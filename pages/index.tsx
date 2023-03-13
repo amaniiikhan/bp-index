@@ -4,8 +4,6 @@ import Footer from "@components/Footer";
 import Grid2 from '@mui/material/Unstable_Grid2';
 import Item from '@mui/material/Unstable_Grid2';
 
-import PlaceholderTable from '@components/PlaceholderTable'
-
 const trends = ["Officer Pay", "Department Salaries", "OT Pay",
   "Forfeitures per XXX", "Detail Pay", "FIOs per XXX", "Civil Settlements",
   "Arrest data","Internal Affairs Open Cases"];
@@ -23,7 +21,6 @@ export default function Home() {
         <p className="description">
           Get started by editing <code>pages/index.js</code>
         </p>
-        <PlaceholderTable/>
         <Grid2 container spacing={{ xs: 2, md: 3 }}>
           {Array.from(trends).map((subj, index) => (
             <><Grid2 xs={4} key={index}>
