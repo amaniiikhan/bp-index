@@ -1,27 +1,48 @@
-# Next + Netlify Starter
+1) move the task from "Sprint Backlog" to "In Progress"       
+2) create a branch      
+3) do the work      
+4) git commit / git push      
+5) review the result at  http://dev.bpi.buspark.io   
+6) if complete, create PR       
+6) move card to Ready for Review       
+7) wait for team to give "thumbs up"      
+8) PM merges PR      
+9) PM moves card to done
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/46648482-644c-4c80-bafb-872057e51b6b/deploy-status)](https://app.netlify.com/sites/next-dev-starter/deploys)
 
-This is a [Next.js](https://nextjs.org/) v12 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and set up to be instantly deployed to [Netlify](https://url.netlify.com/SyTBPVamO)!
+# Boston Police Index
 
-This project is a very minimal starter that includes 2 sample components, a global stylesheet, a `netlify.toml` for deployment, and a `jsconfig.json` for setting up absolute imports and aliases. With Netlify, you'll have access to features like Preview Mode, server-side rendering/incremental static regeneration via Netlify Functions, and internationalized routing on deploy automatically.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+## System Architecture:
 
-(If you click this button, it will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify)
+
+This web-app is a site with a [Next.js](https://nextjs.org/) framework, with a PostreSQL server as the backend. We also use [Material UI] (https://mui.com) and [MDX] (https://mdxjs.com) to assist in front-end.
+
+
+The [Boston Police Index] (https://dev-bpi.netlify.app), aims to be a successor to the now inactive [Woke Windows] (https://www.wokewindows.org) project, where we aim to make Boston police data as accessible and easy to understand for as many people as possible.
+
 
 ## Table of Contents:
 
-- [Getting Started](#getting-started)
-- [Installation options](#installation-options)
-- [Testing](#testing)
-  - [Included Default Testing](#included-default-testing)
-  - [Removing Renovate](#removing-renovate)
-  - [Removing Cypress](#removing-cypress)
 
-## Getting Started
+- [Testing Local Changes](#testing-local-changes)
+- [Contribution Steps](#contribution-steps)
+ - [Step 1: Move task from “Sprint Backlog” to “In Progress”]
+ - [Step 2: Create a branch]
+ - [Step 3: Add any changes or modifications]
+ - [Step 4: Submit a pull request to Git]
+ - [Step 5: Other teammates review the new changes and give a “thumbs up”]
+ - [Step 6: Move task from “In Progress” to “Ready for Review”]
+ - [Step 7: Wait for project manager to approve the Pull Request before merging]
+ - [Step 8: Once approved, merge]
+ - [Step 9: Once merged, move the task to “Done”]
 
-First, run the development server:
+
+## Testing Local Changes
+
+
+To test changes locally, run either commands:
+
 
 ```bash
 npm run dev
@@ -29,62 +50,49 @@ npm run dev
 yarn dev
 ```
 
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-### Installation options
+You can start editing the page by modifying any file. The page auto-updates as you edit the file.
 
-**Option one:** One-click deploy
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+## Contribution Steps
 
-**Option two:** Manual clone
 
-1. Clone this repo: `git clone https://github.com/netlify-templates/next-netlify-starter.git`
-2. Navigate to the directory and run `npm install`
-3. Run `npm run dev`
-4. Make your changes
-5. Connect to [Netlify](https://url.netlify.com/Bk4UicocL) manually (the `netlify.toml` file is the one you'll need to make sure stays intact to make sure the export is done and pointed to the right stuff)
+### Step 1: Move task from “Sprint Backlog” to “In Progress”
 
-## Testing
 
-### Included Default Testing
+Log in to the [Boston Police Index Taiga Page] (https://tree.taiga.io/project/langdon-boston-police-index/timeline) and click “Scrum” then “Backlog”. Click a task you want to work on and click “In Progress” for a task you want to work on.
 
-We’ve included some tooling that helps us maintain these templates. This template currently uses:
 
-- [Renovate](https://www.mend.io/free-developer-tools/renovate/) - to regularly update our dependencies
-- [Cypress](https://www.cypress.io/) - to run tests against how the template runs in the browser
-- [Cypress Netlify Build Plugin](https://github.com/cypress-io/netlify-plugin-cypress) - to run our tests during our build process
+### Step 2: Create a branch
+Click onto the top left “Branch” button and create a new branch by clicking the “New Branch Button on the top right. Name the new branch something related to the change.
 
-If your team is not interested in this tooling, you can remove them with ease!
 
-### Removing Renovate
+### Step 3: Add any changes or modifications
+After switching to the new branch in your IDE, make modifications to complete the selected task from Step 1. Make sure to test your changes before pushing as outlined in [Testing Local Changes](#testing-local-changes).
 
-In order to keep our project up-to-date with dependencies we use a tool called [Renovate](https://github.com/marketplace/renovate). If you’re not interested in this tooling, delete the `renovate.json` file and commit that onto your main branch.
 
-### Removing Cypress
+### Step 4: Submit a pull request to Git
+Click on the “Pull request” button and create a new pull request by clicking the “New pull request” button on the top right. Select the correct branch, confirm that changes are correct, and submit the pull request. 
 
-For our testing, we use [Cypress](https://www.cypress.io/) for end-to-end testing. This makes sure that we can validate that our templates are rendering and displaying as we’d expect. By default, we have Cypress not generate deploy links if our tests don’t pass. If you’d like to keep Cypress and still generate the deploy links, go into your `netlify.toml` and delete the plugin configuration lines:
 
-```diff
-[[plugins]]
-  package = "netlify-plugin-cypress"
--  [plugins.inputs.postBuild]
--    enable = true
--
--  [plugins.inputs]
--    enable = false 
-```
+### Step 5: Other teammates review the new changes and give a “thumbs up”
+A teammate should notify others in the group using the appropriate methods when a pull request is submitted. A separate teammate should check the changes the made and give it a “thumbs up” by moving the task from “In Progress” to “Ready for Review” as outlined in Step 6
 
-If you’d like to remove the `netlify-plugin-cypress` build plugin entirely, you’d need to delete the entire block above instead. And then make sure sure to remove the package from the dependencies using:
 
-```bash
-npm uninstall -D netlify-plugin-cypress
-```
+### Step 6: Move task from “In Progress” to “Ready for Review”
+Log in to the [Boston Police Index Taiga Page] (https://tree.taiga.io/project/langdon-boston-police-index/timeline) and click “Scrum” then “Backlog”. Click a task you want to work on and click “Ready for Review” for a task you want reviewed.
 
-And lastly if you’d like to remove Cypress entirely, delete the entire `cypress` folder and the `cypress.config.ts` file. Then remove the dependency using:
 
-```bash
-npm uninstall -S cypress
-```
+### Step 7: Wait for the project manager to approve the Pull Request before merging
+Patience is important, please wait for the project manager to approve the pull request.
+
+
+### Step 8: Once approved, merge
+After the project manager approves the changes, go ahead and merge the new branch to the main branch.
+
+
+### Step 9: Once merged, move the task to “Done”
+
