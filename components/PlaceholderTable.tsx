@@ -1,5 +1,6 @@
 import * as React from "react";
 import ReactDOM from "react-dom/client";
+import axios from "axios";
 
 import {
   createColumnHelper,
@@ -76,6 +77,7 @@ const columns = [
   }),
 ];
 
+// export default function PlaceholderTable(input json[], column string[], features/config) {
 export default function PlaceholderTable() {
   const [data, setData] = React.useState(() => [...defaultData]);
   const rerender = React.useReducer(() => ({}), {})[1];
