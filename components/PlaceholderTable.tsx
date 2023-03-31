@@ -7,6 +7,8 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  createColumn,
+  ColumnDef
 } from "@tanstack/react-table";
 
 type Person = {
@@ -77,68 +79,52 @@ const columns = [
   }),
 ];
 
-// export default function PlaceholderTable(input json[], column string[], features/config) {
-export default function PlaceholderTable() {
-  const [data, setData] = React.useState(() => [...defaultData]);
-  const rerender = React.useReducer(() => ({}), {})[1];
+interface TableData {
+  json: string;
+}
 
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
+const PlaceholderTable:React.FC<TableData> = ({json}) => {
+  //JSON.parse(JSON.stringify(json)) is redundant as json should be a string,
+  //but code crashes unless written this way
+  let parsedJSON = JSON.parse(JSON.stringify(json))
+  let jsonArr = Object.keys(parsedJSON).map(key => parsedJSON[key])
+  
+  const [data, setData] = React.useState(() => [...jsonArr]);
+  // const rerender = React.useReducer(() => ({}), {})[1];
+
+  const column = Object.keys(parsedJSON[0]);
+
+  const ThData =()=>{
+    return column.map((data)=>{
+      return <th key={data}>{data}</th>
+    })
+  }
+
+  const tdData =() =>{
+    return data.map((data)=>{
+      return(
+        <tr>
+          {
+            column.map((v)=>{
+              return <td>{data[v]}</td>
+            })
+          }
+        </tr>
+      )
+    })
+}
 
   return (
-    <div className="p-2">
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
-      </table>
-      <div className="h-4" />
-      <button onClick={() => rerender()} className="border p-2">
-        Rerender
-      </button>
-    </div>
-  );
+    <table className="table">
+      <thead>
+       <tr>{ThData()}</tr>
+      </thead>
+      <tbody>
+      {tdData()}
+      </tbody>
+     </table>
+)
 }
+
+
+export default PlaceholderTable;

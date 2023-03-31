@@ -1,6 +1,4 @@
-
-{
-    "person":[
+[
     {
         "firstName": "tanner",
         "lastName": "linsley",
@@ -25,5 +23,4 @@
         "status": "Complicated",
         "progress": 10
     }
-    ]
-}
+]
