@@ -4,6 +4,7 @@ import Link from "next/link";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import PlaceholderTable from "@components/PlaceholderTable";
+import data from "../../components/NAME.json";
 
 <div>
 <head>
@@ -11,26 +12,48 @@ import PlaceholderTable from "@components/PlaceholderTable";
     <link rel="icon" href="/favicon.ico" />
 </head>
 
+<style>
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#container{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.leftcol{
+    width: 50%;
+    float: left;
+}
+
+.rightcol{
+    width: 50%;
+    float: left;
+}
+</style>
+
 <body>
 <div id="container">
-<div class="coll">
+<div class="leftcol">
     <h1 class="heading 1"> Officer Profile</h1>
         <h2 class="subheading 1"> Pay Information</h2>
-            <PlaceholderTable />
+            <PlaceholderTable json={data}/>
         <h2 class="subheading 2"> Incidents & FIOs</h2>
-            <PlaceholderTable />
+            <PlaceholderTable json={data}/>
         <h2 class="subheading 3"> Settlements & IA</h2>
-            <PlaceholderTable />
+            <PlaceholderTable json={data}/>
         <h2 class="subheading 4"> Dataset 1</h2>
-            <PlaceholderTable />
+            <PlaceholderTable json={data}/>
 </div>
 
-<div class="coll">
+<div class="rightcol">
     <h1 class="heading 2"> </h1>
         <h2 class="subheading 5"> Dataset 2</h2>
-            <PlaceholderTable />
+            <PlaceholderTable json={data}/>
         <h2 class="subheading 6"> Dataset 3</h2>
-            <PlaceholderTable />
+            <PlaceholderTable json={data}/>
         <h2 class="subheading 7"> Analysis</h2>
             <p class="analysis paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
              Proin quis massa eu urna tempor dictum. Aliquam aliquam tortor nisi, ac vestibulum metus pretium convallis. 
@@ -47,7 +70,6 @@ import PlaceholderTable from "@components/PlaceholderTable";
               quam massa, fringilla fringilla orci malesuada et. Donec at orci non urna volutpat dictum ut sed odio. </p>
 </div>
 
-
-</div>
+<Footer />
 </body>
-</html>
+</div>
