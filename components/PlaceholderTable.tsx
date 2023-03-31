@@ -1,89 +1,18 @@
 import * as React from "react";
 import ReactDOM from "react-dom/client";
-import axios from "axios";
-
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-  createColumn,
-  ColumnDef
-} from "@tanstack/react-table";
-
-type Person = {
-  firstName: string;
-  lastName: string;
-  age: number;
-  visits: number;
-  status: string;
-  progress: number;
-};
-
-const defaultData: Person[] = [
-  {
-    firstName: "tanner",
-    lastName: "linsley",
-    age: 24,
-    visits: 100,
-    status: "In Relationship",
-    progress: 50,
-  },
-  {
-    firstName: "tandy",
-    lastName: "miller",
-    age: 40,
-    visits: 40,
-    status: "Single",
-    progress: 80,
-  },
-  {
-    firstName: "joe",
-    lastName: "dirte",
-    age: 45,
-    visits: 20,
-    status: "Complicated",
-    progress: 10,
-  },
-];
-
-const columnHelper = createColumnHelper<Person>();
-
-const columns = [
-  columnHelper.accessor("firstName", {
-    cell: (info) => info.getValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor((row) => row.lastName, {
-    id: "lastName",
-    cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Last Name</span>,
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("age", {
-    header: () => "Age",
-    cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("visits", {
-    header: () => <span>Visits</span>,
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("status", {
-    header: "Status",
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("progress", {
-    header: "Profile Progress",
-    footer: (info) => info.column.id,
-  }),
-];
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 interface TableData {
   json: string;
 }
 
-const PlaceholderTable:React.FC<TableData> = ({json}) => {
+const Placeholder:React.FC<TableData> = ({json}) => {
   //JSON.parse(JSON.stringify(json)) is redundant as json should be a string,
   //but code crashes unless written this way
   let parsedJSON = JSON.parse(JSON.stringify(json))
@@ -94,37 +23,39 @@ const PlaceholderTable:React.FC<TableData> = ({json}) => {
 
   const column = Object.keys(parsedJSON[0]);
 
-  const ThData =()=>{
+  const ThData = ()=>{
     return column.map((data)=>{
-      return <th key={data}>{data}</th>
+      return <TableCell>{data}</TableCell>
     })
   }
 
-  const tdData =() =>{
-    return data.map((data)=>{
+  const tdData = (row) =>{
       return(
-        <tr>
-          {
-            column.map((v)=>{
-              return <td>{data[v]}</td>
-            })
-          }
-        </tr>
+        column.map((v)=>{
+            return <TableCell>{row[v]}</TableCell>
+        })
       )
-    })
-}
+  }
 
   return (
-    <table className="table">
-      <thead>
-       <tr>{ThData()}</tr>
-      </thead>
-      <tbody>
-      {tdData()}
-      </tbody>
-     </table>
-)
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+        <TableHead>
+          <TableRow>
+            {ThData()}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <TableRow>
+                {tdData(row)}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
 
 
-export default PlaceholderTable;
+export default Placeholder;
