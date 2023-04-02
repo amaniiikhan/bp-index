@@ -1,15 +1,5 @@
 import styles from './Table.module.css';
-
-const data = [
-  {
-    "firstName": "Tanner",
-    "lastName": "Linsley",
-    "age": 24,
-    "visits": 100,
-    "status": "In Relationship",
-    "progress": 50
-  }
-];
+import data from "./person.json";
 
 export default function Table() {
   return (
