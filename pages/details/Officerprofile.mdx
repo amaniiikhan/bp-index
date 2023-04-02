@@ -8,50 +8,50 @@ import data from "../../components/NAME.json";
 import { useEffect, useState } from 'react'
 
 <div>
-<head>
+  <head>
     <title>Boston Police Index</title>
     <link rel="icon" href="/favicon.ico" />
-</head>
+  </head>
 
-{/* style section here, removed because it was not compiling */}
+  {/* style section here, removed because it was not compiling */}
 
-<body>
-<div id="container">
-<div class="leftcol">
-    <h1 class="heading 1"> Officer Profile</h1>
+  <body>
+    <div id="container" style={{ display: "flex" }}>
+      <div class="leftcol" style={{ width: "50%" }}>
+        <h1 class="heading 1"> Officer Profile</h1>
         <h2 class="subheading 1"> Pay Information</h2>
-            <PlaceholderTable json={data}/>
+        <PlaceholderTable json={data}/>
         <h2 class="subheading 2"> Incidents & FIOs</h2>
-            <PlaceholderTable json={data}/>
+        <PlaceholderTable json={data}/>
         <h2 class="subheading 3"> Settlements & IA</h2>
-            <PlaceholderTable json={data}/>
+        <PlaceholderTable json={data}/>
         <h2 class="subheading 4"> Dataset 1</h2>
-            <PlaceholderTable json={data}/>
-</div>
+        <PlaceholderTable json={data}/>
+      </div>
 
-<div class="rightcol">
-    <h1 class="heading 2"> </h1>
+      <div class="rightcol" style={{ width: "50%" }}>
+        <h1 class="heading 2"> </h1>
         <h2 class="subheading 5"> Dataset 2</h2>
-            <PlaceholderTable json={data}/>
+        <PlaceholderTable json={data}/>
         <h2 class="subheading 6"> Dataset 3</h2>
-            <PlaceholderTable json={data}/>
+        <PlaceholderTable json={data}/>
         <h2 class="subheading 7"> Analysis</h2>
-            <p class="analysis paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-             Proin quis massa eu urna tempor dictum. Aliquam aliquam tortor nisi, ac vestibulum metus pretium convallis. 
-             Pellentesque consectetur turpis justo, sed rhoncus nisl faucibus sit amet. Vivamus ultricies tempus arcu, 
-             id venenatis libero ornare eget. Nam rutrum a quam eu tempor. Fusce sollicitudin, quam ut laoreet interdum,
-             odio arcu luctus ex, nec euismod lacus elit non odio. Nullam eget magna erat. Nullam pretium
-             quam massa, fringilla fringilla orci malesuada et. Donec at orci non urna volutpat dictum ut sed odio. </p>
+        <p class="analysis paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Proin quis massa eu urna tempor dictum. Aliquam aliquam tortor nisi, ac vestibulum metus pretium convallis.
+          Pellentesque consectetur turpis justo, sed rhoncus nisl faucibus sit amet. Vivamus ultricies tempus arcu,
+          id venenatis libero ornare eget. Nam rutrum a quam eu tempor. Fusce sollicitudin, quam ut laoreet interdum,
+          odio arcu luctus ex, nec euismod lacus elit non odio. Nullam eget magna erat. Nullam pretium
+          quam massa, fringilla fringilla orci malesuada et. Donec at orci non urna volutpat dictum ut sed odio. </p>
         <h2 class="subheading 8"> Explanation</h2>
-             <p class="explanation paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Proin quis massa eu urna tempor dictum. Aliquam aliquam tortor nisi, ac vestibulum metus pretium convallis. 
-              Pellentesque consectetur turpis justo, sed rhoncus nisl faucibus sit amet. Vivamus ultricies tempus arcu, 
-              id venenatis libero ornare eget. Nam rutrum a quam eu tempor. Fusce sollicitudin, quam ut laoreet interdum,
-              odio arcu luctus ex, nec euismod lacus elit non odio. Nullam eget magna erat. Nullam pretium
-              quam massa, fringilla fringilla orci malesuada et. Donec at orci non urna volutpat dictum ut sed odio. </p>
-</div>
+        <p class="explanation paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Proin quis massa eu urna tempor dictum. Aliquam aliquam tortor nisi, ac vestibulum metus pretium convallis.
+          Pellentesque consectetur turpis justo, sed rhoncus nisl faucibus sit amet. Vivamus ultricies tempus arcu,
+          id venenatis libero ornare eget. Nam rutrum a quam eu tempor. Fusce sollicitudin, quam ut laoreet interdum,
+          odio arcu luctus ex, nec euismod lacus elit non odio. Nullam eget magna erat. Nullam pretium
+          quam massa, fringilla fringilla orci malesuada et. Donec at orci non urna volutpat dictum ut sed odio. </p>
+      </div>
 
-<Footer />
-</div>
-</body>
+      <Footer />
+    </div>
+  </body>
 </div>
