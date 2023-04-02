@@ -1,142 +1,83 @@
 import * as React from "react";
 import ReactDOM from "react-dom/client";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import json2csv from 'json2csv';
 
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+interface TableData {
+  json: string;
+}
 
-type Person = {
-  firstName: string;
-  lastName: string;
-  age: number;
-  visits: number;
-  status: string;
-  progress: number;
-};
+const Placeholder:React.FC<TableData> = ({json}) => {
+  //JSON.parse(JSON.stringify(json)) is redundant as json should be a string,
+  //but code crashes unless written this way
+  let parsedJSON = JSON.parse(JSON.stringify(json))
+  let jsonArr = Object.keys(parsedJSON).map(key => parsedJSON[key])
+  
+  const [data, setData] = React.useState(() => [...jsonArr]);
+  // const rerender = React.useReducer(() => ({}), {})[1];
 
-const defaultData: Person[] = [
-  {
-    firstName: "tanner",
-    lastName: "linsley",
-    age: 24,
-    visits: 100,
-    status: "In Relationship",
-    progress: 50,
-  },
-  {
-    firstName: "tandy",
-    lastName: "miller",
-    age: 40,
-    visits: 40,
-    status: "Single",
-    progress: 80,
-  },
-  {
-    firstName: "joe",
-    lastName: "dirte",
-    age: 45,
-    visits: 20,
-    status: "Complicated",
-    progress: 10,
-  },
-];
+  const column = Object.keys(parsedJSON[0]);
+  
 
-const columnHelper = createColumnHelper<Person>();
+  const ThData = ()=>{
+    return column.map((data)=>{
+      return <TableCell key={data}>{data}</TableCell>
+    })
+  }
 
-const columns = [
-  columnHelper.accessor("firstName", {
-    cell: (info) => info.getValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor((row) => row.lastName, {
-    id: "lastName",
-    cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Last Name</span>,
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("age", {
-    header: () => "Age",
-    cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("visits", {
-    header: () => <span>Visits</span>,
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("status", {
-    header: "Status",
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("progress", {
-    header: "Profile Progress",
-    footer: (info) => info.column.id,
-  }),
-];
+  const downloadCsv = () => {
+    const csvData = json2csv.parse(data); // convert table data to CSV format
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' }); // create a Blob object with the CSV data
+    const url = URL.createObjectURL(blob); // create a URL object with the Blob object
+    const link = document.createElement('a'); // create a link element
+    link.setAttribute('href', url); // set the link's href attribute to the URL
+    
+    //We need to change "hello.csv" to something dynamic depending on the current page"
+    link.setAttribute('download', 'hello.csv'); // set the link's download attribute to the filename
 
-export default function PlaceholderTable() {
-  const [data, setData] = React.useState(() => [...defaultData]);
-  const rerender = React.useReducer(() => ({}), {})[1];
-
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
+    link.style.display = 'none'; // hide the link
+    document.body.appendChild(link); // add the link to the DOM
+    link.click(); // click the link
+    document.body.removeChild(link); // remove the link from the DOM
+    URL.revokeObjectURL(url); // release the URL object
+  };
 
   return (
-    <div className="p-2">
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
-      </table>
-      <div className="h-4" />
-      <button onClick={() => rerender()} className="border p-2">
-        Rerender
-      </button>
+    <div>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+        <TableHead>
+          <TableRow key="labels">
+            {ThData()}
+            </TableRow>
+        </TableHead>
+        <TableBody>
+        {data.map((row, index) => (
+          <TableRow key={index}>
+            {column.map((v) => (
+              <TableCell key={`${index}-${v}`}>
+                {row[v]}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    <br/>
+    <Button variant="contained" color="primary" onClick={downloadCsv}>
+      Download CSV
+    </Button>
     </div>
   );
 }
+
+
+export default Placeholder;
