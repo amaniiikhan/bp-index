@@ -4,6 +4,7 @@ import Link from "next/link";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import PlaceholderTable from "@components/PlaceholderTable";
+import Table from "@components/Table";
 import data from "../../components/NAME.json";
 import { useEffect, useState } from 'react'
 
@@ -34,7 +35,7 @@ export default function MyPage() {
           <PlaceholderTable json={data} style={tableStyle}/>
         </div> 
         <div class="rightcol" style={{ width: "50%" }}>
-            <h1 class="heading 2"> </h1>
+            <Table />
             <h2 class="subheading 5"> Dataset 2</h2>
             <PlaceholderTable json={data}/>
             <h2 class="subheading 6"> Dataset 3</h2>
@@ -55,7 +56,7 @@ export default function MyPage() {
           quam massa, fringilla fringilla orci malesuada et. Donec at orci non urna volutpat dictum ut sed odio. </p>
       </div>
         </div>
-      
+      <Footer />
     </>
   );
 }
