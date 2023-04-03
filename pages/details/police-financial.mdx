@@ -5,6 +5,9 @@ import Header from "@components/Header";
 import Footer from "@components/Footer";
 import PlaceholderTable from "@components/PlaceholderTable";
 
+{/* Line below will be replaced with data that will be fetched from a database */}
+import data from "../../components/person.json";
+
 <div>
 <Head>
     <title>Boston Police Index</title>
@@ -13,7 +16,8 @@ import PlaceholderTable from "@components/PlaceholderTable";
 
 # REPLACE-ME Information
 
-<PlaceholderTable />
+
+<PlaceholderTable json={data}/>
 
 ## Analysis
 
