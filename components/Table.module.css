@@ -1,7 +1,7 @@
 .table {
   border: 2px solid black;
   width: 99%;
-  height: 70px;
+  height: 71px;
   display: table; /* Use table display */
   table-layout: fixed; /* Distribute columns based on table width */
 }
