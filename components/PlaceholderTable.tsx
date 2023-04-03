@@ -55,7 +55,7 @@ const Placeholder:React.FC<TableData> = ({json}) => {
         <TableHead>
           <TableRow key="labels">
             {ThData()}
-          </TableRow>
+            </TableRow>
         </TableHead>
         <TableBody>
         {data.map((row, index) => (
