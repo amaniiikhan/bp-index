@@ -17,7 +17,17 @@ interface TableData {
 const Placeholder:React.FC<TableData> = ({json}) => {
   //JSON.parse(JSON.stringify(json)) is redundant as json should be a string,
   //but code crashes unless written this way
-  let parsedJSON = JSON.parse(JSON.stringify(json))
+  let parsedJSON
+  try {
+    parsedJSON = JSON.parse(JSON.stringify(json))
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      console.error('Invalid JSON:', error.message);
+    } else {
+      throw error;
+    }
+  }
+  
   let jsonArr = Object.keys(parsedJSON).map(key => parsedJSON[key])
   
   const [data, setData] = React.useState(() => [...jsonArr]);
