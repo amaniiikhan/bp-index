@@ -1,15 +1,17 @@
 import { useTheme } from "@mui/material/styles";
+import { useRouter } from 'next/router';
 import Head from "next/head";
 import Link from "next/link";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import PlaceholderTable from "@components/PlaceholderTable";
-import Table from "@components/Table";
 import data from "../../components/NAME.json";
 import { useEffect, useState } from 'react'
 
 
-export default function MyPage() {
+export default function officerpage() {
+  const router = useRouter();
+  const { id } = router.query;
   const theme = useTheme();
   const tableStyle = {
     backgroundColor: "red"
@@ -26,9 +28,9 @@ export default function MyPage() {
         <div className="leftcol" style={{ width: "50%" }}>
           <h1 className="heading 1"> Officer Profile</h1>
           <h2 className="subheading 1"> Pay Information</h2>
-          <PlaceholderTable json={data} style={tableStyle}/>
+          <OfficerTable json={data} style={tableStyle}/>
           <h2 className="subheading 2"> Incidents &amp; FIOs</h2>
-          <PlaceholderTable json={data} style={tableStyle}/>
+          <OfficerTable json={data} style={tableStyle}/>
           <h2 className="subheading 3"> Settlements &amp; IA</h2>
           <PlaceholderTable json={data} style={tableStyle}/>
           <h2 className="subheading 4"> Dataset 1</h2>
