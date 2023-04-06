@@ -9,12 +9,27 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import json2csv from 'json2csv';
+import * as pg from 'pg';
 
 interface TableData {
   json: string;
 }
 
 const Placeholder:React.FC<TableData> = ({json}) => {
+  // const { Sequelize } = require('sequelize');
+  // const sequelize = new Sequelize('postgresql://postgres:iG5CEYV5GU6DaDpBv5Nb@containers-us-west-43.railway.app:7705/railway')
+
+  // async function connect() {
+  //   try {
+  //     await sequelize.authenticate();
+  //     console.log('Connection has been established successfully.');
+  //   } catch (error) {
+  //     console.error('Unable to connect to the database:', error);
+  //   }
+  // }
+
+  // connect()
+  
   //JSON.parse(JSON.stringify(json)) is redundant as json should be a string,
   //but code crashes unless written this way
   let parsedJSON = ""
