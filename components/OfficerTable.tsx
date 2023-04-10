@@ -10,6 +10,19 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import json2csv from 'json2csv';
 
+/*
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'container-us-west-43.railway.app',
+  database: 'railway',
+  password: 'iG5CEYV5GU6DaDpBv5Nb',
+  port: 5432, // default port for PostgreSQL
+});
+
+*/
+
 interface TableData {
   json: string;
 }
