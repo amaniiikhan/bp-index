@@ -15,6 +15,20 @@ interface TableData {
   json: string;
 }
 
+// import prisma from '../lib/prisma';
+// import { GetStaticProps } from "next";
+
+// // index.tsx
+// export const getStaticProps: GetStaticProps = async () => {
+//   const feed = await prisma.post.findMany();
+//   console.log(feed)
+//   return {
+//     props: {
+//       users: JSON.parse(JSON.stringify(feed))
+//     }
+//   };
+// };
+
 const Placeholder:React.FC<TableData> = ({json}) => {
   // const { Sequelize } = require('sequelize');
   // const sequelize = new Sequelize('postgresql://postgres:iG5CEYV5GU6DaDpBv5Nb@containers-us-west-43.railway.app:7705/railway')
@@ -32,6 +46,8 @@ const Placeholder:React.FC<TableData> = ({json}) => {
   
   //JSON.parse(JSON.stringify(json)) is redundant as json should be a string,
   //but code crashes unless written this way
+
+  console.log(json)
   let parsedJSON = ""
   try {
     parsedJSON = JSON.parse(JSON.stringify(json))
