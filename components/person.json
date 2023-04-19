@@ -1,227 +1,26 @@
-{
-    "CAS AA 103":{
-       "course_id":"CAS AA 103",
-       "college":"CAS",
-       "department":"AA",
-       "course":"103",
-       "name":"Introduction to African American Literature",
-       "description":"What is the African American literary tradition? In this course, we will read   poetry, slave narratives, essays, speeches, tales, short stories, and novels and   consider how culture, politics, and history shape African American literature.   Carries humanities divisional credit in CAS.  Effective Fall 2018,  this course fulfills a  single unit in each of the  following BU Hub areas: Aesthetic  Exploration,  Global Citizenship and  Intercultural Literacy. Effective Fall 2019, this   course fulfills a single unit in each of the  following BU Hub areas: Aesthetic   Exploration, Global Citizenship and  Intercultural Literacy, Critical Thinking. Effective Fall 2022, this course  fulfills a single unit in each of the following BU Hub areas: Writing-Intensive  Course, Global Citizenship and Intercultural Literacy, Critical Thinking.",
-       "prereqs":"Prereq: First-Year Writing Seminar (WR 120 or equivalent)",
-       "credits":4,
-       "hubs":[
-          "Global Citizenship and Intercultural Literacy",
-          "Critical Thinking",
-          "Writing-Intensive Course",
-          "BU Hub Pathway:\\xa0\\xa0Social & Racial Justice"
-       ],
-       "sections":[
-          {
-             "section_full_name":"CAS AA 103 A1",
-             "course_id":"CAS AA 103",
-             "section":"A1",
-             "instructor":"Maryanne Boelcskevy",
-             "instructorDiff":-1,
-             "instructorRating":-1,
-             "url":"",
-             "type":"IND",
-             "location":"CAS 214",
-             "days":"MWF",
-             "scheduleStart":610,
-             "scheduleEnd":660,
-             "availability":false
-          }
-       ],
-       "professors":[
-          "Maryanne Boelcskevy"
-       ]
-    },
-    "CAS AA 112":{
-       "course_id":"CAS AA 112",
-       "college":"CAS",
-       "department":"AA",
-       "course":"112",
-       "name":"Black Power in the Classroom: The History of Black Studies",
-       "description":"Centers Black experiences, cultures, knowledge production and identity   formation in the United States and in the African Diaspora across time and   space. Examines and traces the genealogies of Black Studies as a discipline:   its political, ideological, and practical foundations on college campuses  and  in communities. Also explores earlier traditions and contemporary work  in Black  radical thought and activism that lay the groundwork for and build  on the  founding principles of Black Studies by mobilizing an intersectional  and  diasporic lens.  Effective Fall 2020, this course fulfills a single  unit in each of the following BU Hub areas: Historical Consciousness, Social  Inquiry I, Research and Information Literacy.",
-       "prereqs":"",
-       "credits":4,
-       "hubs":[
-          "Historical Consciousness",
-          "Social Inquiry I",
-          "Research and Information Literacy",
-          "BU Hub Pathway:\\xa0\\xa0Social & Racial Justice"
-       ],
-       "sections":[
-          {
-             "section_full_name":"CAS AA 112 A1",
-             "course_id":"CAS AA 112",
-             "section":"A1",
-             "instructor":"Aminah Pilgrim",
-             "instructorDiff":2.2,
-             "instructorRating":4.3,
-             "url":"https://www.ratemyprofessors.com/search/teachers?query=Aminah%20Pilgrim&sid=U2Nob29sLTEyNA==",
-             "type":"IND",
-             "location":"SOC B63",
-             "days":"TR",
-             "scheduleStart":750,
-             "scheduleEnd":825,
-             "availability":false
-          }
-       ],
-       "professors":[
-          "Aminah Pilgrim"
-       ]
-    },
-    "CAS AA 207":{
-       "course_id":"CAS AA 207",
-       "college":"CAS",
-       "department":"AA",
-       "course":"207",
-       "name":"Sociology of Race and Ethnicity",
-       "description":"Examines the fundamental theoretical and empirical approaches regarding  race/ethnicity and the current state of race relations in the U.S. that explore  both contemporary social problems. Effective Fall 2019,  this  course  fulfills a  single unit in each of the following BU Hub areas:   Historical  Consciousness,  The Individual in Community, Research and  Information  Literacy. ",
-       "prereqs":"",
-       "credits":4,
-       "hubs":[
-          "Historical Consciousness",
-          "The Individual in Community",
-          "Research and Information Literacy",
-          "BU Hub Pathway:\\xa0\\xa0Social & Racial Justice"
-       ],
-       "sections":[
-          {
-             "section_full_name":"CAS AA 207 A1",
-             "course_id":"CAS AA 207",
-             "section":"A1",
-             "instructor":"Saida Grundy",
-             "instructorDiff":2.9,
-             "instructorRating":4.7,
-             "url":"https://www.ratemyprofessors.com/search/teachers?query=Saida%20Grundy&sid=U2Nob29sLTEyNA==",
-             "type":"LEC",
-             "location":"CGS 511",
-             "days":"TR",
-             "scheduleStart":570,
-             "scheduleEnd":645,
-             "availability":false
-          },
-          {
-             "section_full_name":"CAS AA 207 A2",
-             "course_id":"CAS AA 207",
-             "section":"A2",
-             "instructor":"Saida Grundy",
-             "instructorDiff":2.9,
-             "instructorRating":4.7,
-             "url":"https://www.ratemyprofessors.com/search/teachers?query=Saida%20Grundy&sid=U2Nob29sLTEyNA==",
-             "type":"DIS",
-             "location":"CAS 320",
-             "days":"W",
-             "scheduleStart":545,
-             "scheduleEnd":595,
-             "availability":false
-          },
-          {
-             "section_full_name":"CAS AA 207 A3",
-             "course_id":"CAS AA 207",
-             "section":"A3",
-             "instructor":"Saida Grundy",
-             "instructorDiff":2.9,
-             "instructorRating":4.7,
-             "url":"https://www.ratemyprofessors.com/search/teachers?query=Saida%20Grundy&sid=U2Nob29sLTEyNA==",
-             "type":"DIS",
-             "location":"FLR 122",
-             "days":"W",
-             "scheduleStart":610,
-             "scheduleEnd":660,
-             "availability":true
-          },
-          {
-             "section_full_name":"CAS AA 207 A4",
-             "course_id":"CAS AA 207",
-             "section":"A4",
-             "instructor":"Saida Grundy",
-             "instructorDiff":2.9,
-             "instructorRating":4.7,
-             "url":"https://www.ratemyprofessors.com/search/teachers?query=Saida%20Grundy&sid=U2Nob29sLTEyNA==",
-             "type":"DIS",
-             "location":"PSY B37",
-             "days":"W",
-             "scheduleStart":740,
-             "scheduleEnd":790,
-             "availability":false
-          }
-       ],
-       "professors":[
-          "Saida Grundy"
-       ]
-    },
-    "CAS AA 215":{
-       "course_id":"CAS AA 215",
-       "college":"CAS",
-       "department":"AA",
-       "course":"215",
-       "name":"Arts of Africa and Its Diaspora",
-       "description":"Exploration of a diversity of visual and performing arts from Africa,    including  royal regalia,  masquerades, and contemporary painting. Examines    how the  dispersal of Africans, due to the  transatlantic slave trade and    immigration,  contributed to the cultural richness of the Americas. Effective  Fall 2019, this   course  fulfills a single unit in each of the following BU Hub  areas:   Aesthetic   Exploration, Global Citizenship and Intercultural Literacy,   Critical  Thinking. ",
-       "prereqs":"",
-       "credits":4,
-       "hubs":[
-          "Aesthetic Exploration",
-          "Global Citizenship and Intercultural Literacy",
-          "Critical Thinking",
-          "BU Hub Pathway:\\xa0\\xa0Social & Racial Justice"
-       ],
-       "sections":[
-          {
-             "section_full_name":"CAS AA 215 A1",
-             "course_id":"CAS AA 215",
-             "section":"A1",
-             "instructor":"Sarah Clunis",
-             "instructorDiff":3.7,
-             "instructorRating":3.2,
-             "url":"https://www.ratemyprofessors.com/search/teachers?query=Sarah%20Clunis&sid=U2Nob29sLTEyNA==",
-             "type":"IND",
-             "location":"SOC B63",
-             "days":"TR",
-             "scheduleStart":1020,
-             "scheduleEnd":1095,
-             "availability":false
-          }
-       ],
-       "professors":[
-          "Sarah Clunis"
-       ]
-    },
-    "CAS AA 234":{
-       "course_id":"CAS AA 234",
-       "college":"CAS",
-       "department":"AA",
-       "course":"234",
-       "name":"African Americans in Global Perspective: Slavery and the Creation of Race",
-       "description":"A study of how chattel slavery in the Americas led to racialization as a  primary  tool in the creation of American society and New World capitalism.   Effective Fall 2020, this course fulfills a single unit in each of the  following BU Hub areas: Ethical Reasoning, Global Citizenship and  Intercultural Literacy, Critical Thinking.",
-       "prereqs":"",
-       "credits":4,
-       "hubs":[
-          "Global Citizenship and Intercultural Literacy",
-          "Ethical Reasoning",
-          "Critical Thinking",
-          "BU Hub Pathway:\\xa0\\xa0Social & Racial Justice"
-       ],
-       "sections":[
-          {
-             "section_full_name":"CAS AA 234 A1",
-             "course_id":"CAS AA 234",
-             "section":"A1",
-             "instructor":"Joyce Scott",
-             "instructorDiff":3.0,
-             "instructorRating":5.0,
-             "url":"https://www.ratemyprofessors.com/search/teachers?query=Joyce%20Scott&sid=U2Nob29sLTEyNA==",
-             "type":"IND",
-             "location":"AAS 102",
-             "days":"TR",
-             "scheduleStart":570,
-             "scheduleEnd":645,
-             "availability":false
-          }
-       ],
-       "professors":[
-          "Joyce Scott"
-       ]
-    }
-}
+[
+   {
+       "firstName": "tanner",
+       "lastName": "linsley",
+       "age": 24,
+       "visits": 100,
+       "status": "In Relationship",
+       "progress": 50
+   },
+   {
+       "firstName": "tandy",
+       "lastName": "miller",
+       "age": 40,
+       "visits": 40,
+       "status": "Single",
+       "progress": 80
+   },
+   {
+       "firstName": "joe",
+       "lastName": "dirte",
+       "age": 45,
+       "visits": 20,
+       "status": "Complicated",
+       "progress": 10
+   }
+]
