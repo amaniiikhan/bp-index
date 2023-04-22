@@ -1,5 +1,4 @@
-import PlaceholderTable from "@components/PlaceholderTable"
-import data from "../../components/NAME.json";
+import PlaceholderTable from "@components/PlaceholderTable" 
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 
@@ -14,6 +13,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 
-export default function Test({users, db}) {
-    return <PlaceholderTable json={users}/>
+export default function Test({users}) {
+  console.log(users)
+  return <PlaceholderTable json={users}/>
 }
