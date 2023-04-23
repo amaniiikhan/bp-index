@@ -10,7 +10,7 @@ import data from "../../components/NAME.json";
 import Test from "./test"
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.post.findMany();
+    const feed = await prisma.forfeiture_Cases.findMany();
     console.log(feed)
     return {
       props: {

@@ -1,31 +1,97 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
-// schema.prisma
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        String     @default(cuid()) @id
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+model Field_Contacts {
+  FC             Int      @id @default(autoincrement())
+  Date           DateTime
+  ContactOfficer String?
+  Supervisor     String?
+  Street         String?
+  City           String?
+  State          String?
+  Zip            String?
+  Frisk          String?
+  Basis          String?
+  Circumstance   String?
+  Year           String?
 }
 
-model User {
-  id            String       @default(cuid()) @id
-  name          String?
-  email         String?   @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  posts         Post[]
-  @@map(name: "users")
+model Forfeiture_Cases {
+  Case Int @id @default(autoincrement())
+  Court String
+  Date  DateTime
+  Amount Float
+  MotorVehicle String
+  IncidentReports String
+}
+
+model Arrest_Data {
+  Incident     Int      @id @default(autoincrement())
+  Occurred     DateTime
+  District     String
+  Shooting     String
+  Location     String
+  Offenses     String
+  Officers     String
+  Clearance    String
+  NumVictims   Int
+  NumOffenders Int
+  NumArrests   Int
+}
+
+model Internal_Affairs {
+  IA Int @id @default(autoincrement())
+  Type String
+  Received DateTime
+  Employee String
+  Allegation String
+  Finding String
+}
+
+model Paid_Details {
+  ID Int @id @default(autoincrement())
+  Officer String
+  Type String
+  Customer String
+  Address String
+  Start DateTime
+  Worked String
+  Pay Float
+}
+
+model SWAT_Reports {
+  SWAT_ID Int @id @default(autoincrement())
+  Date DateTime
+}
+
+model Officer_Pay {
+  Emp_ID Int @id @default(autoincrement())
+  Badge_ID Int
+  Name String
+  Title String
+  Organization String
+  Start_Date DateTime
+  Zip Int
+  State String
+  Neighborhood String
+  News Int
+  IA Int 
+  Detail Int
+  FIOs Int
+  Inc Int
+  MVC Int
+  SWAT Int
+  Total Float
+  Regular Float
+  Retro Float
+  Other Float
+  Overtime Float
+  Injured Float
+  Quinn Float
 }

@@ -5,7 +5,7 @@ import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.post.findMany();
+    const feed = await prisma.field_Contacts.findMany();
     console.log(feed)
     return {
       props: {

@@ -1,16 +1,11 @@
-import { useTheme } from "@mui/material/styles";
 import Head from "next/head";
-import Link from "next/link";
-import Header from "@components/Header";
 import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import data from "../../components/NAME.json";
-import Test from "./test"
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.post.findMany();
+    const feed = await prisma.officer_Pay.findMany();
     console.log(feed)
     return {
       props: {
