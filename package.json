@@ -39,9 +39,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-table": "^7.8.0",
-    "sequelize": "^6.30.0",
-    "sqlite3": "^5.1.6"
+    "react-table": "^7.8.0"
   },
   "devDependencies": {
     "prisma": "^4.12.0",
