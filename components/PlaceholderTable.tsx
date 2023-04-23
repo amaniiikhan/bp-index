@@ -33,7 +33,7 @@ const Placeholder:React.FC<TableData> = ({json}) => {
   //JSON.parse(JSON.stringify(json)) is redundant as json should be a string,
   //but code crashes unless written this way
 
-  console.log(json)
+  // console.log(json)
   let parsedJSON = ""
   try {
     parsedJSON = JSON.parse(JSON.stringify(json))

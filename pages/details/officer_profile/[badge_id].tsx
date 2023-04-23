@@ -1,19 +1,37 @@
-import { useTheme } from "@mui/material/styles";
 import Head from "next/head";
-import Link from "next/link";
-import Header from "@components/Header";
 import Footer from "@components/Footer";
 import PlaceholderTable from "@components/PlaceholderTable";
 import Table from "@components/Table";
-import data from "../../components/NAME.json";
-import { useEffect, useState } from 'react'
+import { GetServerSideProps } from "next";
+import { useRouter } from "next/router"
+import prisma from "lib/prisma";
 
-
-export default function MyPage() {
-  const theme = useTheme();
-  const tableStyle = {
-    backgroundColor: "red"
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const bid = +context.params.badge_id
+  console.log("bid is ", bid)
+  const feed = await prisma.officer_Pay.findMany({
+    where: {
+      Badge_ID: {
+        equals: bid
+      }
+    }
+  });
+  console.log("feed is", feed)
+  return {
+    props: {
+      users: JSON.parse(JSON.stringify(feed))
+    },
   };
+};
+
+function Officer_Profile({users}) {
+  const router = useRouter()
+  const current_url = router.query.badge_id
+
+  // const theme = useTheme();
+  // const tableStyle = {
+  //   backgroundColor: "red"
+  // };
 
   return (
     <>
@@ -26,20 +44,20 @@ export default function MyPage() {
         <div className="leftcol" style={{ width: "50%" }}>
           <h1 className="heading 1"> Officer Profile</h1>
           <h2 className="subheading 1"> Pay Information</h2>
-          <PlaceholderTable json={data} style={tableStyle}/>
+          <PlaceholderTable json={users}/>
           <h2 className="subheading 2"> Incidents &amp; FIOs</h2>
-          <PlaceholderTable json={data} style={tableStyle}/>
+          <PlaceholderTable json={users}/>
           <h2 className="subheading 3"> Settlements &amp; IA</h2>
-          <PlaceholderTable json={data} style={tableStyle}/>
+          <PlaceholderTable json={users}/>
           <h2 className="subheading 4"> Dataset 1</h2>
-          <PlaceholderTable json={data} style={tableStyle}/>
+          <PlaceholderTable json={users}/>
         </div> 
         <div className="rightcol" style={{ width: "50%" }}>
             <Table />
             <h2 className="subheading 5"> Dataset 2</h2>
-            <PlaceholderTable json={data}/>
+            <PlaceholderTable json={users}/>
             <h2 className="subheading 6"> Dataset 3</h2>
-            <PlaceholderTable json={data}/>
+            <PlaceholderTable json={users}/>
             <h2 className="subheading 7"> Analysis</h2>
             <p className="analysis paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Proin quis massa eu urna tempor dictum. Aliquam aliquam tortor nisi, ac vestibulum metus pretium convallis.
@@ -60,3 +78,5 @@ export default function MyPage() {
     </>
   );
 }
+
+export default Officer_Profile
