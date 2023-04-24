@@ -30,6 +30,7 @@
     "jsonwebtoken": "^9.0.0",
     "material-react-table": "^1.8.5",
     "mysql2": "^3.2.0",
+    "netlify-cli": "^14.2.1",
     "next": "^12.1.5",
     "next-connect": "^0.13.0",
     "nprogress": "^0.2.0",
