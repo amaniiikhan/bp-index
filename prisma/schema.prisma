@@ -23,12 +23,12 @@ model Field_Contacts {
 }
 
 model Forfeiture_Cases {
-  Case Int @id @default(autoincrement())
-  Court String
-  Date  DateTime
-  Amount Float
-  MotorVehicle String
+  Case            Int      @id @default(autoincrement())
+  Amount          Float
+  Court           String
+  Date            DateTime
   IncidentReports String
+  MotorVehicle    String
 }
 
 model Arrest_Data {
@@ -46,52 +46,44 @@ model Arrest_Data {
 }
 
 model Internal_Affairs {
-  IA Int @id @default(autoincrement())
-  Type String
-  Received DateTime
-  Employee String
+  IA         Int      @id @default(autoincrement())
   Allegation String
-  Finding String
+  Employee   String
+  Finding    String
+  Received   DateTime
+  Type       String
 }
 
 model Paid_Details {
-  ID Int @id @default(autoincrement())
-  Officer String
-  Type String
+  ID       Int      @id @default(autoincrement())
+  Address  String
   Customer String
-  Address String
-  Start DateTime
-  Worked String
-  Pay Float
+  Officer  String
+  Pay      Float
+  Start    DateTime
+  Type     String
+  Worked   String
 }
 
 model SWAT_Reports {
-  SWAT_ID Int @id @default(autoincrement())
-  Date DateTime
+  Date    DateTime
+  SWAT_ID Int      @id @default(autoincrement())
 }
 
-model Officer_Pay {
-  Emp_ID Int @id @default(autoincrement())
-  Badge_ID Int
-  Name String
-  Title String
-  Organization String
-  Start_Date DateTime
-  Zip Int
-  State String
-  Neighborhood String
-  News Int
-  IA Int 
-  Detail Int
-  FIOs Int
-  Inc Int
-  MVC Int
-  SWAT Int
-  Total Float
-  Regular Float
-  Retro Float
-  Other Float
-  Overtime Float
-  Injured Float
-  Quinn Float
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model arrest_info {
+  incident_number     Int @id
+  offense_code        Int?
+  offense_description String?   @db.VarChar(100)
+  district            String?   @db.VarChar(50)
+  reporting_area      String?   @db.VarChar(50)
+  shooting            Int?
+  occurred_on_date    DateTime? @db.Timestamp(6)
+  YEAR                Int?
+  MONTH               Int?
+  day_of_week         String?   @db.VarChar(50)
+  HOUR                Int?
+  ucr_part            String?   @db.VarChar(50)
+  street              String?   @db.VarChar(100)
+  Location            String?   @db.VarChar(100)
 }
