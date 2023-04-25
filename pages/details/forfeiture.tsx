@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 
-export default function Fio({users}){
+export default function Fio({forfeiture_json}){
     return (
         <div>
         <Head>
@@ -25,7 +25,7 @@ export default function Fio({users}){
 
         <h1>Forfeiture Information</h1>
 
-        <PlaceholderTable json={users}/>
+        <PlaceholderTable json={forfeiture_json}/>
 
         <h2>Analysis</h2>
 
@@ -46,7 +46,7 @@ export default function Fio({users}){
         an analysis of the location, types of crime, and disposition of assets together 
         could lead to better understanding of how forfeiture is used.
 
-        ## Explanation
+        <h2>Explanation</h2>
 
         Forfeiture is the process in which law enforcement seize the property, 
         assets, and/or cash of people involved in criminal activity. It is 
