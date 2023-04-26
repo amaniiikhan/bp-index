@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import json2csv from 'json2csv';
 import * as pg from 'pg';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 interface TableData {
   json: string;
@@ -77,18 +78,8 @@ const Placeholder:React.FC<TableData> = ({json, limit}) => {
       setCurrentLimit(newLimit);
       console.log(newLimit)
     };
-    // const [displayData, setDisplayData] = useState([]);
-    // const [currentLimit, setCurrentLimit] = useState(limit);
-  
-    // // Update the displayed data when the limit prop changes
-    // useEffect(() => {
-    //   setDisplayData(data.slice(0, currentLimit));
-    // }, [data, currentLimit]);
-  
-    // const handleLoadMore = () => {
-    //   const newLimit = currentLimit + 10; // increase the limit by 10
-    //   setCurrentLimit(newLimit);
-    // };
+
+
 
     return (
       <div>
@@ -99,17 +90,18 @@ const Placeholder:React.FC<TableData> = ({json, limit}) => {
               {ThData()}
               </TableRow>
           </TableHead>
-          <TableBody>
-          {displayData.map((row, index) => (
-            <TableRow key={index}>
-              {column.map((v) => (
-                <TableCell key={`${index}-${v}`}>
-                  {row[v]}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-          </TableBody>
+          <Table style={{ tableLayout: "fixed" }}></Table>
+            <TableBody>
+            {displayData.map((row, index) => (
+              <TableRow key={index}>
+                {column.map((v) => (
+                  <TableCell key={`${index}-${v}`}>
+                    {row[v]}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+            </TableBody>
         </Table>
       </TableContainer>
 
@@ -117,7 +109,7 @@ const Placeholder:React.FC<TableData> = ({json, limit}) => {
         <Button onClick={handleLoadMore}>Load More</Button>
       )}
 
-      <br/>
+
       <Button variant="contained" color="primary" onClick={downloadCsv}>
         Download CSV
       </Button>
