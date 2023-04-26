@@ -2,20 +2,22 @@ import Head from "next/head";
 import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
-import PlaceholderTable from "@components/PlaceholderTable";
+import PlaceholderTable from "@components/forfeituretable";
+import forfeiture from "pages/details/forfeiture.json" assert { type: 'json' };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.forfeiture_Cases.findMany();
+    //const feed = await prisma.forfeiture_Cases.findMany();
+    const feed = forfeiture
     console.log(feed)
     return {
       props: {
-        users: JSON.parse(JSON.stringify(feed))
+        table: JSON.parse(JSON.stringify(feed))
       }
     };
 };
 
 
-export default function Fio({forfeiture_json}){
+export default function Fio({table}){
     return (
         <div>
         <Head>
@@ -25,7 +27,7 @@ export default function Fio({forfeiture_json}){
 
         <h1>Forfeiture Information</h1>
 
-        <PlaceholderTable json={forfeiture_json}/>
+        <PlaceholderTable json={table} limit={10}/>
 
         <h2>Analysis</h2>
 

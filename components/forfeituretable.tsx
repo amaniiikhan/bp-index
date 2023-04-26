@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactDOM from "react-dom/client";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,9 +14,10 @@ import * as pg from 'pg';
 
 interface TableData {
   json: string;
+  limit: number;
 }
 
-const Placeholder:React.FC<TableData> = ({json}) => {
+const Placeholder:React.FC<TableData> = ({json, limit}) => {
   // const { Sequelize } = require('sequelize');
   // const sequelize = new Sequelize('postgresql://postgres:iG5CEYV5GU6DaDpBv5Nb@containers-us-west-43.railway.app:7705/railway')
 
@@ -64,6 +65,31 @@ const Placeholder:React.FC<TableData> = ({json}) => {
       URL.revokeObjectURL(url); // release the URL object
     };
 
+    const [currentLimit, setCurrentLimit] = useState(limit);
+    const [displayData, setDisplayData] = useState(data.slice(0, limit));
+    
+    useEffect(() => {
+        setDisplayData(data.slice(0, currentLimit));
+      }, [data, currentLimit]);
+
+    const handleLoadMore = () => {
+      const newLimit = currentLimit + 10; // increase the limit by 10
+      setCurrentLimit(newLimit);
+      console.log(newLimit)
+    };
+    // const [displayData, setDisplayData] = useState([]);
+    // const [currentLimit, setCurrentLimit] = useState(limit);
+  
+    // // Update the displayed data when the limit prop changes
+    // useEffect(() => {
+    //   setDisplayData(data.slice(0, currentLimit));
+    // }, [data, currentLimit]);
+  
+    // const handleLoadMore = () => {
+    //   const newLimit = currentLimit + 10; // increase the limit by 10
+    //   setCurrentLimit(newLimit);
+    // };
+
     return (
       <div>
       <TableContainer component={Paper}>
@@ -74,7 +100,7 @@ const Placeholder:React.FC<TableData> = ({json}) => {
               </TableRow>
           </TableHead>
           <TableBody>
-          {data.map((row, index) => (
+          {displayData.map((row, index) => (
             <TableRow key={index}>
               {column.map((v) => (
                 <TableCell key={`${index}-${v}`}>
@@ -86,7 +112,11 @@ const Placeholder:React.FC<TableData> = ({json}) => {
           </TableBody>
         </Table>
       </TableContainer>
-      
+
+      {displayData.length < data.length && (
+        <Button onClick={handleLoadMore}>Load More</Button>
+      )}
+
       <br/>
       <Button variant="contained" color="primary" onClick={downloadCsv}>
         Download CSV
