@@ -1,8 +1,16 @@
 import React, { useRef, useEffect } from 'react';
-import { Chart, ChartConfiguration } from 'chart.js';
+import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale } from 'chart.js';
+
+Chart.register(
+    LineController,
+    LineElement,
+    PointElement,
+    CategoryScale,
+    LinearScale
+  );
 
 interface ChartComponentProps {
-  config: ChartConfiguration;
+  config: any;
 }
 
 const ChartComponent: React.FC<ChartComponentProps> = ({ config }) => {
@@ -17,7 +25,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ config }) => {
     }
   }, [config]);
 
-  return <canvas ref={canvasRef}></canvas>;
+  return <canvas ref={canvasRef} />;
 };
 
 export default ChartComponent;

@@ -16,19 +16,22 @@ Chart.register(
   LinearScale
 );
 function prepareChartData(tableData: any[]) {
-  const assetTypes: { [key: string]: number } = {};
+  const yearlySums: { [key: string]: number } = {};
 
   tableData.forEach((item) => {
-    const assetType = item.amount; // Replace 'assetType' with the appropriate key in your data
-    if (assetTypes[assetType]) {
-      assetTypes[assetType] += 1;
+    const date = new Date(item.date);
+    const year = date.getFullYear().toString();
+    const amount = item.amount;
+
+    if (yearlySums[year]) {
+      yearlySums[year] += amount;
     } else {
-      assetTypes[assetType] = 1;
+      yearlySums[year] = amount;
     }
   });
 
-  const labels = Object.keys(assetTypes);
-  const data = labels.map((label) => assetTypes[label]);
+  const labels = Object.keys(yearlySums);
+  const data = labels.map((label) => yearlySums[label]);
 
   return { labels, data };
 }
@@ -46,47 +49,48 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 
-export default function Fio({table}){
-
+export default function Fio({ table }) {
   const { labels, data } = prepareChartData(table);
 
-  const chartConfig: ChartConfiguration = {
-    type: 'bar',
+  const chartConfig = {
+    type: 'line',
     data: {
       labels: labels,
       datasets: [
         {
-          label: 'Asset Types',
+          label: 'Total Amount Seized',
           data: data,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1,
+          tension: 0.4,
+          fill: false,
         },
       ],
     },
     options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Total Amount Seized by Year',
+        },
+      },
       scales: {
         y: {
           beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Sum of Amount',
+          },
         },
-        x: {},
+        x: {
+          title: {
+            display: true,
+            text: 'Year',
+          },
+        },
       },
     },
-    plugins: [],
   };
 
     return (
