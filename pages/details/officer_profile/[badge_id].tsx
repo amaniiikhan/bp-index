@@ -9,10 +9,10 @@ import prisma from "lib/prisma";
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const bid = +context.params.badge_id
   console.log("bid is ", bid)
-  const feed = await prisma.officer_Pay.findMany({
+  const feed = await prisma.officermisconduct.findMany({
     where: {
-      Badge_ID: {
-        equals: bid
+      IA_No: {
+        equals: bid.toString()
       }
     }
   });

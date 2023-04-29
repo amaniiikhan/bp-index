@@ -5,9 +5,7 @@ import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.arrest_info.findMany({
-      take: 10,
-    });
+    const feed = await prisma.arrest_info.findMany();
     console.log(feed)
     return {
       props: {
@@ -23,9 +21,9 @@ export default function Fio({users}){
         <Head>
             <title>Boston Police Index</title>
             <link rel="icon" href="/favicon.ico" />
-        </Head>
+        </Head> 
 
-        <h1>REPLACE-ME Information</h1>
+        <h1>Police Financial</h1>
 
         <PlaceholderTable json={users}/>
 
