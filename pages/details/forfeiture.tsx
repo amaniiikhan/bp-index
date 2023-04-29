@@ -4,6 +4,57 @@ import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/forfeituretable";
 import forfeiture from "pages/details/forfeiture.json" assert { type: 'json' };
+import ChartComponent from '@components/ChartComponent'; 
+import { Chart } from 'chart.js';
+import { ChartConfiguration } from 'chart.js/auto';
+import { BarController, BarElement, CategoryScale, LinearScale } from 'chart.js';
+
+Chart.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
+
+const chartConfig: ChartConfiguration = {
+  type: 'bar',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [2, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+      x: {},
+    },
+  },
+  plugins: [],
+};
+
 
 export const getStaticProps: GetStaticProps = async () => {
     //const feed = await prisma.forfeiture_Cases.findMany();
@@ -47,6 +98,8 @@ export default function Fio({table}){
         different internal and external factors, and there is no ground truth. However, 
         an analysis of the location, types of crime, and disposition of assets together 
         could lead to better understanding of how forfeiture is used.
+        
+        <ChartComponent config={chartConfig} />
 
         <h2>Explanation</h2>
 
