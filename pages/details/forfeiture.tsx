@@ -36,6 +36,27 @@ function prepareChartData(tableData: any[]) {
   return { labels, data };
 }
 
+function prepareBarChartData(tableData: any[]) {
+  const courtSums: { [key: string]: number } = {};
+
+  tableData.forEach((item) => {
+    const courtName = item.court_name;
+    const amount = item.amount;
+
+    if (courtSums[courtName]) {
+      courtSums[courtName] += amount;
+    } else {
+      courtSums[courtName] = amount;
+    }
+  });
+
+  const labels = Object.keys(courtSums);
+  const data = labels.map((label) => courtSums[label]);
+
+  return { labels, data };
+}
+
+
 
 export const getStaticProps: GetStaticProps = async () => {
     //const feed = await prisma.forfeiture_Cases.findMany();
@@ -51,6 +72,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function Fio({ table }) {
   const { labels, data } = prepareChartData(table);
+  const { labels: barLabels, data: barData } = prepareBarChartData(table);
 
   const chartConfig = {
     type: 'line',
@@ -93,6 +115,47 @@ export default function Fio({ table }) {
     },
   };
 
+  const barChartConfig: ChartConfiguration = {
+    type: 'bar',
+    data: {
+      labels: barLabels,
+      datasets: [
+        {
+          label: 'Total Amount Seized by Court',
+          data: barData,
+          backgroundColor: barLabels.map(
+            () => 'rgba(255, 99, 132, 0.2)'
+          ),
+          borderColor: barLabels.map(() => 'rgba(255, 99, 132, 1)'),
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Total Amount Seized by Court',
+        },
+      },
+      scales: {
+        y: {
+          title: {
+            display: true,
+            text: 'Sum of Amount',
+          },
+        },
+        x: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Court Name',
+          },
+        },
+      },
+    }
+  };
+
     return (
         <div>
         <Head>
@@ -124,6 +187,7 @@ export default function Fio({ table }) {
         could lead to better understanding of how forfeiture is used.
         
         <ChartComponent config={chartConfig} />
+        <ChartComponent config={barChartConfig} />
 
         <h2>Explanation</h2>
 
