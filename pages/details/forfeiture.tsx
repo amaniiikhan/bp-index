@@ -102,7 +102,7 @@ export default function Fio({ table }) {
           beginAtZero: true,
           title: {
             display: true,
-            text: 'Sum of Amount',
+            text: 'Total Amount',
           },
         },
         x: {
@@ -167,6 +167,19 @@ export default function Fio({ table }) {
 
         <PlaceholderTable json={table} limit={10}/>
 
+        <h2>Summarization</h2>
+
+        <h3>Total amount of asset from 2001 to 2015</h3>
+        <ChartComponent config={chartConfig} />
+        The total amount of forfeited assets trended up, resulting in a 4,304.78% increase between 2001 and 2015. <br />
+        Specifically, the yearly amount started trending up on 2009, rising by 592.10% (726,570.75) in 6 years. 
+        It jumped from 122710 to 849,280.75 during its steepest incline between 2009 and 2015.
+
+        <h3>Total amount seized by court</h3>
+        <ChartComponent config={barChartConfig} />
+        Superior Court is the court that processing most of forfeiture cases, with 7 times more than other courts in the areas. 
+        It can be said that most of forfeiture cases need to be determined by Superior Court, but not the lower ones.
+
         <h2>Analysis</h2>
 
         There are a number of metrics that may be useful when analyzing 
@@ -186,8 +199,6 @@ export default function Fio({ table }) {
         an analysis of the location, types of crime, and disposition of assets together 
         could lead to better understanding of how forfeiture is used.
         
-        <ChartComponent config={chartConfig} />
-        <ChartComponent config={barChartConfig} />
 
         <h2>Explanation</h2>
 

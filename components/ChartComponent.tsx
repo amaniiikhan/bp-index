@@ -23,9 +23,13 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ config }) => {
         chartInstance.destroy();
       };
     }
-  }, [config]);
+  }, [canvasRef,config]);
 
-  return <canvas ref={canvasRef} />;
+  return (
+    <div>
+      <canvas ref={canvasRef} style={{ width: '40px', height: '100px' }} />
+    </div>
+  );
 };
 
 export default ChartComponent;
