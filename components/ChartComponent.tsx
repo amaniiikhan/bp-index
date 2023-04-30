@@ -26,9 +26,10 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ config }) => {
     }
   }, [canvasRef,config]);
 
+
   return (
     <div>
-      <canvas ref={canvasRef} style={{ width: '80%', height: '70px' }} />
+      <canvas ref={canvasRef} style={{ width: '50%', height: '70px' }} />
     </div>
   );
 };

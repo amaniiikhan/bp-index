@@ -108,7 +108,7 @@ export default function Fio({ table }) {
           beginAtZero: true,
           title: {
             display: true,
-            text: 'Sum of Amount',
+            text: 'Total Amount',
           },
         },
         x: {
@@ -178,6 +178,25 @@ export default function Fio({ table }) {
 
         <PlaceholderTable json={table} limit={10}/>
 
+        <h2 className={styles.section}>Summarization</h2>
+
+        <h3 className={styles.section}>Total amount of asset from 2001 to 2015</h3>
+        <div className={styles.chart}>
+        <ChartComponent config={chartConfig} />
+        </div>
+        <p className={styles.paragraph}>
+        The total amount of forfeited assets trended up, resulting in a 4,304.78% increase between 2001 and 2015. <br />
+        Specifically, the yearly amount started trending up on 2009, rising by 592.10% (726,570.75) in 6 years. 
+        It jumped from 122710 to 849,280.75 during its steepest incline between 2009 and 2015.
+        </p>
+        <h3 className={styles.section}>Total amount seized by court</h3>
+        <div className={styles.chart}>
+        <ChartComponent config={barChartConfig} />
+        </div>
+        <p className={styles.paragraph}>
+        Superior Court is the court that processing most of forfeiture cases, with 7 times more than other courts in the areas. 
+        It can be said that most of forfeiture cases need to be determined by Superior Court, but not the lower ones.
+        </p>
         <h2 className={styles.section}>Analysis</h2>
 
         <p className={styles.paragraph}>
@@ -198,16 +217,8 @@ export default function Fio({ table }) {
         different internal and external factors, and there is no ground truth. However, 
         an analysis of the location, types of crime, and disposition of assets together 
         could lead to better understanding of how forfeiture is used.
-
+        
         </p>
-        <div className={styles.chart}>
-        <ChartComponent config={chartConfig} />
-        </div>
-        <div className={styles.chart}>
-        <ChartComponent config={barChartConfig} />
-        </div>
-
-        <h2 className={styles.section}>Explanation</h2>
 
         <p className={styles.paragraph}>
 
