@@ -1,12 +1,13 @@
 import React, { useRef, useEffect } from 'react';
-import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale } from 'chart.js';
+import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, TimeScale} from 'chart.js';
 
 Chart.register(
     LineController,
     LineElement,
     PointElement,
     CategoryScale,
-    LinearScale
+    LinearScale,
+    TimeScale
   );
 
 interface ChartComponentProps {
@@ -23,9 +24,13 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ config }) => {
         chartInstance.destroy();
       };
     }
-  }, [config]);
+  }, [canvasRef,config]);
 
-  return <canvas ref={canvasRef} />;
+  return (
+    <div>
+      <canvas ref={canvasRef} style={{ width: '80%', height: '70px' }} />
+    </div>
+  );
 };
 
 export default ChartComponent;

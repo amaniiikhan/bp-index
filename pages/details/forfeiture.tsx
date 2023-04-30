@@ -8,12 +8,14 @@ import ChartComponent from '@components/ChartComponent';
 import { Chart } from 'chart.js';
 import { ChartConfiguration } from 'chart.js/auto';
 import { BarController, BarElement, CategoryScale, LinearScale } from 'chart.js';
-
+import styles from "./styles.module.css";
+// import { TimeScale } from 'chart.js';
 Chart.register(
   BarController,
   BarElement,
   CategoryScale,
-  LinearScale
+  LinearScale,
+  // TimeScale
 );
 function prepareChartData(tableData: any[]) {
   const yearlySums: { [key: string]: number } = {};
@@ -32,6 +34,9 @@ function prepareChartData(tableData: any[]) {
 
   const labels = Object.keys(yearlySums);
   const data = labels.map((label) => yearlySums[label]);
+  // const labels = Object.keys(yearlySums).map((year) => new Date(year));
+  // const data = labels.map((label) => yearlySums[label.getFullYear().toString()]);
+
 
   return { labels, data };
 }
@@ -91,6 +96,7 @@ export default function Fio({ table }) {
       ],
     },
     options: {
+      maintainAspectRatio: true,
       plugins: {
         title: {
           display: true,
@@ -106,6 +112,10 @@ export default function Fio({ table }) {
           },
         },
         x: {
+          // type: 'time',
+          // ticks: {
+          //   max: new Date('2015'), // Set the maximum value for the x-axis
+          // },
           title: {
             display: true,
             text: 'Year',
@@ -132,6 +142,7 @@ export default function Fio({ table }) {
       ],
     },
     options: {
+      maintainAspectRatio: true,
       plugins: {
         title: {
           display: true,
@@ -163,11 +174,13 @@ export default function Fio({ table }) {
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <h1>Forfeiture Information</h1>
+        <h1 className={styles.section}>Forfeiture Information</h1>
 
         <PlaceholderTable json={table} limit={10}/>
 
-        <h2>Analysis</h2>
+        <h2 className={styles.section}>Analysis</h2>
+
+        <p className={styles.paragraph}>
 
         There are a number of metrics that may be useful when analyzing 
         forfeiture data such as the total value of seized assets, types of 
@@ -185,11 +198,18 @@ export default function Fio({ table }) {
         different internal and external factors, and there is no ground truth. However, 
         an analysis of the location, types of crime, and disposition of assets together 
         could lead to better understanding of how forfeiture is used.
-        
-        <ChartComponent config={chartConfig} />
-        <ChartComponent config={barChartConfig} />
 
-        <h2>Explanation</h2>
+        </p>
+        <div className={styles.chart}>
+        <ChartComponent config={chartConfig} />
+        </div>
+        <div className={styles.chart}>
+        <ChartComponent config={barChartConfig} />
+        </div>
+
+        <h2 className={styles.section}>Explanation</h2>
+
+        <p className={styles.paragraph}>
 
         Forfeiture is the process in which law enforcement seize the property, 
         assets, and/or cash of people involved in criminal activity. It is 
@@ -208,7 +228,7 @@ export default function Fio({ table }) {
         activities of police departments so that the public can gain insight into 
         how law enforcement agencies are using this tool, and whether there are any 
         trends that point to an abuse of power.
-
+        </p>
 
         <Footer />
         </div>

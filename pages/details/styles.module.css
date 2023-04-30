@@ -1,0 +1,25 @@
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 20px;
+  }
+  
+  .section {
+    margin-bottom: 1%;
+    margin-left: 1%;
+    margin-right: 2%;
+  }
+  
+  .paragraph {
+    margin-bottom: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  .chart {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 5%;
+    margin-right: 10%;
+  }
+  
