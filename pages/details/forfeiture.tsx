@@ -18,27 +18,32 @@ Chart.register(
   // TimeScale
 );
 function prepareChartData(tableData: any[]) {
+
   const yearlySums: { [key: string]: number } = {};
 
   tableData.forEach((item) => {
-    const date = new Date(item.date);
-    const year = date.getFullYear().toString();
-    const amount = item.amount;
+      const date = new Date(item.date);
+      const year = date.getFullYear().toString();
+      console.log(year)
+      const amount = item.amount;
+      if (yearlySums[year]) {
+        yearlySums[year] += amount;
+      } else {
+        yearlySums[year] = amount;
+      }
 
-    if (yearlySums[year]) {
-      yearlySums[year] += amount;
-    } else {
-      yearlySums[year] = amount;
-    }
+    
   });
 
   const labels = Object.keys(yearlySums);
   const data = labels.map((label) => yearlySums[label]);
+  const filteredLabels = labels.filter((label) => !isNaN(label));
+
   // const labels = Object.keys(yearlySums).map((year) => new Date(year));
   // const data = labels.map((label) => yearlySums[label.getFullYear().toString()]);
 
 
-  return { labels, data };
+  return { labels: filteredLabels, data };
 }
 
 function prepareBarChartData(tableData: any[]) {
