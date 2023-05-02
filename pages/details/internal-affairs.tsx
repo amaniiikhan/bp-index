@@ -3,7 +3,7 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import internalaffairs from "@components/IA.json"
+import internalaffairs from "@components/IA.json";
 import Chart from 'chart.js/auto'
 import { useState } from "react";
 import { Pie } from "react-chartjs-2";
@@ -25,13 +25,13 @@ export const getStaticProps: GetStaticProps = async () => {
   console.log(feed)
   return {
     props: {
-      users: JSON.parse(JSON.stringify(feed))
+      internal_affairs_cases: feed
     }
   };
 };
 
-export default function Fio({users}){
-
+export default function InternalAffairs({internal_affairs_cases}){
+console.log(internal_affairs_cases)
   const data = require('../../utility/extracleandata.json');
 
   const allegation_data = data.Allegation
@@ -78,7 +78,7 @@ export default function Fio({users}){
 
         <h1>Officer Misconduct Information</h1>
 
-        <PlaceholderTable json={users} limit={10}/>
+        <PlaceholderTable json={users}/>
 
     
         <div className="Fio">
