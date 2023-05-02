@@ -26,7 +26,7 @@ export default function Fio({users}){
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <h1>REPLACE-ME Information</h1>
+        <h1>Civil Settlement Information</h1>
 
         <PlaceholderTable json={users}/>
 
