@@ -3,16 +3,34 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
+import Papa from 'papaparse';
+import "leaflet/dist/leaflet.css";
+// for map functions 
+import { useEffect, useRef } from "react";
+import L from "leaflet";
+import { Chart } from "chart.js";
 
+
+
+// presenting data table 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.arrest_Data.findMany();
-    console.log(feed)
-    return {
-      props: {
-        users: JSON.parse(JSON.stringify(feed))
-      }
-    };
+  const response = await fetch('https://raw.githubusercontent.com/JQJQrush/DS4G/main/AI.csv');
+  const csvContent = await response.text();
+
+  const parsedData = Papa.parse(csvContent, {
+    header: true,
+    skipEmptyLines: true,
+  });
+
+  const firstFiveRows = parsedData.data.slice(0, 5);
+
+  return {
+    props: {
+      users: firstFiveRows,
+    },
+  };
 };
+
 
 
 export default function Fio({users}){
@@ -23,9 +41,20 @@ export default function Fio({users}){
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <h1>REPLACE-ME Information</h1>
+        <h1>Arrest Information</h1>
 
         <PlaceholderTable json={users}/>
+
+
+
+        <h2>Data Visualization</h2>
+        <h3>offense case map</h3>
+
+
+
+
+
+
 
         <h2>Analysis</h2>
 
