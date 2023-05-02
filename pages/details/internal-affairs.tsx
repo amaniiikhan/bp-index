@@ -4,6 +4,19 @@ import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 import internalaffairs from "@components/IA.json"
+import Chart from 'chart.js/auto'
+import { useState } from "react";
+import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
+
+ChartJS.register(CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend)
+
+
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
