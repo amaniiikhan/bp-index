@@ -3,9 +3,10 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
+import internalaffairs from "utility/InternalAffairs.json" assert { type: 'json' };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.internal_Affairs.findMany();
+    const feed = internalaffairs;
     console.log(feed)
     return {
       props: {
