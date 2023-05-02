@@ -6,10 +6,6 @@ import PlaceholderTable from "@components/PlaceholderTable";
 import internalaffairs from "pages/details/IA.json";
 
 
-type Props = {
-  table: Record<string, unknown>;
-};
-
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = internalaffairs
