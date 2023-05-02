@@ -4,24 +4,19 @@ import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 import internalaffairs from "pages/details/IA.json";
-import path from 'path';
-import * as fs from 'fs';
+
 
 type Props = {
   table: Record<string, unknown>;
 };
 
+
 export const getStaticProps: GetStaticProps = async () => {
-  const filePath = path.join(process.cwd(), 'pages/details', 'IA.json');
-  console.log(filePath);
-  const jsonString = fs.readFileSync(filePath, 'utf8');
-  console.log(jsonString);
-  const feed = JSON.parse(jsonString);
-  
-  console.log(feed);
+  const feed = internalaffairs
+  console.log(feed)
   return {
     props: {
-      table: feed
+      table: JSON.parse(JSON.stringify(feed))
     }
   };
 };
