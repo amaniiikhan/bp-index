@@ -3,24 +3,32 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import JSONStream from 'JSONStream';
-import fs from 'fs';
 
-const stream = fs.createReadStream('@components/IA.json')
-  .pipe(JSONStream.parse('*'));
 
-stream.on('data', (data) => {
-  // process each chunk of data here
+const readline = require('readline');
+const fs = require('fs');
+
+const filePath = 'path/to/file.json';
+
+const stream = fs.createReadStream(filePath);
+const rl = readline.createInterface({
+  input: stream,
+  crlfDelay: Infinity
 });
 
-stream.on('error', (err) => {
-  console.error('Error while parsing JSON file:', err);
+let json = '';
+rl.on('line', (line) => {
+  json += line;
 });
 
-stream.on('end', () => {
-  console.log('Finished parsing JSON file.');
+rl.on('close', () => {
+  try {
+    const data = JSON.parse(json);
+    console.log(data);
+  } catch (err) {
+    console.error(`Error parsing JSON: ${err}`);
+  }
 });
-
 
 export default function Fio({users}){
     return (
