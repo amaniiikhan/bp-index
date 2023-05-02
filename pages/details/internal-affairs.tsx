@@ -31,10 +31,11 @@ ChartJS.register(CategoryScale,
 
 export default function Fio({users}){
 
-  const data = require('../../utility/cleaned_data.json');
+  const data = require('../../utility/extracleandata.json');
 
   const allegation_data = data.Allegation
 
+  //creates an object to keep count of occurences
   const count = {};
     for (const key in allegation_data) {
       if (count[allegation_data[key]]) {
@@ -46,15 +47,25 @@ export default function Fio({users}){
   const labels = Object.keys(count);
   const values = Object.values(count);
   
-
+  //set values to later use for graph
   const [chartData, setChartData] = useState({ 
     labels: labels,
     datasets: [
       {
-        label: "Users Gained",
+        label: "Allegations:",
         data: values,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 255, 255, 0.2)',
+            'rgba(0, 0, 0, 0.2)',
+        ],
       }
-    ]
+    ],
   });
 
     return (
@@ -68,8 +79,9 @@ export default function Fio({users}){
 
         <PlaceholderTable json={users}/>
 
-
+    
         <div className="Fio">
+          <style> 'height': 400px, 'width': 800px </style>
           <Pie data={chartData}/>
         </div>
 
