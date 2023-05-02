@@ -3,19 +3,23 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import internalaffairs from "@components/IA.json";
+import JSONStream from 'JSONStream';
+import fs from 'fs';
 
+const stream = fs.createReadStream('@components/IA.json')
+  .pipe(JSONStream.parse('*'));
 
+stream.on('data', (data) => {
+  // process each chunk of data here
+});
 
-export const getStaticProps: GetStaticProps = async () => {
-  const feed = internalaffairs
-  console.log(feed)
-  return {
-    props: {
-      table: JSON.parse(JSON.stringify(feed))
-    }
-  };
-};
+stream.on('error', (err) => {
+  console.error('Error while parsing JSON file:', err);
+});
+
+stream.on('end', () => {
+  console.log('Finished parsing JSON file.');
+});
 
 
 export default function Fio({users}){
