@@ -3,7 +3,7 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import internalaffairs from "pages/details/IA.json";
+import internalaffairs from "@components/IA.json";
 
 
 
