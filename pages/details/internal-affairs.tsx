@@ -78,7 +78,7 @@ export default function Fio({users}){
 
         <h1>Officer Misconduct Information</h1>
 
-        <PlaceholderTable json={users}/>
+        <PlaceholderTable json={users} limit={10}/>
 
     
         <div className="Fio">
