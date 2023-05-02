@@ -7,7 +7,7 @@ import internalaffairs from "pages/details/IA.json" assert { type: 'json' };
 
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = internalaffairs;
+    const feed = internalaffairs
     console.log(feed)
     return {
       props: {
