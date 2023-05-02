@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
   console.log(feed)
   return {
     props: {
-      table: JSON.parse(JSON.stringify(feed))
+      users: JSON.parse(JSON.stringify(feed))
     }
   };
 };
