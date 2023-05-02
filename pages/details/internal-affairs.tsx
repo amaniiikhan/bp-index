@@ -5,12 +5,13 @@ import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 import internalaffairs from "utility/InternalAffairs.json" assert { type: 'json' };
 
+intaff = JSON
 export const getStaticProps: GetStaticProps = async () => {
     const feed = internalaffairs;
     console.log(feed)
     return {
       props: {
-        users: JSON.parse(JSON.stringify(feed))
+        table: JSON.parse(JSON.stringify(feed))
       }
     };
 };
