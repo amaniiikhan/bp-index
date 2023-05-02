@@ -3,32 +3,18 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
+import internalaffairs from "@components/IA.json"
 
 
-const readline = require('readline');
-const fs = require('fs');
-
-const filePath = 'path/to/file.json';
-
-const stream = fs.createReadStream(filePath);
-const rl = readline.createInterface({
-  input: stream,
-  crlfDelay: Infinity
-});
-
-let json = '';
-rl.on('line', (line) => {
-  json += line;
-});
-
-rl.on('close', () => {
-  try {
-    const data = JSON.parse(json);
-    console.log(data);
-  } catch (err) {
-    console.error(`Error parsing JSON: ${err}`);
-  }
-});
+export const getStaticProps: GetStaticProps = async () => {
+  const feed = internalaffairs
+  console.log(feed)
+  return {
+    props: {
+      table: JSON.parse(JSON.stringify(feed))
+    }
+  };
+};
 
 export default function Fio({users}){
     return (
