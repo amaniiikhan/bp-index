@@ -78,7 +78,7 @@ console.log(internal_affairs_cases)
 
         <h1>Officer Misconduct Information</h1>
 
-        <PlaceholderTable json={users}/>
+        <PlaceholderTable json={internal_affairs_cases}/>
 
     
         <div className="Fio">
