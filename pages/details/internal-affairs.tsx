@@ -3,19 +3,10 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-<<<<<<< HEAD
 import internalaffairs from "@components/IA.json"
-=======
-//import data from "../../utility/cleaned_data.json";
-import Chart from 'chart.js/auto'
-import { useState } from "react";
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
->>>>>>> bf6945c023df0e9084b4f5be0bc3385ffef90a85
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-<<<<<<< HEAD
 export const getStaticProps: GetStaticProps = async () => {
   const feed = internalaffairs
   console.log(feed)
@@ -25,24 +16,6 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   };
 };
-=======
-ChartJS.register(CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend)
-
-//export const getStaticProps: GetStaticProps = async () => {
- //   const feed = internalaffairs;
-//    console.log(feed)
-//    return {
-//      props: {
-//        table: JSON.parse(JSON.stringify(feed))
-//      }
-//    };
-//};
->>>>>>> bf6945c023df0e9084b4f5be0bc3385ffef90a85
 
 export default function Fio({users}){
 
