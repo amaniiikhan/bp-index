@@ -13,6 +13,7 @@ type Props = {
 
 export const getStaticProps: GetStaticProps = async () => {
   const filePath = path.join(process.cwd(), 'pages/details', 'IA.json');
+  console.log(filePath);
   const jsonString = fs.readFileSync(filePath, 'utf8');
   console.log(jsonString);
   const feed = JSON.parse(jsonString);
