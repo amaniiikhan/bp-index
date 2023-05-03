@@ -6,7 +6,7 @@ import PlaceholderTable from "@components/PlaceholderTable";
 import content from "@components/IA.json";
 import Chart from "chart.js/auto";
 import { useState } from "react";
-import { Pie } from "react-chartjs-2";
+import { Pie, Line } from "react-chartjs-2";
 import {
    Chart as ChartJS,
    ArcElement,
@@ -151,7 +151,17 @@ export default function InternalAffairs() {
           'height': '550px',
           'width': '550px',
         }}>
-         <Pie data={chartData} /> 
+         <Pie
+         options={{
+          plugins: {
+            title: {
+              display: true,
+              text: "Allegation Number",
+              align: "center"
+            }
+          }
+         }} 
+            data={chartData} /> 
       </div>
       </div>
       <h2>Analysis</h2>
@@ -159,7 +169,7 @@ export default function InternalAffairs() {
       come up with the following data visuals. We found the most common
       allegations in this time frame were negligent duty/unreasonable judgement
       followed by respectful treatment. Over this time frame, allegation volume
-      showed a d ownwards sloping trend line. In terms of dispositions, the
+      showed a downwards sloping trend line. In terms of dispositions, the
       dataset showed 40.1% not sustained, 31.3% sustained, 15.4% unfounded,
       12.8% exonerated, and the remaining 0.4% were withdrawn or filed.
       <Footer />
