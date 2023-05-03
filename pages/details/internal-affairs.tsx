@@ -109,7 +109,7 @@ export default function InternalAffairs() {
 
   //creates an object to keep count of occurences
    const count = {};
-   const data = require('../../utility/extracleandata.json');
+   const data = require('../../components/IA_2.json');
    const allegation_data=data.Allegation;
    for (const key in allegation_data) {
      if (count[allegation_data[key]]) {
