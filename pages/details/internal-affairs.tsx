@@ -3,10 +3,11 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import content from "@components/IA.json";
+import content from "../../components/IA.json";
 import Chart from "chart.js/auto";
 import { useState } from "react";
-import { Pie } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
+import { BarController } from 'chart.js';
 import {
    Chart as ChartJS,
    ArcElement,
@@ -24,6 +25,7 @@ import { GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
    CategoryScale,
    LinearScale,
    BarElement,
+   BarController,
    Title,
    Tooltip,
    Legend
@@ -118,7 +120,7 @@ export default function InternalAffairs() {
    const labels = Object.keys(count);
    const values = Object.values(count);
  //  console.log(count);
-
+   
   // //set values to later use for graph
    const [chartData, setChartData] = useState({
      labels: labels,
@@ -137,6 +139,48 @@ export default function InternalAffairs() {
        },
      ],
    });
+      const disposition_count = {};
+      const d_data = require('../../components/IA.json');
+      const disposition_data=d_data.Disposition;
+      for (const dkey in disposition_data) {
+        if (disposition_count[disposition_data[dkey]]) {
+          disposition_count[disposition_data[dkey]]++;
+        } else {
+            disposition_count[disposition_data[dkey]] = 1;
+      }
+    }
+    const disposition_labels = Object.keys(disposition_count);
+    const disposition_values = Object.values(disposition_count);
+    console.log(disposition_count);
+
+   const [barData, setbarData] = useState({
+    labels: disposition_labels,
+    datasets: [{
+      label: 'Dispositions',
+      data : disposition_values,
+      responsive: false,
+      backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)'
+    ],    
+      borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)'
+    ],
+    borderWidth: 1
+
+   }]
+  });
 
   return (
     <div>
@@ -152,6 +196,14 @@ export default function InternalAffairs() {
           'width': '550px',
         }}>
          <Pie data={chartData} /> 
+      </div>
+      </div>
+      <div className="chart-container">
+      <div style={{
+          'height': '550px',
+          'width': '550px',
+        }}>
+         <Bar data={barData}/> 
       </div>
       </div>
       <h2>Analysis</h2>
