@@ -4,32 +4,32 @@ import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 import content from "@components/IA.json";
-// import Chart from "chart.js/auto";
+import Chart from "chart.js/auto";
 import { useState } from "react";
-// import { Pie } from "react-chartjs-2";
-// import {
-//   Chart as ChartJS,
-//   ArcElement,
-//   Tooltip,
-//   Legend,
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-// } from "chart.js";
+import { Pie } from "react-chartjs-2";
+import {
+   Chart as ChartJS,
+   ArcElement,
+   Tooltip,
+   Legend,
+   CategoryScale,
+   LinearScale,
+   BarElement,
+   Title,
+ } from "chart.js";
 import LargeDataTable from "@components/LargeDataTable";
 import { GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
-// ChartJS.register(
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// );
+ ChartJS.register(
+   CategoryScale,
+   LinearScale,
+   BarElement,
+   Title,
+   Tooltip,
+   Legend
+ );
 
-// ChartJS.register(ArcElement, Tooltip, Legend);
+ ChartJS.register(ArcElement, Tooltip, Legend);
 
 // export const getStaticProps: GetStaticProps = async () => {
 //   const feed = internalaffairs;
@@ -105,37 +105,38 @@ export default function InternalAffairs() {
   ];
 
   //creates an object to keep count of occurences
-  // const count = {};
-  // for (const key in allegation_data) {
-  //   if (count[allegation_data[key]]) {
-  //     count[allegation_data[key]]++;
-  //   } else {
-  //     count[allegation_data[key]] = 1;
-  //   }
-  // }
-  // const labels = Object.keys(count);
-  // const values = Object.values(count);
+   const count = {};
+   const data = require('../../utility/extracleandata.json');
+   const allegation_data=data.Allegation;
+   for (const key in allegation_data) {
+     if (count[allegation_data[key]]) {
+       count[allegation_data[key]]++;
+     } else {
+       count[allegation_data[key]] = 1;
+     }
+   }
+   const labels = Object.keys(count);
+   const values = Object.values(count);
+ //  console.log(count);
 
   // //set values to later use for graph
-  // const [chartData, setChartData] = useState({
-  //   labels: labels,
-  //   datasets: [
-  //     {
-  //       label: "Allegations:",
-  //       data: values,
-  //       backgroundColor: [
-  //         "rgba(255, 99, 132, 0.2)",
-  //         "rgba(54, 162, 235, 0.2)",
-  //         "rgba(255, 206, 86, 0.2)",
-  //         "rgba(75, 192, 192, 0.2)",
-  //         "rgba(153, 102, 255, 0.2)",
-  //         "rgba(255, 159, 64, 0.2)",
-  //         "rgba(255, 255, 255, 0.2)",
-  //         "rgba(0, 0, 0, 0.2)",
-  //       ],
-  //     },
-  //   ],
-  // });
+   const [chartData, setChartData] = useState({
+     labels: labels,
+     datasets: [
+       {
+         label: "Allegations:",
+         data: values,
+         responsive: false,
+         backgroundColor: [
+           "rgba(255, 99, 132, 0.2)",
+           "rgba(54, 162, 235, 0.2)",
+           "rgba(255, 206, 86, 0.2)",
+           "rgba(75, 192, 192, 0.2)",
+           "rgba(153, 102, 255, 0.2)",
+        ],
+       },
+     ],
+   });
 
   return (
     <div>
@@ -146,8 +147,12 @@ export default function InternalAffairs() {
       <h1>Officer Misconduct Information</h1>
       <LargeDataTable column_def={columns} rows={content} />
       <div className="Fio">
-        {/* <style> 'height': 400px, 'width': 800px </style> */}
-        {/* <Pie data={chartData} /> */}
+        <div style={{
+          'height': '550px',
+          'width': '550px',
+        }}>
+         <Pie data={chartData} /> 
+      </div>
       </div>
       <h2>Analysis</h2>
       Using the Boston Police Internal Affairs Division records, we were able to
