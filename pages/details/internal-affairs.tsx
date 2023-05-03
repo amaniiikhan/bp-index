@@ -6,12 +6,9 @@ import PlaceholderTable from "@components/PlaceholderTable";
 import content from "../../components/IA.json";
 import Chart from "chart.js/auto";
 import { useState } from "react";
-<<<<<<< HEAD
-import { Bar, Pie } from "react-chartjs-2";
+import { Bar} from "react-chartjs-2";
 import { BarController } from 'chart.js';
-=======
 import { Pie, Line } from "react-chartjs-2";
->>>>>>> 76febf405fa6da43863aa17c0c3e0a85ecb2a84c
 import {
    Chart as ChartJS,
    ArcElement,
@@ -144,8 +141,7 @@ export default function InternalAffairs() {
      ],
    });
       var disposition_count = {};
-      const d_data = require('../../components/IA.json');
-      const disposition_data=d_data.Disposition;
+      const disposition_data=data.Disposition;
       for (const dkey in disposition_data) {
         if (disposition_count[disposition_data[dkey]]) {
           disposition_count[disposition_data[dkey]]++;
@@ -156,13 +152,14 @@ export default function InternalAffairs() {
     const disposition_labels = Object.keys(disposition_count);
     const disposition_values = Object.values(disposition_count);
     console.log(disposition_count);
+    console.log(disposition_labels);
+    console.log(disposition_values);
 
    const [barData, setbarData] = useState({
     labels: disposition_labels,
     datasets: [{
-      label: 'Dispositions',
+      label: 'disposition',
       data : disposition_values,
-      responsive: false,
       backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
       'rgba(255, 159, 64, 0.2)',
@@ -217,7 +214,17 @@ export default function InternalAffairs() {
           'height': '550px',
           'width': '550px',
         }}>
-         <Bar data={barData}/> 
+         <Bar data={barData}
+         options={{
+          plugins: {
+            title: {
+              display: true,
+              text: "Internal Affairs Case Dispositions",
+              align: "center"
+            },
+            legend: {
+              display: false
+            }}}}/> 
       </div>
       </div>
       <h2>Analysis</h2>
