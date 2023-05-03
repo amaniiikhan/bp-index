@@ -139,7 +139,7 @@ export default function InternalAffairs() {
        },
      ],
    });
-      const disposition_count = {};
+      var disposition_count = {};
       const d_data = require('../../components/IA.json');
       const disposition_data=d_data.Disposition;
       for (const dkey in disposition_data) {
