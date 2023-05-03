@@ -189,7 +189,7 @@ export default function InternalAffairs() {
         <title>Boston Police Index</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Officer Misconduct Information</h1>
+      <h1>Internal Affairs Cases</h1>
       <LargeDataTable column_def={columns} rows={content} />
       <br></br>
       <div className="Fio">
@@ -232,11 +232,11 @@ export default function InternalAffairs() {
 
       <h2>Analysis</h2>
       Using the Boston Police Internal Affairs Division records, we were able to
-      come up with the following data visuals. We found the most common
+      come up with the data visuals above. We found the most common
       allegations in this time frame were negligent duty/unreasonable judgement
       followed by respectful treatment. Over this time frame, allegation volume
-      showed a downwards sloping trend line. Our trend graphs shows dispositions and breaks it down
-      to the number that were sustained (31.3%), not sustained (40.1%), unfounded(15.4%), and exonerated(12.8%). 
+      showed a downwards sloping trend line. The case disposition bar chart shows that
+      in the 2010 to 2020 time frame, the majority were not sustained (40.1%), followed by sustained (31.3%), unfounded(15.4%), and exonerated(12.8%). 
       The trend shows how most allegations against offers are not sustained.
 
       <h2>Topic Explanation</h2>
