@@ -231,7 +231,12 @@ export default function InternalAffairs() {
 
       <h2>Topic Explanation</h2>
       Our objective is to give the general public access
-      to clear information on instances of officer M
+      to clear information on instances of officer misconduct within the BPD. Officer misconduct
+      undermines public trust and biased judgement often leads to this disproportionally affecting
+      minorities and those in underpriviliged communities. Generally, officer data is really hard to come by.
+      Requests for more officer data is rarely fulfilled, but it is important for the public to know
+      about instances of and the commonality of of officer misconduct. It is crucial to be able to hold officers
+      accountable. 
       <Footer />
     </div>
   );
