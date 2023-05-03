@@ -225,9 +225,13 @@ export default function InternalAffairs() {
       come up with the following data visuals. We found the most common
       allegations in this time frame were negligent duty/unreasonable judgement
       followed by respectful treatment. Over this time frame, allegation volume
-      showed a downwards sloping trend line. In terms of dispositions, the
-      dataset showed 40.1% not sustained, 31.3% sustained, 15.4% unfounded,
-      12.8% exonerated, and the remaining 0.4% were withdrawn or filed.
+      showed a downwards sloping trend line. Our trend graphs shows dispositions and breaks it down
+      to the number that were sustained (31.3%), not sustained (40.1%), unfounded(15.4%), and exonerated(12.8%). 
+      The trend shows how most allegations against offers are not sustained.
+
+      <h2>Topic Explanation</h2>
+      Our objective is to give the general public access
+      to clear information on instances of officer M
       <Footer />
     </div>
   );
