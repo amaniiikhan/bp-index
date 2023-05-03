@@ -191,6 +191,7 @@ export default function InternalAffairs() {
       </Head>
       <h1>Officer Misconduct Information</h1>
       <LargeDataTable column_def={columns} rows={content} />
+      <br></br>
       <div className="Fio">
         <div style={{
           'height': '550px',
@@ -209,6 +210,7 @@ export default function InternalAffairs() {
             data={chartData} /> 
       </div>
       </div>
+      <br></br>
       <div className="chart-container">
       <div style={{
           'height': '550px',
@@ -227,6 +229,7 @@ export default function InternalAffairs() {
             }}}}/> 
       </div>
       </div>
+
       <h2>Analysis</h2>
       Using the Boston Police Internal Affairs Division records, we were able to
       come up with the following data visuals. We found the most common
