@@ -3,7 +3,6 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import data from "../../components/InternalAffairs.json";
 
 export const getStaticProps: GetStaticProps = async () => {
     const feed = await prisma.officermisconduct.findMany();
@@ -25,7 +24,7 @@ export default function Fio({users}){
 
         <h1>Internal Affair Cases</h1>
 
-        <data json={users}/>
+        <PlaceholderTable json={users}/>
 
         <h2>Analysis</h2>
 
