@@ -8,7 +8,7 @@ import prisma from "lib/prisma";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const bid = +context.params.badge_id
-  console.log("bid is ", bid)
+  console.log("bid is", bid)
   const feed = await prisma.officermisconduct.findMany({
     where: {
       IA_No: {
