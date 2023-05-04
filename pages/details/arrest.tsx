@@ -10,9 +10,10 @@ import AIData from "components/ArrestData/AI.json" assert { type: 'json' };
 import fs from "fs";
 import path from "path";
 import Chart from "chart.js/auto";
-import { LogarithmicScale } from 'chart.js';
-Chart.register(LogarithmicScale);
+// import { LogarithmicScale } from 'chart.js';
 import React, { useEffect, useRef, useState, useCallback } from "react";
+
+
 
 
 // presenting data table 
@@ -20,11 +21,10 @@ export const getStaticProps: GetStaticProps = async () => {
   // Use the first five rows from the AIData JSON file
   const firstFiveRows = AIData.slice(0, 5);
   const arrestinformtion = AIData;
-
+  // accessing geojson file 
   const policeDistrictsFilePath = path.join(process.cwd(), "components/ArrestData/Police_Districts.geojson");
   const policeDistrictsFileContents = fs.readFileSync(policeDistrictsFilePath, "utf8");
   const policeDistricts = JSON.parse(policeDistrictsFileContents);
-
   return {
     props: {
       firstFiveRows,
@@ -38,7 +38,6 @@ export const getStaticProps: GetStaticProps = async () => {
 const ArrestMap = dynamic(() => import('components/ArrestData/ArrestMap'), {
   ssr: false
 });
-
 
 // bar chart for different type of offense 
 const offenseCountsByAge = {};
@@ -57,8 +56,6 @@ AIData.forEach((entry) => {
     offenseCountsByAge[age][offense] = 1;
   }
 });
-
-
 
 const ageGroups = Object.keys(offenseCountsByAge).sort((a, b) => Number(a) - Number(b));
 const offenseCounts = {};
@@ -83,7 +80,7 @@ const sortedOffenseLabels = sortedOffenseData.map(([offense]) => offense);
 const offenseCountsData = sortedOffenseData.map(([, countsByAge]) => countsByAge);
 
 const offenseCountsDataWithPercentage = offenseCountsData.map((countsByAge) => {
-  const totalCount = Object.values(countsByAge).reduce((acc, val) => acc + val, 0);
+  const totalCount = Object.values(countsByAge).reduce((acc, val) => Number(acc) + Number(val), 0);
   const countsWithPercentage = {};
 
   ageGroups.forEach((age) => {
@@ -112,8 +109,6 @@ const CustomLegend = ({ labels }) => {
   );
 };
 
-
-
 const OffenseBarChart = ({ data, labels, ageGroups }) => {
   const chartRef = useRef(null);
   const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#2ecc71'];
@@ -127,8 +122,8 @@ const OffenseBarChart = ({ data, labels, ageGroups }) => {
     }
   };
 
-
   useEffect(() => {
+    if (chartRef.current) {
     const myChart = new Chart(chartRef.current, {
       type: 'bar',
       data: {
@@ -172,15 +167,147 @@ const OffenseBarChart = ({ data, labels, ageGroups }) => {
       }
     });
 
-    return () => {
-      myChart.destroy();
-    };
+    return () => {myChart.destroy();};
+  }
+
   }, [data, labels, ageGroups]);
 
   return (
     <canvas ref={chartRef} />
   );
 };
+
+
+
+// Histogram 
+            
+
+// const OffensehisChart = ({ ageGroups }) => {
+//   const chartRef2 = useRef(null);
+//   const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#2ecc71'];
+            
+//   const getAgeGroupLabel = (age) => {
+//     if (age === 0) {
+//       return "0-9";
+//     } else {
+//       return `${age}-${Number(age) + 9}`;
+//     }
+//   };
+            
+//   const ageGroupCounts = ageGroups.map((age) => offenseCounts[age]?.count || 0);
+            
+//   useEffect(() => {
+//     if (chartRef2.current) {
+//       const myChart = new Chart(chartRef2.current, {
+//         type: "bar",
+//         data: {
+//           labels: ageGroups.map((age) => getAgeGroupLabel(age)),
+//           datasets: [
+//             {
+//               label: "Total Number of Offenses",
+//               data: ageGroupCounts,
+//               backgroundColor: colors[0],
+//               borderColor: colors[0],
+//               borderWidth: 1,
+//               barPercentage: 1,
+//               categoryPercentage: 1,
+//             },
+//             {
+//               label: "Offenses by Age Group",
+//               data: ageGroupCounts,
+//               backgroundColor: colors[1],
+//               borderColor: colors[1],
+//               borderWidth: 1,
+//               fill: false,
+//               type: "line",
+//             },
+//           ],
+//         },
+//         options: {
+//           scales: {
+//             y: {beginAtZero: true, stacked: true,},
+//             x: {stacked: true,
+//               ticks: {stepSize: 10,callback: (value, index, values) => getAgeGroupLabel(value),},
+//             },
+//           },
+//         },
+//       });
+            
+//       return () => {myChart.destroy();};
+//     }
+//   }, [ageGroups, ageGroupCounts]);
+            
+//   return <canvas ref={chartRef2} />;
+// };
+
+const OffensehisChart = ({ ageGroups }) => {
+  const chartRef2 = useRef(null);
+  const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#2ecc71'];
+            
+  const getAgeGroupLabel = (age) => {
+    if (age === 0) {
+      return "0-9";
+    } else {
+      return `${age}-${Number(age) + 9}`;
+    }
+  };
+            
+  // const ageGroupCounts = ageGroups.map((age) => Object.values(offenseCounts[age]).reduce((a, b) => Number(a) + Number(b), 0) || 0);
+            
+  const ageGroupCounts = ageGroups.map((age) => {
+    const counts = Object.values(offenseCounts).map((offenseCountsForAge) => offenseCountsForAge[age] || 0);
+    return counts.reduce((a, b) => a + b, 0);
+  });
+  
+  useEffect(() => {
+    if (chartRef2.current) {
+      const myChart = new Chart(chartRef2.current, {
+        type: "bar",
+        data: {
+          labels: ageGroups.map((age) => getAgeGroupLabel(age)),
+          datasets: [
+            {
+              label: "Total Number of Offenses",
+              data: ageGroupCounts,
+              backgroundColor: colors[0],
+              borderColor: colors[0],
+              borderWidth: 1,
+              barPercentage: 1,
+              categoryPercentage: 1,
+            },
+            {
+              label: "Offenses by Age Group",
+              data: ageGroupCounts,
+              backgroundColor: colors[1],
+              borderColor: colors[1],
+              borderWidth: 1,
+              fill: false,
+              type: "line",
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {beginAtZero: true, stacked: true,},
+            x: {stacked: true,
+              ticks: {stepSize: 10,callback: (value, index, values) => getAgeGroupLabel(value),},
+            },
+          },
+        },
+      });
+            
+      return () => {myChart.destroy();};
+    }
+  }, [ageGroups, ageGroupCounts]);
+            
+  return <canvas ref={chartRef2} />;
+};
+
+            
+
+
+
+
 
 
 
@@ -205,15 +332,14 @@ export default function Fio({ firstFiveRows, arrestinformtion, policeDistricts})
         <ArrestMap policeDistricts={policeDistricts} />
 
         <h3>Number of Different Types of Offenses by Age</h3>
-        {/* <OffenseBarChart data={offenseCountsDataWithPercentage} labels={sortedOffenseLabels} ageGroups={ageGroups} /> */}
-
-        <h3>Number of Different Types of Offenses by Age</h3>
         <OffenseBarChart data={offenseCountsDataWithPercentage} labels={shortOffenseLabels} ageGroups={ageGroups} />
         <CustomLegend labels={sortedOffenseLabels} />
 
 
 
-
+        <h3>Number of Cases by Age Group</h3>
+        <OffensehisChart ageGroups = {ageGroups}/>
+      
 
 
 
