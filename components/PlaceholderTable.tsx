@@ -21,7 +21,7 @@ const PlaceholderTable:React.FC<TableData> = ({json}) => {
   </Box>
 
   } catch (e) {
-    return <div></div>
+    return <div>Invalid JSON</div>
   }
 }
 

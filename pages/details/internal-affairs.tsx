@@ -13,7 +13,6 @@ export const getStaticProps: GetStaticProps = async () => {
     };
 };
 
-
 export default function Fio({users}){
     return (
         <div>
