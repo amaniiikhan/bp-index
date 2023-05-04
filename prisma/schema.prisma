@@ -7,69 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Field_Contacts {
-  FC             Int      @id @default(autoincrement())
-  Date           DateTime
-  ContactOfficer String?
-  Supervisor     String?
-  Street         String?
-  City           String?
-  State          String?
-  Zip            String?
-  Frisk          String?
-  Basis          String?
-  Circumstance   String?
-  Year           String?
-}
-
-model Forfeiture_Cases {
-  Case            Int      @id @default(autoincrement())
-  Amount          Float
-  Court           String
-  Date            DateTime
-  IncidentReports String
-  MotorVehicle    String
-}
-
-model Arrest_Data {
-  Incident     Int      @id @default(autoincrement())
-  Occurred     DateTime
-  District     String
-  Shooting     String
-  Location     String
-  Offenses     String
-  Officers     String
-  Clearance    String
-  NumVictims   Int
-  NumOffenders Int
-  NumArrests   Int
-}
-
-model Internal_Affairs {
-  IA         Int      @id @default(autoincrement())
-  Allegation String
-  Employee   String
-  Finding    String
-  Received   DateTime
-  Type       String
-}
-
-model Paid_Details {
-  ID       Int      @id @default(autoincrement())
-  Address  String
-  Customer String
-  Officer  String
-  Pay      Float
-  Start    DateTime
-  Type     String
-  Worked   String
-}
-
-model SWAT_Reports {
-  Date    DateTime
-  SWAT_ID Int      @id @default(autoincrement())
-}
-
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model arrest_info {
@@ -87,17 +25,14 @@ model arrest_info {
   ucr_part            String?   @db.VarChar(50)
   street              String?   @db.VarChar(100)
   Location            String?   @db.VarChar(100)
-  type_of_arrest      String?   @db.VarChar(50)
-  age_code            Int?
-  sex_label           String?   @db.VarChar(50)
-  race_label          String?   @db.VarChar(50)
-  ethnicity_label     String?   @db.VarChar(50)
+
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model forfeiture_data {
-  url             String @id
-  case_number     String? @db.VarChar(50)
+  url             String? @db.VarChar(64)
+  case_number     String @id @db.VarChar(50)
   court_name      String? @db.VarChar(50)
   date            String? @db.VarChar(50)
   amount          Float?  @db.Real
@@ -108,9 +43,10 @@ model forfeiture_data {
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model officermisconduct {
   column1           Int?
-  IA_No             String @id  @map("IA No") @db.VarChar(50)
+  IA_No             String @id   @map("IA No") @db.VarChar(50)
   Incident_type     String?   @map("Incident type") @db.VarChar(50)
   Received_date     DateTime? @map("Received date") @db.Date
   Title_rank__snap_ String?   @map("Title/rank (snap)") @db.VarChar(50)
@@ -122,6 +58,7 @@ model officermisconduct {
 
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model police_financial {
   employee_id     Int @id
@@ -139,4 +76,5 @@ model police_financial {
   postal          String? @db.VarChar(50)
   filename        String? @db.VarChar(50)
   year            Int?
+
 }
