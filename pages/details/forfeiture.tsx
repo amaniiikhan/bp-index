@@ -5,8 +5,9 @@ import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.forfeiture_Cases.findMany();
-    console.log(feed)
+    const feed = await prisma.forfeiture_data.findMany({
+      take: 200,
+    });
     return {
       props: {
         users: JSON.parse(JSON.stringify(feed))
@@ -23,7 +24,7 @@ export default function Fio({users}){
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <h1>REPLACE-ME Information</h1>
+        <h1>Forfeiture Information</h1>
 
         <PlaceholderTable json={users}/>
 

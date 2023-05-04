@@ -3,18 +3,17 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import data from "../../components/InternalAffairs.json";
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.internal_Affairs.findMany();
-    console.log(feed)
+    const feed = await prisma.officermisconduct.findMany({
+      take: 200,
+    });
     return {
       props: {
         users: JSON.parse(JSON.stringify(feed))
       }
     };
 };
-
 
 export default function Fio({users}){
     return (
@@ -24,9 +23,9 @@ export default function Fio({users}){
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <h1>Internal Affairs</h1>
+        <h1>Internal Affair Cases</h1>
 
-        <data json={users}/>
+        <PlaceholderTable json={users}/>
 
         <h2>Analysis</h2>
 

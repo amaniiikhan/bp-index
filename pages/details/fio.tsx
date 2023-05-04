@@ -4,15 +4,16 @@ import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 
-export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.field_Contacts.findMany();
-    console.log(feed)
-    return {
-      props: {
-        users: JSON.parse(JSON.stringify(feed))
-      }
-    };
-};
+// export const getStaticProps: GetStaticProps = async () => {
+//     const feed = await prisma.field_Contacts.findMany({
+//       take: 1000,
+//     });
+//     return {
+//       props: {
+//         users: JSON.parse(JSON.stringify(feed))
+//       }
+//     };
+// };
 
 
 export default function Fio({users}){
@@ -23,7 +24,7 @@ export default function Fio({users}){
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <h1>REPLACE-ME Information</h1>
+        <h1>Field Interrogation and Observations</h1>
 
         <PlaceholderTable json={users}/>
 
