@@ -23,7 +23,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 function Officer_Profile({users}) {
-  const router = useRouter()
 
   return (
     <>

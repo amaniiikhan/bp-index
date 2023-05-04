@@ -10,7 +10,6 @@ const PlaceholderTable:React.FC<TableData> = ({json}) => {
   try {
     const rows = json
     const rowsWithId : Object[] = rows.map((row, index) => ({...row, id: index}))
-    console.log(rowsWithId)
     const temp = rowsWithId[0]
     let columns = []
     for (const key in temp) {
