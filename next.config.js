@@ -19,5 +19,22 @@ const withMDX = require('@next/mdx')({
     reactStrictMode: true,
   }
 
+  // arrestinformation 
+  const withTM = require('next-transpile-modules')(['json-loader']);
+
+  module.exports = withTM({
+    webpack(config, options) {
+      config.module.rules.push({
+        test: /\.geojson$/,
+        use: ['json-loader'],
+      });
+  
+      return config;
+    },
+  });
+
+  
+  
+
   // Merge MDX config with Next.js config
   module.exports = withMDX(nextConfig)
