@@ -8,15 +8,13 @@ import prisma from "lib/prisma";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const bid = +context.params.badge_id
-  console.log("bid is", bid)
-  const feed = await prisma.officermisconduct.findMany({
+  const feed = await prisma.police_financial.findMany({
     where: {
-      IA_No: {
-        equals: bid.toString()
+      employee_id: {
+        equals: bid
       }
     }
   });
-  console.log("feed is", feed)
   return {
     props: {
       users: JSON.parse(JSON.stringify(feed))
@@ -26,12 +24,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 function Officer_Profile({users}) {
   const router = useRouter()
-  const current_url = router.query.badge_id
-
-  // const theme = useTheme();
-  // const tableStyle = {
-  //   backgroundColor: "red"
-  // };
 
   return (
     <>

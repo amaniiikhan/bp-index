@@ -5,8 +5,9 @@ import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 
 export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.arrest_info.findMany();
-    console.log(feed)
+    const feed = await prisma.police_financial.findMany({
+      take: 1000,
+    });
     return {
       props: {
         users: JSON.parse(JSON.stringify(feed))

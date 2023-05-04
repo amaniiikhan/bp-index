@@ -6,9 +6,8 @@ import PlaceholderTable from "@components/PlaceholderTable";
 
 export const getStaticProps: GetStaticProps = async () => {
     const feed = await prisma.arrest_info.findMany({
-      take: 10,
+      take: 1000,
     });
-    console.log(feed)
     return {
       props: {
         users: JSON.parse(JSON.stringify(feed))

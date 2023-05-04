@@ -5,17 +5,16 @@ import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 
-export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.arrest_info.findMany({
-      take: 10,
-    });
-    console.log(feed)
-    return {
-      props: {
-        users: JSON.parse(JSON.stringify(feed))
-      }
-    };
-};
+// export const getStaticProps: GetStaticProps = async () => {
+//     const feed = await prisma.settlement.findMany({
+//       take: 1000,
+//     });
+//     return {
+//       props: {
+//         users: JSON.parse(JSON.stringify(feed))
+//       }
+//     };
+// };
 
 
 export default function Fio({users}){
