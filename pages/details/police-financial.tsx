@@ -7,7 +7,7 @@ import {data} from '../../utility/2011_2020_bpd_earnings_with_ids.xlsx - 2011_20
 import {roleDataOri} from '../../utility/pd_earning_role'
 import {yearlyData} from '../../utility/yearly_information'
 import { useEffect, useState } from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, ChartData } from 'chart.js';
 import { Pie, Doughnut, Bar, Line } from 'react-chartjs-2';
 
 
@@ -42,6 +42,7 @@ ChartJS.register(
 
 export default function Fio({users}){
   const [combineMap, setCombineMap] = useState<Map<string, number>>(new Map());
+//probably more correct:  const [overallData, setOverallData] = useState<ChartData>(null);
   const [overallData, setOverallData] = useState<object>(null);
 
   const [roleMap, setRoleMap] = useState<Map<string, number>>(new Map());
@@ -108,7 +109,8 @@ export default function Fio({users}){
   }, [selection])
 
   useEffect(() => {
-    let tmpData = {
+    //probably more correct: const tmpData: ChartData = {
+    const tmpData = {
       'labels': [],
       'datasets': [
         {
@@ -146,7 +148,8 @@ export default function Fio({users}){
   }, [selectionMap])
 
   useEffect(() => {
-    let tmpData = {
+    //probably more correct: const tmpData: ChartData = {
+    const tmpData = {
       'labels': [],
       'datasets': [
         {
@@ -198,7 +201,8 @@ export default function Fio({users}){
       },
     };
 
-    let tmpData = {
+//probably more correct: const tmpData: ChartData = {
+      const tmpData = {
       'labels': [],
       'datasets': [
         {
@@ -251,7 +255,8 @@ export default function Fio({users}){
       },
     };
 
-    let tmpData = {
+//probably more correct: const tmpData: ChartData = {
+    const tmpData = {
       'labels': [],
       'datasets': [
         {
