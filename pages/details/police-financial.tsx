@@ -75,7 +75,7 @@ export default function Fio({users}){
       })
       setCombineMap(tmpMap)
 
-    } 
+    }
 
     if (roleMap.size === 0) {
       let tmpMap = roleMap
@@ -85,7 +85,7 @@ export default function Fio({users}){
 
       setRoleMap(tmpMap)
     }
-  
+
     if (yearlyMap.size === 0) {
       let tmpMap = yearlyMap
       yearlyData.map((obj: object) => {
@@ -94,7 +94,7 @@ export default function Fio({users}){
 
       setYearlyMap(tmpMap)
     }
-  
+
   }, [])
 
   useEffect(() => {
@@ -301,7 +301,7 @@ export default function Fio({users}){
             {overallData && <Pie data={overallData}/>}
             <div>
               <div style={{
-                display:'grid', 
+                display:'grid',
                 placeContent: 'center'
               }}>
                 <select defaultValue={selection} onChange={e => setSelection(e.target.value)}>
