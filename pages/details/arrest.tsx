@@ -217,12 +217,13 @@ data: {
     {
       label: "Total Number of Offenses",
       data: ageGroupCounts,
-      backgroundColor: colors[0],
+      backgroundColor: 'rgba(255, 99, 132, 0.5)', // Set the alpha value to 0.5
       borderColor: colors[0],
       borderWidth: 1,
       barPercentage: 1,
       categoryPercentage: 1,
-    },
+    }
+    ,
   ],
 },
 
@@ -272,7 +273,7 @@ export default function Fio({ firstFiveRows, arrestinformtion, policeDistricts})
 
         <h2>Data Visualization</h2>
 
-        <h3>offense case map</h3>
+        <h3>Map of Offense Occurrence</h3>
         <ArrestMap policeDistricts={policeDistricts} />
 
         <h3>Number of Different Types of Offenses by Age</h3>
@@ -283,54 +284,53 @@ export default function Fio({ firstFiveRows, arrestinformtion, policeDistricts})
 
         <h3>Number of Cases by Age Group</h3>
         <OffensehisChart ageGroups = {ageGroups}/>
-      
-
 
 
         <h2>Analysis</h2>
-
-        We don’t serve their kind here!
-        What?
-        Your droids.
-        They’ll have to wait outside.
-        We don’t want them here.
-        Listen, why don’t you wait out by the speeder.
-        We don’t want any trouble.
-        I heartily agree with you sir.
-        Negola dewaghi wooldugger?!?
-        He doesn’t like you.
-        I’m sorry.
-        I don’t like you either You just watch yourself.
-        We’re wanted men.
-        I have the death sentence in twelve systems.
-        I’ll be careful than.
-        You’ll be dead.
-        This little one isn’t worth the effort.
-        Come let me buy you something…
-
-        ## Explanation
-
-        We don’t serve their kind here!
-        What?
-        Your droids.
-        They’ll have to wait outside.
-        We don’t want them here.
-        Listen, why don’t you wait out by the speeder.
-        We don’t want any trouble.
-        I heartily agree with you sir.
-        Negola dewaghi wooldugger?!?
-        He doesn’t like you.
-        I’m sorry.
-        I don’t like you either You just watch yourself.
-        We’re wanted men.
-        I have the death sentence in twelve systems.
-        I’ll be careful than.
-        You’ll be dead.
-        This little one isn’t worth the effort.
-        Come let me buy you something…
+        Our 2 main sources of data were datasets from Boston NIBRS and Analyze Boston. The data collected from these sources were both incomplete and had different categories, but they all had an incident number, an identification used internally by the Boston Police to track all incident data in their own database. Using Python, we wrote a script to do the following:<br />
+        - Clean the data to make it easier for the computer to read and operate with<br />
+        - Find incident numbers that exist in both datasets, combining the data from them if they do<br />
+        - Filter out incomplete data categories to ensure accuracy in our processing and graphing<br />
+        <br />
+        Once this script finished, we had a combined dataset to work with. Then we used a combination of HTML and Javascript to graph the data and make an interactive webpage so users can interact with it in real time. This graph is a map of the city limits of Boston, with each neighborhood split up by district code, the same method that BPD uses. Each red dot represents an incident in 2019, and when clicked it displays the following:<br />
+        - Offense Code: The police internal naming system for incidents, typically used for radio communication<br />
+        - Offense Description: A short description of the incident<br />
+        - Arrestee information: characteristics of the suspect being arrested. We specifically analyzed age, gender, race, and ethnicity.<br />
+        <br />
+        Additionally, we added pie charts when a district is clicked on the map. These show the percentage of incidents that occurred and the most common crime in said district. These can also be interacted with.
 
 
-        <Footer />
-        </div>
+
+      <h2>Explanation</h2>
+      <strong>Map of Offense Occurrence:</strong><br />
+      Out of the 419 incidents we analyzed, we were able to conclude the following: <br />
+      Approximately 28% of incidents were in district A1, or Downtown Boston. This is the most populous district in the city, so this result is expected.
+      The most common crimes across all districts are drug related crimes or simple assault. 
+      Simple assault is defined as any minor verbal or physical action intended to harm a victim. 
+      The specifics of these incidents are not publically available, so any conclusions about the nature of them cannot be made.
+      <br />
+
+      <strong>Number of Different Types of Offenses by Age:</strong><br />
+      The bar graph is shown in 6 different colors with 10 years of age for each, showing the distribution of age in different types of crime. 
+      As shown in the graph, most crimes are conducted by people age 20-29 year old, with variation in distribution of other age groups. 
+      As an interaction graph, it shows the exact percent of one block occupied in its bar while placing the mouse onto it. 
+      One remarkable issue in Boston is drug possession as it has the largest number of violations and all age groups are involved. 
+      The largest block in this bar graph is drug violation of age group 20-29 which takes 40.20% of total drug violation caes. 
+      One thing interesting is that there isn’t any cases in weapon violation and robbery for age 60-69.<br />
+
+      <strong>Number of Cases by Age Group:</strong><br />
+      The data presents the distribution of total cases across various age groups. 
+      The age group 20-29 has the highest number of cases (141), followed by the 30-39 age group (116). 
+      The other age groups show a decline in the number of cases, with the lowest count in the 60-69 age group (13). 
+      This suggests that younger individuals, particularly those aged 20-39, are more likely to be involved in incidents compared to other age groups.
+      A explanation for this trend could be that younger individuals, specifically those aged 20-39, 
+      tend to be more physically active and energetic, which may lead to a higher likelihood of engaging in risky behaviors or being involved in incidents. 
+      Additionally, younger people might still be developing their decision-making skills and may not fully understand the consequences of their actions, 
+      leading to a higher number of cases in these age groups. On the other hand, older individuals may have more life experience and better judgment,
+       making them less likely to be involved in incidents.
+
+
+      <Footer />
+      </div>
     )
 }
