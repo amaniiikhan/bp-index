@@ -118,7 +118,7 @@ const OffenseBarChart = ({ data, labels, ageGroups }) => {
     if (age === 0) {
       return "0-9";
     } else {
-      return `${age}-${Number(age) + 9}`;
+      return `${age}-${Number(age)+ 9}`;
     }
   };
 
@@ -180,65 +180,6 @@ const OffenseBarChart = ({ data, labels, ageGroups }) => {
 
 
 // Histogram 
-            
-
-// const OffensehisChart = ({ ageGroups }) => {
-//   const chartRef2 = useRef(null);
-//   const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#2ecc71'];
-            
-//   const getAgeGroupLabel = (age) => {
-//     if (age === 0) {
-//       return "0-9";
-//     } else {
-//       return `${age}-${Number(age) + 9}`;
-//     }
-//   };
-            
-//   const ageGroupCounts = ageGroups.map((age) => offenseCounts[age]?.count || 0);
-            
-//   useEffect(() => {
-//     if (chartRef2.current) {
-//       const myChart = new Chart(chartRef2.current, {
-//         type: "bar",
-//         data: {
-//           labels: ageGroups.map((age) => getAgeGroupLabel(age)),
-//           datasets: [
-//             {
-//               label: "Total Number of Offenses",
-//               data: ageGroupCounts,
-//               backgroundColor: colors[0],
-//               borderColor: colors[0],
-//               borderWidth: 1,
-//               barPercentage: 1,
-//               categoryPercentage: 1,
-//             },
-//             {
-//               label: "Offenses by Age Group",
-//               data: ageGroupCounts,
-//               backgroundColor: colors[1],
-//               borderColor: colors[1],
-//               borderWidth: 1,
-//               fill: false,
-//               type: "line",
-//             },
-//           ],
-//         },
-//         options: {
-//           scales: {
-//             y: {beginAtZero: true, stacked: true,},
-//             x: {stacked: true,
-//               ticks: {stepSize: 10,callback: (value, index, values) => getAgeGroupLabel(value),},
-//             },
-//           },
-//         },
-//       });
-            
-//       return () => {myChart.destroy();};
-//     }
-//   }, [ageGroups, ageGroupCounts]);
-            
-//   return <canvas ref={chartRef2} />;
-// };
 
 const OffensehisChart = ({ ageGroups }) => {
   const chartRef2 = useRef(null);
@@ -248,12 +189,10 @@ const OffensehisChart = ({ ageGroups }) => {
     if (age === 0) {
       return "0-9";
     } else {
-      return `${age}-${Number(age) + 9}`;
+      return `${Number(age)}-${Number(age)+9}`;
     }
   };
-            
-  // const ageGroupCounts = ageGroups.map((age) => Object.values(offenseCounts[age]).reduce((a, b) => Number(a) + Number(b), 0) || 0);
-            
+                        
   const ageGroupCounts = ageGroups.map((age) => {
     const counts = Object.values(offenseCounts).map((offenseCountsForAge) => offenseCountsForAge[age] || 0);
     return counts.reduce((a, b) => a + b, 0);
@@ -263,34 +202,39 @@ const OffensehisChart = ({ ageGroups }) => {
     if (chartRef2.current) {
       const myChart = new Chart(chartRef2.current, {
         type: "bar",
-        data: {
-          labels: ageGroups.map((age) => getAgeGroupLabel(age)),
-          datasets: [
-            {
-              label: "Total Number of Offenses",
-              data: ageGroupCounts,
-              backgroundColor: colors[0],
-              borderColor: colors[0],
-              borderWidth: 1,
-              barPercentage: 1,
-              categoryPercentage: 1,
-            },
-            {
-              label: "Offenses by Age Group",
-              data: ageGroupCounts,
-              backgroundColor: colors[1],
-              borderColor: colors[1],
-              borderWidth: 1,
-              fill: false,
-              type: "line",
-            },
-          ],
-        },
+data: {
+  labels: ageGroups.map((age) => getAgeGroupLabel(age)),
+  datasets: [
+    {
+      label: "Offenses by Age Group",
+      data: ageGroupCounts,
+      backgroundColor: colors[1],
+      borderColor: colors[1],
+      borderWidth: 1,
+      fill: false,
+      type: "line",
+    },
+    {
+      label: "Total Number of Offenses",
+      data: ageGroupCounts,
+      backgroundColor: colors[0],
+      borderColor: colors[0],
+      borderWidth: 1,
+      barPercentage: 1,
+      categoryPercentage: 1,
+    },
+  ],
+},
+
+
+
         options: {
           scales: {
             y: {beginAtZero: true, stacked: true,},
             x: {stacked: true,
-              ticks: {stepSize: 10,callback: (value, index, values) => getAgeGroupLabel(value),},
+              ticks: {
+                stepSize: 1,
+                callback: (value, index, values) => getAgeGroupLabel(Number(value)*10+10),},
             },
           },
         },
