@@ -35,8 +35,9 @@ function prepareChartData(tableData: any[]) {
   });
 
   const labels = Object.keys(yearlySums);
+  let label:number = 0;
   const data = labels.map((label) => yearlySums[label]);
-  const filteredLabels = labels.filter((label) => !isNaN(label));
+  const filteredLabels = labels.filter((label) => !Number.isNaN(label));
 
   // const labels = Object.keys(yearlySums).map((year) => new Date(year));
   // const data = labels.map((label) => yearlySums[label.getFullYear().toString()]);
