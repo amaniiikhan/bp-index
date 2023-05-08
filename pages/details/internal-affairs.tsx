@@ -121,7 +121,7 @@ export default function InternalAffairs() {
    const labels = Object.keys(count);
    const values = Object.values(count);
  //  console.log(count);
-   
+
   // //set values to later use for graph
    const [chartData, setChartData] = useState({
      labels: labels,
@@ -168,7 +168,7 @@ export default function InternalAffairs() {
       'rgba(54, 162, 235, 0.2)',
       'rgba(153, 102, 255, 0.2)',
       'rgba(201, 203, 207, 0.2)'
-    ],    
+    ],
       borderColor: [
       'rgb(255, 99, 132)',
       'rgb(255, 159, 64)',
@@ -206,8 +206,8 @@ export default function InternalAffairs() {
               align: "center"
             }
           }
-         }} 
-            data={chartData} /> 
+         }}
+            data={chartData} />
       </div>
       </div>
       <br></br>
@@ -226,7 +226,7 @@ export default function InternalAffairs() {
             },
             legend: {
               display: false
-            }}}}/> 
+            }}}}/>
       </div>
       </div>
 
@@ -236,7 +236,7 @@ export default function InternalAffairs() {
       allegations in this time frame were negligent duty/unreasonable judgement
       followed by respectful treatment. Over this time frame, allegation volume
       showed a downwards sloping trend line. The case disposition bar chart shows that
-      in the 2010 to 2020 time frame, the majority were not sustained (40.1%), followed by sustained (31.3%), unfounded(15.4%), and exonerated(12.8%). 
+      in the 2010 to 2020 time frame, the majority were not sustained (40.1%), followed by sustained (31.3%), unfounded(15.4%), and exonerated(12.8%).
       The trend shows how most allegations against offers are not sustained.
 
       <h2>Topic Explanation</h2>
@@ -246,8 +246,9 @@ export default function InternalAffairs() {
       minorities and those in underpriviliged communities. Generally, officer data is really hard to come by.
       Requests for more officer data is rarely fulfilled, but it is important for the public to know
       about instances of and the commonality of of officer misconduct. It is crucial to be able to hold officers
-      accountable. 
+      accountable.
       <Footer />
     </div>
   );
 }
+
