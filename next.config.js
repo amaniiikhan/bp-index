@@ -9,13 +9,6 @@ const withMDX = require('@next/mdx')({
       // If you use `MDXProvider`, uncomment the following line.
       // providerImportSource: "@mdx-js/react",
     },
-    typescript: {
-      // !! WARN !!
-      // Dangerously allow production builds to successfully complete even if
-      // your project has type errors.
-      // !! WARN !!
-      ignoreBuildErrors: true,
-    },
   })
 
   /** @type {import('next').NextConfig} */
@@ -24,6 +17,13 @@ const withMDX = require('@next/mdx')({
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     // Optionally, add any other Next.js config below
     reactStrictMode: false,
+    typescript: {
+      // !! WARN !!
+      // Dangerously allow production builds to successfully complete even if
+      // your project has type errors.
+      // !! WARN !!
+      ignoreBuildErrors: true,
+    },
   }
 
   // Merge MDX config with Next.js config
