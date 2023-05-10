@@ -13,6 +13,7 @@ export async function getStaticProps() {
     props: {
       role_average_data: yearlyData,
     },
+    revalidate: 60 * 60 * 24, // 24 hours
   };
 }
 
