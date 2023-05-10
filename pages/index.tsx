@@ -5,23 +5,40 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import DataOverviewCard from "@components/OverviewCard";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "theme";
-import RoleAverageWage from "@components/PoliceFinancial_RoleAverageWage";
-import { yearlyData } from "utility/yearly_information";
+import RoleAverageWageChart from "@components/PoliceFinancial_RoleAverageWage";
+import ForfeitureTotalAssetsChart from "@components/Forfeiture_TotalAssets";
+import {
+  ISingleYearSummary,
+  get_forfeitures_yearly_summary,
+} from "data_handlers/forfeitures";
+import {
+  IWageDataLineChartPoint,
+  get_yearly_wage_data,
+} from "data_handlers/police_financial";
 
-export async function getStaticProps() {
+interface IHomeProps {
+  role_average_data: IWageDataLineChartPoint[];
+  forfeitures_yearly_summary: ISingleYearSummary[];
+}
+
+export async function getStaticProps<NextPage, IHomeProps>() {
   return {
     props: {
-      role_average_data: yearlyData,
+      role_average_data: await get_yearly_wage_data(),
+      forfeitures_yearly_summary: await get_forfeitures_yearly_summary(),
     },
     revalidate: 60 * 60 * 24, // 24 hours
   };
 }
 
-export default function Home({ role_average_data }) {
+export default function Home({
+  role_average_data,
+  forfeitures_yearly_summary,
+}: IHomeProps) {
   const data_cards = [
     <DataOverviewCard
       title="Officer Pay"
-      chart={<RoleAverageWage data={role_average_data} />}
+      chart={<RoleAverageWageChart data={role_average_data} />}
       link={"/details/police-financial"}
     />,
     <DataOverviewCard
@@ -36,7 +53,11 @@ export default function Home({ role_average_data }) {
     />,
     <DataOverviewCard
       title="Forfeitures per XXX"
-      chart={<p>Testing Content</p>}
+      chart={
+        <ForfeitureTotalAssetsChart
+          yearly_summary_data={forfeitures_yearly_summary}
+        />
+      }
       link="/details/forfeiture"
     />,
     <DataOverviewCard

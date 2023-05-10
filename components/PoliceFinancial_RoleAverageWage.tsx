@@ -20,19 +20,13 @@ ChartJS.register(
   LineElement
 );
 
-interface ILineChartDataPoint {
-  // TODO: Probably remove this, cleanup input data or something
-  // Maybe rename it to index or key
-  FIELD1: number;
-  year: number;
-  infl_adj_total: string;
-}
+
 
 interface IRoleAverageWageProps {
   data: ILineChartDataPoint[];
 }
 
-const RoleAverageWage = ({ data }: IRoleAverageWageProps) => {
+const RoleAverageWageChart = ({ data }: IRoleAverageWageProps) => {
   const chart_options = {
     responsive: true,
     plugins: {
@@ -85,4 +79,4 @@ const RoleAverageWage = ({ data }: IRoleAverageWageProps) => {
   return <Line options={chart_options} data={datasets} />;
 };
 
-export default RoleAverageWage;
+export default RoleAverageWageChart;

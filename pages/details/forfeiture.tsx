@@ -14,15 +14,14 @@ import {
 import styles from "./styles.module.css";
 import { forfeiture_data } from "@prisma/client";
 import { Tooltip } from "chart.js";
+import ForfeitureTotalAssetsChart from "@components/Forfeiture_TotalAssets";
+import {
+  ISingleYearSummary,
+  get_forfeitures_yearly_summary,
+} from "data_handlers/forfeitures";
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 
 type ISingleCourtSummary = Pick<forfeiture_data, "court_name" | "amount">;
-interface ISingleYearSummary {
-  // This is used for the result of our raw SQL query
-  // It is DIRECTLY tied to the raw SQL query
-  year: Date;
-  year_sum: number;
-}
 
 interface IForfeitureProps {
   yearly_summary_data: ISingleYearSummary[];
@@ -30,12 +29,6 @@ interface IForfeitureProps {
 }
 
 export const getStaticProps: GetStaticProps<IForfeitureProps> = async () => {
-  const year_summary_data = await prisma.$queryRaw<ISingleYearSummary[]>`
-      select sum(fd.amount) as year_sum, date_trunc('year', to_date(fd.date, 'YYYY-MM-DD')) as year from "forfeiture data" as fd
-    where fd.date is not null
-    group by year;
-  `;
-
   const raw_court_amount_data = await prisma.forfeiture_data.groupBy({
     by: ["court_name"],
     _sum: {
@@ -51,7 +44,7 @@ export const getStaticProps: GetStaticProps<IForfeitureProps> = async () => {
   );
   return {
     props: {
-      yearly_summary_data: year_summary_data,
+      yearly_summary_data: await get_forfeitures_yearly_summary(),
       court_summary_data: court_summary_data,
     },
     revalidate: 60 * 60 * 24, // 24 hours
@@ -62,51 +55,6 @@ const ForfeiturePage: NextPage<IForfeitureProps> = ({
   yearly_summary_data,
   court_summary_data,
 }) => {
-  const chartConfig = {
-    type: "line",
-    data: {
-      labels: yearly_summary_data.map((item) => item.year.getFullYear()),
-      datasets: [
-        {
-          label: "Total Amount Seized",
-          data: yearly_summary_data,
-          parsing: {
-            xAxisKey: nameof<ISingleYearSummary>((c) => c.year),
-            yAxisKey: nameof<ISingleYearSummary>((c) => c.year_sum),
-          },
-          backgroundColor: "rgba(54, 162, 235, 0.2)",
-          borderColor: "rgba(54, 162, 235, 1)",
-          borderWidth: 1,
-          tension: 0.4,
-          fill: false,
-        },
-      ],
-    },
-    options: {
-      maintainAspectRatio: true,
-      plugins: {
-        title: {
-          display: true,
-          text: "Total Amount Seized by Year",
-        },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: "Total Amount",
-          },
-        },
-        x: {
-          title: {
-            display: true,
-            text: "Year",
-          },
-        },
-      },
-    },
-  };
   const barChartConfig = {
     type: "bar",
     data: {
@@ -164,7 +112,7 @@ const ForfeiturePage: NextPage<IForfeitureProps> = ({
         Total amount of asset from 2001 to 2015
       </h3>
       <div className={styles.chart}>
-        <ChartComponent config={chartConfig} />
+        <ForfeitureTotalAssetsChart yearly_summary_data={yearly_summary_data} />
       </div>
       <p className={styles.paragraph}>
         The total amount of forfeited assets trended up, resulting in a
