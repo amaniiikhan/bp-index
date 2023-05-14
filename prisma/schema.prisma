@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model arrest_info {
+  incident_number     Int @id
+  offense_code        Int?
+  offense_description String?   @db.VarChar(100)
+  district            String?   @db.VarChar(50)
+  reporting_area      String?   @db.VarChar(50)
+  shooting            Int?
+  occurred_on_date    DateTime? @db.Timestamp(6)
+  YEAR                Int?
+  MONTH               Int?
+  day_of_week         String?   @db.VarChar(50)
+  HOUR                Int?
+  ucr_part            String?   @db.VarChar(50)
+  street              String?   @db.VarChar(100)
+  Location            String?   @db.VarChar(100)
+
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model forfeiture_data {
+  url             String? @db.VarChar(64)
+  case_number     String @id @db.VarChar(50)
+  court_name      String? @db.VarChar(50)
+  date            String? @db.VarChar(50)
+  amount          Float?  @db.Real
+  motor_vehicle   String? @db.VarChar(50)
+  cases_incidents String? @db.VarChar(512)
+
+  @@map("forfeiture data")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model officermisconduct {
+  column1           Int?
+  IA_No             String @id   @map("IA No") @db.VarChar(50)
+  Incident_type     String?   @map("Incident type") @db.VarChar(50)
+  Received_date     DateTime? @map("Received date") @db.Date
+  Title_rank__snap_ String?   @map("Title/rank (snap)") @db.VarChar(50)
+  First_name        String?   @map("First name") @db.VarChar(50)
+  Last_name         String?   @map("Last name") @db.VarChar(50)
+  allegation        String?   @db.VarChar(50)
+  disposition       String?   @db.VarChar(50)
+  Completed_date    DateTime? @map("Completed date") @db.Date
+
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model police_financial {
+  employee_id     Int @id
+  name            String? @db.VarChar(50)
+  department_name String? @db.VarChar(50)
+  title           String? @db.VarChar(50)
+  regular         String? @db.VarChar(50)
+  retro           String? @db.VarChar(50)
+  other           String? @db.VarChar(50)
+  overtime        String? @db.VarChar(50)
+  injured         String? @db.VarChar(50)
+  detail          String? @db.VarChar(50)
+  quinn           String? @db.VarChar(50)
+  total_earnings  String? @db.VarChar(50)
+  postal          String? @db.VarChar(50)
+  filename        String? @db.VarChar(50)
+  year            Int?
+
+}

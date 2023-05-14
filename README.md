@@ -1,27 +1,65 @@
-# Next + Netlify Starter
+1. move the task from "Sprint Backlog" to "In Progress"
+2. create a branch
+3. do the work
+4. git commit / git push
+5. review the result at http://dev.bpi.buspark.io
+6. if complete, create PR
+7. move card to Ready for Review
+8. wait for team to give "thumbs up"
+9. PM merges PR
+10. PM moves card to done
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/46648482-644c-4c80-bafb-872057e51b6b/deploy-status)](https://app.netlify.com/sites/next-dev-starter/deploys)
+# Boston Police Index
 
-This is a [Next.js](https://nextjs.org/) v12 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and set up to be instantly deployed to [Netlify](https://url.netlify.com/SyTBPVamO)!
+## System Architecture:
 
-This project is a very minimal starter that includes 2 sample components, a global stylesheet, a `netlify.toml` for deployment, and a `jsconfig.json` for setting up absolute imports and aliases. With Netlify, you'll have access to features like Preview Mode, server-side rendering/incremental static regeneration via Netlify Functions, and internationalized routing on deploy automatically.
+This web-app is a site with a [Next.js](https://nextjs.org/) framework, with a PostreSQL server as the backend. We also use [Material UI] (https://mui.com) and [TSX] (https://www.npmjs.com/package/tsx) to assist in the front-end.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+The [Boston Police Index] (https://dev-bpi.netlify.app), aims to be a successor to the now inactive [Woke Windows] (https://www.wokewindows.org) project, where we aim to make Boston police data as accessible and easy to understand for as many people as possible.
 
-(If you click this button, it will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify)
+## How to install and use Prisma
+
+Prisma is a next generation ORM that can be used to access databases in node.js and Typescript applications. Essentially, for this project, you are attempting to build a full stack application that fetches data from the backend and presents the tables on the website.
+
+Prerequisites
+Node.js
+PostgreSQL Database
+Github account
+
+Next, refer to this link and follow the steps to test out Prisma.
+https://vercel.com/guides/nextjs-prisma-postgres
+
+When you reach step 2 in the tutorial where it asks you for a database url, talk to the professor and ask for the database url.
+Note that, if you try to run the repo locally, you will realize that you need to create a dummy .env file on the root of the directory because github hides the database url for the public to see. Meaning you would need to create a .env file and include the url every time.
+
+# .env
+
+DATABASE_URL = "URL"
+
+Step 3
+The tutorial shows you how to create a schema in your database. In other words, you would need to create columns and define data types.
+npx prisma db push to make the changes to the database.
+
+npx prisma studio will open an url and you can see the database.
 
 ## Table of Contents:
 
-- [Getting Started](#getting-started)
-- [Installation options](#installation-options)
-- [Testing](#testing)
-  - [Included Default Testing](#included-default-testing)
-  - [Removing Renovate](#removing-renovate)
-  - [Removing Cypress](#removing-cypress)
+- [Testing Local Changes](#testing-local-changes)
+- [Contribution Steps](#contribution-steps)
+- [Step 1: Move task from “Sprint Backlog” to “In Progress”]
+- [Step 2: Create a branch]
+- [Step 3: Add any changes or modifications]
+- [Step 4: Submit a pull request to Git]
+- [Step 5: Other teammates review the new changes and give a “thumbs up”]
+- [Step 6: Move task from “In Progress” to “Ready for Review”]
+- [Step 7: Wait for project manager to approve the Pull Request before merging]
+- [Step 8: Once approved, merge]
+- [Step 9: Once merged, move the task to “Done”]
 
-## Getting Started
+## Testing Local Changes
 
-First, run the development server:
+To test changes locally, run either commands:
+npm run dev will open up a url which then directs you to the website of the page..
 
 ```bash
 npm run dev
@@ -31,60 +69,63 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+You can start editing the page by modifying any file. The page auto-updates as you edit the file.
 
-### Installation options
+# Next.js Configuration Information
 
-**Option one:** One-click deploy
+1. We're using typed routes for Next.js. This means that when you are navigating using `<Link />` or similar methods you will get type checking and type hints for the routes.
+2. We are using `superjson` to handle automatic serialization and deserialization of data between the server and the client. This means that you can use `Date` objects and other complex types in your data and they will be serialized and deserialized automatically. It should be noted that the data you return from `getStaticProps` etc should still be fairly "simple" in nature as there is a cost to serialization and deserialization.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+## How the database work
 
-**Option two:** Manual clone
+### Import the datasets into DBeaver and select the categories for each variable such as int, date, time…
 
-1. Clone this repo: `git clone https://github.com/netlify-templates/next-netlify-starter.git`
-2. Navigate to the directory and run `npm install`
-3. Run `npm run dev`
-4. Make your changes
-5. Connect to [Netlify](https://url.netlify.com/Bk4UicocL) manually (the `netlify.toml` file is the one you'll need to make sure stays intact to make sure the export is done and pointed to the right stuff)
+### Then go to prisma file, select schema.prisma to assign @id from the variable and remove the @ignore for each dataset
 
-## Testing
+### The PlaceHolder tables are directly connected with the .csv files of the datasets, the user should be able to download the .csv files from under the table “download” button.
 
-### Included Default Testing
+## Things need to be work on
 
-We’ve included some tooling that helps us maintain these templates. This template currently uses:
+### Goal 1: The current dataset does not contain IDs of the police officers, woke windows has a way to connect all the databases together. We need to clean the data and find the IDs for the police officers for the data to be grabbed to the tables. There should also be a way to add links to the rows of the columns that contain identification of the officer (employee_id).
 
-- [Renovate](https://www.mend.io/free-developer-tools/renovate/) - to regularly update our dependencies
-- [Cypress](https://www.cypress.io/) - to run tests against how the template runs in the browser
-- [Cypress Netlify Build Plugin](https://github.com/cypress-io/netlify-plugin-cypress) - to run our tests during our build process
+### Goal 2: Multiple dynamic placeholder tables need to be created for the officer profiles after IDs are added to the datasets. This placeholder table needs to grab each section of the data (ie. income history) in a condensed form to display for each officer. Each table for each section of the data (on officer profiles) needs to be linked to a page that can show the full data in a non-condensed form (a different page for each section of the data).
 
-If your team is not interested in this tooling, you can remove them with ease!
+### Goal 3: The current setup displays all the columns in a dataset all at once (when clicked in from the main page). With the large datasets that we have (100k+ columns), the page is extremely slow at generating the table. The table needs to be modified to show 100 columns at a time, and there can be forward and backward buttons that let you go through the entire dataset (like a library catalog) so that it does not take as long to generate.
 
-### Removing Renovate
+### Goal 4: The current large data tables (when clicked in from the main page) need to be dynamically linked to the corresponding officer profiles via officer ID. For example, from the main page, clicking pay information will take you to a page with a large table of pay information data. Each column in this table should show information about an officer with an ID. Clicking on the ID the column should allow you to visit that officer’s specific officer profile page. The dynamic routing should allow you to input a link (http://localhost::3000/details/officer_profile/755) and show information about the officer with ID #27. There should NOT be a different static page for every officer.
 
-In order to keep our project up-to-date with dependencies we use a tool called [Renovate](https://github.com/marketplace/renovate). If you’re not interested in this tooling, delete the `renovate.json` file and commit that onto your main branch.
+## Contribution Steps
 
-### Removing Cypress
+### Step 1: Move task from “Sprint Backlog” to “In Progress”
 
-For our testing, we use [Cypress](https://www.cypress.io/) for end-to-end testing. This makes sure that we can validate that our templates are rendering and displaying as we’d expect. By default, we have Cypress not generate deploy links if our tests don’t pass. If you’d like to keep Cypress and still generate the deploy links, go into your `netlify.toml` and delete the plugin configuration lines:
+Log in to the [Boston Police Index Taiga Page] (https://tree.taiga.io/project/langdon-boston-police-index/timeline) and click “Scrum” then “Backlog”. Click a task you want to work on and click “In Progress” for a task you want to work on.
 
-```diff
-[[plugins]]
-  package = "netlify-plugin-cypress"
--  [plugins.inputs.postBuild]
--    enable = true
--
--  [plugins.inputs]
--    enable = false 
-```
+### Step 2: Create a branch
 
-If you’d like to remove the `netlify-plugin-cypress` build plugin entirely, you’d need to delete the entire block above instead. And then make sure sure to remove the package from the dependencies using:
+Click onto the top left “Branch” button and create a new branch by clicking the “New Branch Button on the top right. Name the new branch something related to the change.
 
-```bash
-npm uninstall -D netlify-plugin-cypress
-```
+### Step 3: Add any changes or modifications
 
-And lastly if you’d like to remove Cypress entirely, delete the entire `cypress` folder and the `cypress.config.ts` file. Then remove the dependency using:
+After switching to the new branch in your IDE, make modifications to complete the selected task from Step 1. Make sure to test your changes before pushing as outlined in [Testing Local Changes](#testing-local-changes).
 
-```bash
-npm uninstall -S cypress
-```
+### Step 4: Submit a pull request to Git
+
+Click on the “Pull request” button and create a new pull request by clicking the “New pull request” button on the top right. Select the correct branch, confirm that changes are correct, and submit the pull request.
+
+### Step 5: Other teammates review the new changes and give a “thumbs up”
+
+A teammate should notify others in the group using the appropriate methods when a pull request is submitted. A separate teammate should check the changes the made and give it a “thumbs up” by moving the task from “In Progress” to “Ready for Review” as outlined in Step 6
+
+### Step 6: Move task from “In Progress” to “Ready for Review”
+
+Log in to the [Boston Police Index Taiga Page] (https://tree.taiga.io/project/langdon-boston-police-index/timeline) and click “Scrum” then “Backlog”. Click a task you want to work on and click “Ready for Review” for a task you want reviewed.
+
+### Step 7: Wait for the project manager to approve the Pull Request before merging
+
+Patience is important, please wait for the project manager to approve the pull request.
+
+### Step 8: Once approved, merge
+
+After the project manager approves the changes, go ahead and merge the new branch to the main branch.
+
+### Step 9: Once merged, move the task to “Done”

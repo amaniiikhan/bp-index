@@ -1,23 +1,28 @@
-import { useTheme } from "@mui/material/styles";
-import { useRouter } from 'next/router';
 import Head from "next/head";
-import Link from "next/link";
-import Header from "@components/Header";
 import Footer from "@components/Footer";
 import PlaceholderTable from "@components/PlaceholderTable";
-import data from "../../components/NAME.json";
-import { useEffect, useState } from 'react'
 import Table from "@components/Table";
-import OfficerTable from "@components/OfficerTable";
+import { GetServerSideProps } from "next";
+import { useRouter } from "next/router"
+import prisma from "lib/prisma";
 
-
-export default function officerpage() {
-  const router = useRouter();
-  const { id } = router.query;
-  const theme = useTheme();
-  const tableStyle = {
-    backgroundColor: "red"
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const bid = +context.params.badge_id
+  const feed = await prisma.police_financial.findMany({
+    where: {
+      employee_id: {
+        equals: bid
+      }
+    }
+  });
+  return {
+    props: {
+      users: JSON.parse(JSON.stringify(feed))
+    },
   };
+};
+
+function Officer_Profile({users}) {
 
   return (
     <>
@@ -30,29 +35,29 @@ export default function officerpage() {
         <div className="leftcol" style={{ width: "50%" }}>
           <h1 className="heading 1"> Officer Profile</h1>
           <h2 className="subheading 1"> Pay Information</h2>
-          <OfficerTable json={data} style={tableStyle}/>
+          <PlaceholderTable json={users}/>
           <h2 className="subheading 2"> Incidents &amp; FIOs</h2>
-          <OfficerTable json={data} style={tableStyle}/>
+          <PlaceholderTable json={users}/>
           <h2 className="subheading 3"> Settlements &amp; IA</h2>
-          <PlaceholderTable json={data} style={tableStyle}/>
+          <PlaceholderTable json={users}/>
           <h2 className="subheading 4"> Dataset 1</h2>
-          <PlaceholderTable json={data} style={tableStyle}/>
-        </div> 
-        <div class="rightcol" style={{ width: "50%" }}>
+          <PlaceholderTable json={users}/>
+        </div>
+        <div className="rightcol" style={{ width: "50%" }}>
             <Table />
-            <h2 class="subheading 5"> Dataset 2</h2>
-            <PlaceholderTable json={data}/>
-            <h2 class="subheading 6"> Dataset 3</h2>
-            <PlaceholderTable json={data}/>
-            <h2 class="subheading 7"> Analysis</h2>
-            <p class="analysis paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <h2 className="subheading 5"> Dataset 2</h2>
+            <PlaceholderTable json={users}/>
+            <h2 className="subheading 6"> Dataset 3</h2>
+            <PlaceholderTable json={users}/>
+            <h2 className="subheading 7"> Analysis</h2>
+            <p className="analysis paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Proin quis massa eu urna tempor dictum. Aliquam aliquam tortor nisi, ac vestibulum metus pretium convallis.
           Pellentesque consectetur turpis justo, sed rhoncus nisl faucibus sit amet. Vivamus ultricies tempus arcu,
           id venenatis libero ornare eget. Nam rutrum a quam eu tempor. Fusce sollicitudin, quam ut laoreet interdum,
           odio arcu luctus ex, nec euismod lacus elit non odio. Nullam eget magna erat. Nullam pretium
           quam massa, fringilla fringilla orci malesuada et. Donec at orci non urna volutpat dictum ut sed odio. </p>
-            <h2 class="subheading 8"> Explanation</h2>
-            <p class="explanation paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <h2 className="subheading 8"> Explanation</h2>
+            <p className="explanation paragraph"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Proin quis massa eu urna tempor dictum. Aliquam aliquam tortor nisi, ac vestibulum metus pretium convallis.
           Pellentesque consectetur turpis justo, sed rhoncus nisl faucibus sit amet. Vivamus ultricies tempus arcu,
           id venenatis libero ornare eget. Nam rutrum a quam eu tempor. Fusce sollicitudin, quam ut laoreet interdum,
@@ -64,3 +69,5 @@ export default function officerpage() {
     </>
   );
 }
+
+export default Officer_Profile
