@@ -88,7 +88,7 @@ export default function Home({
     <DataOverviewCard
       title="Sample Office Detail Page"
       chart={<p>Testing Content</p>}
-      link="/details/officer_profile/123456"
+      link="/details/officer-profile/123456"
     />,
   ];
   return (
