@@ -1,13 +1,4 @@
-1. move the task from "Sprint Backlog" to "In Progress"
-2. create a branch
-3. do the work
-4. git commit / git push
-5. review the result at http://dev.bpi.buspark.io
-6. if complete, create PR
-7. move card to Ready for Review
-8. wait for team to give "thumbs up"
-9. PM merges PR
-10. PM moves card to done
+[![Netlify Status](https://api.netlify.com/api/v1/badges/168b2ed1-4784-4179-b85b-84a67618a35e/deploy-status)](https://app.netlify.com/sites/dev-bpi/deploys)
 
 # Boston Police Index
 
