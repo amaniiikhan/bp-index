@@ -4,15 +4,16 @@ import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
 
-export const getStaticProps: GetStaticProps = async () => {
-    const feed = await prisma.field_Contacts.findMany();
-    console.log(feed)
-    return {
-      props: {
-        users: JSON.parse(JSON.stringify(feed))
-      }
-    };
-};
+// export const getStaticProps: GetStaticProps = async () => {
+//     const feed = await prisma.field_Contacts.findMany({
+//       take: 1000,
+//     });
+//     return {
+//       props: {
+//         users: JSON.parse(JSON.stringify(feed))
+//       }
+//     };
+// };
 
 
 export default function Fio({users}){
@@ -31,9 +32,9 @@ export default function Fio({users}){
 
         <p>
         The data we use is  from BPD's FIO (https://data.boston.gov/dataset/boston-police-department-fio).
-        We merged across years and cleaned in two analysis-ready CSV 
+        We merged across years and cleaned in two analysis-ready CSV
         files: fio_people and fio_contacts. The merged files include
-         data from the second half of 2015 through the end of 2022. 
+         data from the second half of 2015 through the end of 2022.
         </p>
 
         <p>
@@ -51,7 +52,7 @@ export default function Fio({users}){
         a more accurate examination of the impact of implicit bias
         on various cultural groups. By utilizing this approach,
         we were able to gain deeper insights into the prevalence
-        of implicit bias within the Boston Police Department's 
+        of implicit bias within the Boston Police Department's
         practices, particularly in relation to individuals of non-Hispanic
         Black origin.
         </p>
@@ -59,35 +60,35 @@ export default function Fio({users}){
         <h2>Explanation</h2>
 
         <p>The data of FIO is crucial for residents of the Boston area,
-         as it relates to their potential and unexpected encounters 
-         with law enforcement. The quality of these interactions can 
-         have a direct impact on the public's perception of safety 
-         within the community. Therefore, analyzing FIO data is vital 
-         in assessing the effectiveness of police practices and ensuring 
+         as it relates to their potential and unexpected encounters
+         with law enforcement. The quality of these interactions can
+         have a direct impact on the public's perception of safety
+         within the community. Therefore, analyzing FIO data is vital
+         in assessing the effectiveness of police practices and ensuring
          that they promote safety and security among all members of the
         community. By doing so, law enforcement agencies work towards
            building trust and positive relationships with the communities
             that they serve.</p>
-            <p>​Analyzing FIOs is important in order to discover trends in 
+            <p>​Analyzing FIOs is important in order to discover trends in
               the data. In Boston, the data proves that there is a racial
               bias in FIOs, so that relative to white suspects, black
               suspects are more likely to be observed, interrogated,
               and frisked or searched for gang membership and prior
               arrest history. After inspecting the race and ethnicity
               categories in our visualization, it is clear that a
-              significant proportion of non-Hispanic Black individuals 
+              significant proportion of non-Hispanic Black individuals
               are subjected to FIOs by the Boston Police Department,
               highlighting the presence of implicit bias in their
-              policing practices. Even further, high crime areas 
-              and minority neighborhoods are more subject to FIOs. 
-              To address these injustices and ensure fair treatment 
-              for all, it is essential that the Boston Police Department 
-              consult with experts in the field who can provide guidance 
-              on how to address implicit biases and reduce racial 
-              disparities in policing. By making timely adjustments to 
-              their policies and continuing to collect and analyze data, 
-              the department can work towards creating a more just and 
-              equitable system that ensures the safety and protection of all 
+              policing practices. Even further, high crime areas
+              and minority neighborhoods are more subject to FIOs.
+              To address these injustices and ensure fair treatment
+              for all, it is essential that the Boston Police Department
+              consult with experts in the field who can provide guidance
+              on how to address implicit biases and reduce racial
+              disparities in policing. By making timely adjustments to
+              their policies and continuing to collect and analyze data,
+              the department can work towards creating a more just and
+              equitable system that ensures the safety and protection of all
               individuals, regardless of their race or ethnicity.
               </p>
 

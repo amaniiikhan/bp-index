@@ -8,15 +8,13 @@ import prisma from "lib/prisma";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const bid = +context.params.badge_id
-  console.log("bid is ", bid)
-  const feed = await prisma.officer_Pay.findMany({
+  const feed = await prisma.police_financial.findMany({
     where: {
-      Badge_ID: {
+      employee_id: {
         equals: bid
       }
     }
   });
-  console.log("feed is", feed)
   return {
     props: {
       users: JSON.parse(JSON.stringify(feed))
@@ -25,13 +23,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 function Officer_Profile({users}) {
-  const router = useRouter()
-  const current_url = router.query.badge_id
-
-  // const theme = useTheme();
-  // const tableStyle = {
-  //   backgroundColor: "red"
-  // };
 
   return (
     <>
@@ -51,7 +42,7 @@ function Officer_Profile({users}) {
           <PlaceholderTable json={users}/>
           <h2 className="subheading 4"> Dataset 1</h2>
           <PlaceholderTable json={users}/>
-        </div> 
+        </div>
         <div className="rightcol" style={{ width: "50%" }}>
             <Table />
             <h2 className="subheading 5"> Dataset 2</h2>
