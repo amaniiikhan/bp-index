@@ -1,0 +1,17 @@
+.table {
+    border: 2px solid black;
+    width: 99%;
+    height: 70px;
+    display: table; /* Use table display */
+    table-layout: fixed; /* Distribute columns based on table width */
+  }
+  
+  .table thead th {
+    text-align: left; /* Center header text */
+  }
+  
+  .table tbody td {
+    text-align: left; /* Center cell text */
+    width: 20%; 
+  }
+  
