@@ -85,6 +85,11 @@ export default function Home({
       chart={<p>Testing Content</p>}
       link="/details/internal-affairs"
     />,
+    <DataOverviewCard
+      title="Sample Office Detail Page"
+      chart={<p>Testing Content</p>}
+      link="/details/officer-profile/123456"
+    />,
   ];
   return (
     <ThemeProvider theme={theme}>
