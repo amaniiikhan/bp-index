@@ -42,7 +42,7 @@ function Officer_Profile({users}) {
           <PlaceholderTable json={users}/>
           <h2 className="subheading 4"> Dataset 1</h2>
           <PlaceholderTable json={users}/>
-        </div> 
+        </div>
         <div className="rightcol" style={{ width: "50%" }}>
             <Table />
             <h2 className="subheading 5"> Dataset 2</h2>
