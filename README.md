@@ -4,9 +4,9 @@
 
 ## System Architecture:
 
-This web-app is a site with a [Next.js](https://nextjs.org/) framework, with a PostreSQL server as the backend. We also use [Material UI] (https://mui.com) and [TSX] (https://www.npmjs.com/package/tsx) to assist in the front-end.
+This web-app is a site with a [Next.js](https://nextjs.org/) framework, with a PostreSQL server as the backend. We also use [Material UI](https://mui.com) and [TSX](https://www.npmjs.com/package/tsx) to assist in the front-end.
 
-The [Boston Police Index] (https://dev-bpi.netlify.app), aims to be a successor to the now inactive [Woke Windows] (https://www.wokewindows.org) project, where we aim to make Boston police data as accessible and easy to understand for as many people as possible.
+The [Boston Police Index](https://dev-bpi.netlify.app), aims to be a successor to the now inactive [Woke Windows](https://www.wokewindows.org) project, where we aim to make Boston police data as accessible and easy to understand for as many people as possible.
 
 ## How to install and use Prisma
 
@@ -89,7 +89,7 @@ You can start editing the page by modifying any file. The page auto-updates as y
 
 ### Step 1: Move task from “Sprint Backlog” to “In Progress”
 
-Log in to the [Boston Police Index Taiga Page] (https://tree.taiga.io/project/langdon-boston-police-index/timeline) and click “Scrum” then “Backlog”. Click a task you want to work on and click “In Progress” for a task you want to work on.
+Log in to the [Boston Police Index Taiga Page](https://tree.taiga.io/project/langdon-boston-police-index/timeline) and click “Scrum” then “Backlog”. Click a task you want to work on and click “In Progress” for a task you want to work on.
 
 ### Step 2: Create a branch
 
@@ -109,7 +109,7 @@ A teammate should notify others in the group using the appropriate methods when 
 
 ### Step 6: Move task from “In Progress” to “Ready for Review”
 
-Log in to the [Boston Police Index Taiga Page] (https://tree.taiga.io/project/langdon-boston-police-index/timeline) and click “Scrum” then “Backlog”. Click a task you want to work on and click “Ready for Review” for a task you want reviewed.
+Log in to the [Boston Police Index Taiga Page](https://tree.taiga.io/project/langdon-boston-police-index/timeline) and click “Scrum” then “Backlog”. Click a task you want to work on and click “Ready for Review” for a task you want reviewed.
 
 ### Step 7: Wait for the project manager to approve the Pull Request before merging
 
