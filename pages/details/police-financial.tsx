@@ -22,6 +22,7 @@ import {
 } from "chart.js";
 import { Pie, Doughnut, Bar, Line } from "react-chartjs-2";
 
+
 // export const getStaticProps: GetStaticProps = async () => {
 //     const feed = await prisma.officer_Pay.findMany();
 //     console.log(feed)
@@ -56,20 +57,20 @@ ChartJS.register(
 export default function Fio({ users }) {
   const [combineMap, setCombineMap] = useState<Map<string, number>>(new Map());
   //probably more correct:  const [overallData, setOverallData] = useState<ChartData>(null);
-  const [overallData, setOverallData] = useState<object>(null);
+  const [overallData, setOverallData] = useState(null);
 
   const [roleMap, setRoleMap] = useState<Map<string, number>>(new Map());
-  const [roleData, setRoleData] = useState<object>(null);
+  const [roleData, setRoleData] = useState(null);
   const [roleOptions, setRoleOptions] = useState<object>(null);
 
   const [selection, setSelection] = useState<string>("regular");
   const [selectionMap, setSelectionMap] = useState<Map<string, number>>(
     new Map()
   );
-  const [selectionData, setSelectionData] = useState<object>(null);
+  const [selectionData, setSelectionData] = useState(null);
 
   const [yearlyMap, setYearlyMap] = useState<Map<string, number>>(new Map());
-  const [yearData, setYearData] = useState<object>(null);
+  const [yearData, setYearData] = useState(null);
   const [yearOption, setYearOption] = useState<object>(null);
 
   const handleMapAdd = (
@@ -131,7 +132,7 @@ export default function Fio({ users }) {
 
   useEffect(() => {
     //probably more correct: const tmpData: ChartData = {
-    const tmpData = {
+    const tmpData: ChartData = {
       labels: [],
       datasets: [
         {
@@ -172,7 +173,7 @@ export default function Fio({ users }) {
 
   useEffect(() => {
     //probably more correct: const tmpData: ChartData = {
-    const tmpData = {
+    const tmpData: ChartData = {
       labels: [],
       datasets: [
         {
@@ -227,7 +228,7 @@ export default function Fio({ users }) {
     };
 
     //probably more correct: const tmpData: ChartData = {
-    const tmpData = {
+    const tmpData: ChartData = {
       labels: [],
       datasets: [
         {

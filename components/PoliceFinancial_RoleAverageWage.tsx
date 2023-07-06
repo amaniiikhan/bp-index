@@ -20,7 +20,9 @@ ChartJS.register(
   LineElement
 );
 
-
+export interface ILineChartDataPoint {
+  year: number
+}
 
 interface IRoleAverageWageProps {
   data: ILineChartDataPoint[];
