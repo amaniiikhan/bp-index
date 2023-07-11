@@ -15,7 +15,7 @@ declare module "nextjs-routes" {
     | StaticRoute<"/details/fio">
     | StaticRoute<"/details/forfeiture">
     | StaticRoute<"/details/internal-affairs">
-    | DynamicRoute<"/details/officer_profile/[badge_id]", { "badge_id": string }>
+    | DynamicRoute<"/details/officer-profile/[badge_id]", { "badge_id": number }>
     | StaticRoute<"/details/police-financial">
     | StaticRoute<"/details/settlement">
     | StaticRoute<"/">;
@@ -95,7 +95,7 @@ declare module "next/link" {
   export interface LinkProps
     extends Omit<NextLinkProps, "href" | "locale">,
       AnchorHTMLAttributes<HTMLAnchorElement> {
-    href: Route | StaticRoute | Omit<Route, "pathname">
+    href: Route | StaticRoute | DynamicRoute<"/details/officer-profile/[badge_id]", { "badge_id": number }>
     locale?: false;
   }
 

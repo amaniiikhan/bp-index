@@ -45,3 +45,10 @@ module.exports = withTM({
 
 // Merge MDX config with Next.js config
 module.exports = withRoutes(withMDX(nextConfig));
+
+// superjson SWC plugin
+module.exports = {
+  experimental: {
+    swcPlugins: [["next-superjson-plugin", {}]],
+  },
+};

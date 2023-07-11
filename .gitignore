@@ -35,3 +35,7 @@ yarn-error.log*
 
 # ignore vscode
 .vscode
+
+# lock files for other pkg managers
+yarn.lock
+pnpm-lock.yaml
