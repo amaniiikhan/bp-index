@@ -11,7 +11,7 @@ export const get_forfeitures_yearly_summary = async (): Promise<
   ISingleYearSummary[]
 > => {
   const year_summary_data = prisma.$queryRaw<ISingleYearSummary[]>`
-    select sum(fd.amount) as year_sum, date_trunc('year', to_date(fd.date, 'YYYY-MM-DD')) as year from "forfeiture data" as fd
+    select sum(fd.amount) as year_sum, date_trunc('year', to_date(fd.date, 'YYYY-MM-DD')) as year from "forfeiture_data" as fd
   where fd.date is not null
   group by year;
 `;
