@@ -19,9 +19,10 @@ import {
 interface TableData {
   column_def: GridColDef[];
   rows: GridRowsProp;
+  isLoading: boolean;
 }
 
-const LargeDataTable: React.FC<TableData> = ({ column_def, rows }) => {
+const LargeDataTable: React.FC<TableData> = ({ column_def, rows, isLoading }) => {
   return (
     <>
       <DataGrid
@@ -29,6 +30,7 @@ const LargeDataTable: React.FC<TableData> = ({ column_def, rows }) => {
         columns={column_def}
         initialState={{ pagination: { paginationModel: { pageSize: 25 } } }}
         slots={{ toolbar: GridToolbar }}
+        loading={isLoading}
       />
     </>
   );

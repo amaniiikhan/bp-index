@@ -21,6 +21,8 @@ import {
  } from "chart.js";
 import LargeDataTable from "@components/LargeDataTable";
 import { GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
  ChartJS.register(
    CategoryScale,
@@ -45,6 +47,7 @@ import { GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 // };
 
 export default function InternalAffairs() {
+
   const dateValueGetter = (params: GridValueGetterParams) => {
     return new Date(Date.parse(params.row["Completed date"]));
   };
@@ -151,9 +154,9 @@ export default function InternalAffairs() {
     }
     const disposition_labels = Object.keys(disposition_count);
     const disposition_values = Object.values(disposition_count);
-    console.log(disposition_count);
-    console.log(disposition_labels);
-    console.log(disposition_values);
+    // console.log(disposition_count);
+    // console.log(disposition_labels);
+    // console.log(disposition_values);
 
    const [barData, setbarData] = useState({
     labels: disposition_labels,
@@ -183,6 +186,17 @@ export default function InternalAffairs() {
    }]
   });
 
+  const {data: IA_Data, isLoading: IA_loading} = useQuery(
+    ["IA_Data"], 
+    async () => {
+      const res = await axios.get('../api/internal-affairs');
+      return res.data;
+    }
+  )
+
+  console.log(IA_Data);
+  console.log("content",content);
+
   return (
     <div>
       <Head>
@@ -190,7 +204,7 @@ export default function InternalAffairs() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Internal Affairs Cases</h1>
-      <LargeDataTable column_def={columns} rows={content} />
+      <LargeDataTable column_def={columns} rows={content} isLoading={IA_loading}/>
       <br></br>
       <div className="Fio">
         <div style={{
