@@ -69,3 +69,65 @@ model police_financial {
   filename        String?
   year            Int?
 }
+
+model fio_contact_stop {
+  id Int @id @default(autoincrement())
+  supervisor String?
+  fc_num String
+  contact_officer_name String?
+  supervisor_name String?
+  city String?
+  stop_duration String?
+  zip String?
+  basis String?
+  summonsissued Boolean?
+  vehicle_color String?
+  vehicle_make String?
+  state String?
+  vehicle_state String?
+  vehicle_year Int?
+  circumstance String?
+  contact_officer String?
+  vehicle_style String?
+  searchvehicle Boolean
+  vehicle_type String?
+  vehicle_model String?
+  contact_date DateTime
+  street String?
+  key_situations String?
+  weather String?
+  narrative String?
+  fc_involved_frisk_or_search Boolean?
+  year Int?
+}
+
+model fio_contact_person {
+  id Int @id @default(autoincrement())
+  fc_num String
+  gender String?
+  race String?
+  recnum Int?
+  build String?
+  hair_style String?
+  otherclothing String?
+  age Float?
+  ethnicity String?
+  skin_tone String?
+  license_state String?
+  person_frisked_or_searched Boolean
+  license_type String?
+  was_frisked Boolean?
+  person_id String?
+}
+
+model police_officer_role_earnings {
+  id Int @id @default(autoincrement())
+  role String
+  yearly_earnings Float
+}
+
+model police_dept_yearly {
+  id Int @id @default(autoincrement())
+  year Int
+  infl_adj_total Float
+}
