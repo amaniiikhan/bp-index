@@ -6,24 +6,35 @@ interface TableData {
   json: Object[];
 }
 
-const PlaceholderTable:React.FC<TableData> = ({json}) => {
+const PlaceholderTable: React.FC<TableData> = ({ json }) => {
   try {
-    const rows = json
-    const rowsWithId : Object[] = rows.map((row, index) => ({...row, id: index}))
-    const temp = rowsWithId[0]
-    let columns = []
+    const rows = json;
+    const rowsWithId: Object[] = rows.map((row, index) => ({
+      ...row,
+      id: index,
+    }));
+    const temp = rowsWithId[0];
+    let columns = [];
     for (const key in temp) {
-      columns.push({ field: key, headerName: key,  flex: 1 } )
+      columns.push({ field: key, headerName: key, flex: 1 });
     }
 
-    return <Box sx={{ height: 600, width: "100%" }}>
-    <DataGrid rows={rowsWithId} columns={columns} slots={{ toolbar: GridToolbar }}/>;
-  </Box>
-
+    return (
+      <Box sx={{ height: 600, width: "100%" }}>
+        <DataGrid
+          rows={rowsWithId}
+          columns={columns}
+          slots={{ toolbar: GridToolbar }}
+          initialState={{
+            pagination: { paginationModel: {pageSize: 10} },
+          }}
+        />
+        ;
+      </Box>
+    );
   } catch (e) {
-    return <div>Invalid JSON</div>
+    return <div>Invalid JSON</div>;
   }
-}
-
+};
 
 export default PlaceholderTable;
