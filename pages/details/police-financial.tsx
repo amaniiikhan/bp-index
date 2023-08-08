@@ -3,9 +3,6 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import { data } from "../../utility/2011_2020_bpd_earnings_with_ids.xlsx - 2011_2020_bpd_earnings_with_ids";
-import { roleDataOri } from "../../utility/pd_earning_role";
-import { yearlyData } from "../../utility/yearly_information";
 import { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
@@ -21,17 +18,35 @@ import {
   ChartData,
 } from "chart.js";
 import { Pie, Doughnut, Bar, Line } from "react-chartjs-2";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { police_dept_yearly, police_financial, police_officer_role_earnings } from "@prisma/client";
 
+export const getStaticProps: GetStaticProps = async () => {
+  
+  const financialData = await prisma.police_financial.findMany()
+  const roleEarningData = await prisma.police_officer_role_earnings.findMany()
+  const yearlyData = await prisma.police_dept_yearly.findMany()
 
-// export const getStaticProps: GetStaticProps = async () => {
-//     const feed = await prisma.officer_Pay.findMany();
-//     console.log(feed)
-//     return {
-//       props: {
-//         users: JSON.parse(JSON.stringify(feed))
-//       }
-//     };
-// };
+  const handleMapAdd = (
+    tmpMap: Map<string, number>,
+    fieldName: string,
+    obj: object
+  ) => {
+    tmpMap.set(
+      fieldName,
+      (tmpMap.get(fieldName) === undefined ? 0 : tmpMap.get(fieldName)) +
+        parseInt(obj[fieldName] === "" ? 0 : obj[fieldName])
+    );
+  };
+
+  
+    return {
+      props: {
+
+      }
+    };
+};
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -73,6 +88,23 @@ export default function Fio({ users }) {
   const [yearData, setYearData] = useState(null);
   const [yearOption, setYearOption] = useState<object>(null);
 
+  const {data: financialData} = useQuery(["financialData"], 
+    async (): Promise<police_financial[]> => {
+      const res = await axios.get('../api/police-financial');
+      return res.data;
+  })
+
+  const {data: roleEarningData} = useQuery(["roleEarningData"], 
+    async (): Promise<police_officer_role_earnings[]> => {
+      const res = await axios.get('../api/pd-role-earning');
+      return res.data;
+  })
+
+  const {data: yearlyDeptData} = useQuery(["yearlyDeptData"], 
+    async (): Promise<police_dept_yearly[]> => {
+      const res = await axios.get('../api/pd-dept-yearly');
+      return res.data;
+  })  
   const handleMapAdd = (
     tmpMap: Map<string, number>,
     fieldName: string,
@@ -84,51 +116,60 @@ export default function Fio({ users }) {
         parseInt(obj[fieldName] === "" ? 0 : obj[fieldName])
     );
   };
-
+  
   useEffect(() => {
-    if (combineMap.size === 0) {
-      // Combine Data
-      let tmpMap = combineMap;
-      data.map((obj: object) => {
-        handleMapAdd(tmpMap, "other", obj);
-        handleMapAdd(tmpMap, "quinn", obj);
-        handleMapAdd(tmpMap, "injured", obj);
-        handleMapAdd(tmpMap, "overtime", obj);
-        handleMapAdd(tmpMap, "regular", obj);
-        handleMapAdd(tmpMap, "retro", obj);
-        handleMapAdd(tmpMap, "detail", obj);
-      });
-      setCombineMap(tmpMap);
+    if (financialData && roleEarningData && yearlyDeptData) {
+      console.log("🚀 ~ file: police-financial.tsx:150 ~ useEffect ~ yearlyDeptData:", yearlyDeptData)
+      console.log("🚀 ~ file: police-financial.tsx:150 ~ useEffect ~ roleEarningData:", roleEarningData)
+      console.log("🚀 ~ file: police-financial.tsx:150 ~ useEffect ~ financialData:", financialData)
+      
+      if (combineMap.size === 0) {
+        // Combine Data
+        let tmpMap = combineMap;
+        financialData.map((obj: object) => {
+          handleMapAdd(tmpMap, "other", obj);
+          handleMapAdd(tmpMap, "quinn", obj);
+          handleMapAdd(tmpMap, "injured", obj);
+          handleMapAdd(tmpMap, "overtime", obj);
+          handleMapAdd(tmpMap, "regular", obj);
+          handleMapAdd(tmpMap, "retro", obj);
+          handleMapAdd(tmpMap, "detail", obj);
+        });
+        setCombineMap(tmpMap);
+      }
+      
+      if (roleMap.size === 0 ) {
+        let tmpMap = roleMap;
+        roleEarningData.map((obj: object) => {
+          tmpMap.set(obj["Role"], obj["Yearly Earnings (USD)"]);
+        });
+        
+        setRoleMap(tmpMap);
+      }
+      
+      if (yearlyMap.size === 0 ) {
+        let tmpMap = yearlyMap;
+        yearlyDeptData.map((obj: object) => {
+          tmpMap.set(obj["year"], obj["infl_adj_total"]);
+        });
+        
+        setYearlyMap(tmpMap);
+      }
     }
-
-    if (roleMap.size === 0) {
-      let tmpMap = roleMap;
-      roleDataOri.map((obj: object) => {
-        tmpMap.set(obj["Role"], obj["Yearly Earnings (USD)"]);
-      });
-
-      setRoleMap(tmpMap);
-    }
-
-    if (yearlyMap.size === 0) {
-      let tmpMap = yearlyMap;
-      yearlyData.map((obj: object) => {
-        tmpMap.set(obj["year"], obj["infl_adj_total"]);
-      });
-
-      setYearlyMap(tmpMap);
-    }
-  }, []);
+  }, [financialData, roleEarningData, yearlyDeptData]);
 
   useEffect(() => {
     let tmpMap = new Map();
-    data.map((obj: object) => {
-      handleMapAdd(tmpMap, "total_earnings", obj);
-      handleMapAdd(tmpMap, selection, obj);
-    });
+    if (financialData) {
+      financialData.map((obj: object) => {
+        handleMapAdd(tmpMap, "total_earnings", obj);
+        handleMapAdd(tmpMap, selection, obj);
+      });
+    }
 
     setSelectionMap(tmpMap);
-  }, [selection]);
+    
+  }, [selection, financialData]);
 
   useEffect(() => {
     //probably more correct: const tmpData: ChartData = {
