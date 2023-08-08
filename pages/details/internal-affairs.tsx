@@ -36,16 +36,6 @@ import { officermisconduct } from "@prisma/client";
 
  ChartJS.register(ArcElement, Tooltip, Legend);
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   const feed = internalaffairs;
-//   console.log(feed[1]);
-//   return {
-//     props: {
-//       internal_affairs_cases: JSON.parse(JSON.stringify(feed)),
-//     },
-//   };
-// };
-
 export default function InternalAffairs() {
 
   const dateValueGetter = (params: GridValueGetterParams) => {
@@ -118,10 +108,6 @@ export default function InternalAffairs() {
     }
   )
 
-  
-  // console.log("🚀 ~ file: internal-affairs.tsx:204 ~ InternalAffairs ~ IA_Data:", IA_Data)
-  // console.log("content",content);
-
   //creates an object to keep count of occurences
    const count = {};
    const data = require('../../components/IA_2.json');
@@ -135,7 +121,6 @@ export default function InternalAffairs() {
    }
    const labels = Object.keys(count);
    const values = Object.values(count);
- //  console.log(count);
 
   // //set values to later use for graph
    const [chartData, setChartData] = useState({
@@ -166,9 +151,6 @@ export default function InternalAffairs() {
     }
     const disposition_labels = Object.keys(disposition_count);
     const disposition_values = Object.values(disposition_count);
-    // console.log(disposition_count);
-    // console.log(disposition_labels);
-    // console.log(disposition_values);
 
    const [barData, setbarData] = useState({
     labels: disposition_labels,
