@@ -39,7 +39,6 @@ model forfeiture_data {
 
 model officermisconduct {
   id                Int    @id @default(autoincrement())
-  column1           Int?
   ia_no             String
   incident_type     String?
   received_date     DateTime?

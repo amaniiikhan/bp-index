@@ -28,9 +28,11 @@ const LargeDataTable: React.FC<TableData> = ({ column_def, rows, isLoading }) =>
       <DataGrid
         rows={rows}
         columns={column_def}
-        initialState={{ pagination: { paginationModel: { pageSize: 25 } } }}
         slots={{ toolbar: GridToolbar }}
         loading={isLoading}
+        initialState={{
+          pagination: {paginationModel: {pageSize: 20}}
+        }}
       />
     </>
   );

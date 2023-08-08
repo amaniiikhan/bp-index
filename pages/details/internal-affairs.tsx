@@ -3,9 +3,8 @@ import Footer from "@components/Footer";
 import { GetStaticProps } from "next";
 import prisma from "lib/prisma";
 import PlaceholderTable from "@components/PlaceholderTable";
-import content from "../../components/IA.json";
 import Chart from "chart.js/auto";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Bar} from "react-chartjs-2";
 import { BarController } from 'chart.js';
 import { Pie, Line } from "react-chartjs-2";
@@ -20,9 +19,10 @@ import {
    Title,
  } from "chart.js";
 import LargeDataTable from "@components/LargeDataTable";
-import { GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { GridColDef, GridValueGetterParams, DataGrid } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { officermisconduct } from "@prisma/client";
 
  ChartJS.register(
    CategoryScale,
@@ -49,7 +49,7 @@ import axios from "axios";
 export default function InternalAffairs() {
 
   const dateValueGetter = (params: GridValueGetterParams) => {
-    return new Date(Date.parse(params.row["Completed date"]));
+    return new Date(Date.parse(params.value as string));
   };
 
   const dateValueFormatter = (params: GridValueGetterParams) => {
@@ -60,15 +60,15 @@ export default function InternalAffairs() {
     });
   };
   const columns: GridColDef[] = [
-    { field: "IA No", headerName: "IA No", width: 130, type: "string" },
+    { field: "ia_no", headerName: "IA No", width: 130, type: "string" },
     {
-      field: "Incident type",
+      field: "incident_type",
       headerName: "Incident type",
       width: 200,
       type: "string",
     },
     {
-      field: "Received date",
+      field: "received_date",
       headerName: "Received date",
       width: 180,
       type: "dateTime",
@@ -76,32 +76,32 @@ export default function InternalAffairs() {
       valueGetter: dateValueGetter,
     },
     {
-      field: "Title/rank (snap)",
+      field: "title_rank_snap",
       headerName: "Title/rank (snap)",
       width: 150,
       type: "string",
     },
     {
-      field: "First name",
+      field: "first_name",
       headerName: "First name",
       width: 150,
       type: "string",
     },
-    { field: "Last name", headerName: "Last name", width: 150, type: "string" },
+    { field: "last_name", headerName: "Last name", width: 150, type: "string" },
     {
-      field: "Allegation",
+      field: "allegation",
       headerName: "Allegation",
       width: 250,
       type: "string",
     },
     {
-      field: "Disposition",
+      field: "disposition",
       headerName: "Disposition",
       width: 150,
       type: "string",
     },
     {
-      field: "Completed date",
+      field: "completed_date",
       headerName: "Completed date",
       width: 180,
       valueFormatter: dateValueFormatter,
@@ -109,6 +109,18 @@ export default function InternalAffairs() {
       type: "dateTime",
     },
   ];
+
+  const {data: IA_Data , isLoading: IA_loading} = useQuery(
+    ["IA_Data"], 
+    async (): Promise<officermisconduct[]> => {
+      const res = await axios.get('../api/internal-affairs');
+      return res.data;
+    }
+  )
+
+  
+  // console.log("🚀 ~ file: internal-affairs.tsx:204 ~ InternalAffairs ~ IA_Data:", IA_Data)
+  // console.log("content",content);
 
   //creates an object to keep count of occurences
    const count = {};
@@ -186,16 +198,7 @@ export default function InternalAffairs() {
    }]
   });
 
-  const {data: IA_Data, isLoading: IA_loading} = useQuery(
-    ["IA_Data"], 
-    async () => {
-      const res = await axios.get('../api/internal-affairs');
-      return res.data;
-    }
-  )
 
-  console.log(IA_Data);
-  console.log("content",content);
 
   return (
     <div>
@@ -204,7 +207,10 @@ export default function InternalAffairs() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Internal Affairs Cases</h1>
-      <LargeDataTable column_def={columns} rows={content} isLoading={IA_loading}/>
+      {IA_Data ? 
+        <LargeDataTable column_def={columns} rows={IA_Data} isLoading={IA_loading}/>
+        : <h2>Loading...</h2>
+      }
       <br></br>
       <div className="Fio">
         <div style={{

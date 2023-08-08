@@ -33,7 +33,8 @@ yarn-error.log*
 # Local Netlify folder
 .netlify
 
-# ignore vscode
+# ide settings
+.idea
 .vscode
 
 # lock files for other pkg managers
