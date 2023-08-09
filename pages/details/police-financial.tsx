@@ -22,31 +22,31 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { police_dept_yearly, police_financial, police_officer_role_earnings } from "@prisma/client";
 
-export const getStaticProps: GetStaticProps = async () => {
+// export const getStaticProps: GetStaticProps = async () => {
   
-  const financialData = await prisma.police_financial.findMany()
-  const roleEarningData = await prisma.police_officer_role_earnings.findMany()
-  const yearlyData = await prisma.police_dept_yearly.findMany()
+//   const financialData = await prisma.police_financial.findMany()
+//   const roleEarningData = await prisma.police_officer_role_earnings.findMany()
+//   const yearlyData = await prisma.police_dept_yearly.findMany()
 
-  const handleMapAdd = (
-    tmpMap: Map<string, number>,
-    fieldName: string,
-    obj: object
-  ) => {
-    tmpMap.set(
-      fieldName,
-      (tmpMap.get(fieldName) === undefined ? 0 : tmpMap.get(fieldName)) +
-        parseInt(obj[fieldName] === "" ? 0 : obj[fieldName])
-    );
-  };
+//   const handleMapAdd = (
+//     tmpMap: Map<string, number>,
+//     fieldName: string,
+//     obj: object
+//   ) => {
+//     tmpMap.set(
+//       fieldName,
+//       (tmpMap.get(fieldName) === undefined ? 0 : tmpMap.get(fieldName)) +
+//         parseInt(obj[fieldName] === "" ? 0 : obj[fieldName])
+//     );
+//   };
 
-  
-    return {
-      props: {
 
-      }
-    };
-};
+//     return {
+//       props: {
+
+//       }
+//     };
+// };
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -88,6 +88,8 @@ export default function Fio({ users }) {
   const [yearData, setYearData] = useState(null);
   const [yearOption, setYearOption] = useState<object>(null);
 
+  const [isDataReady, setIsDataReady] = useState<boolean>(false);
+
   const {data: financialData} = useQuery(["financialData"], 
     async (): Promise<police_financial[]> => {
       const res = await axios.get('../api/police-financial');
@@ -119,6 +121,12 @@ export default function Fio({ users }) {
   
   useEffect(() => {
     if (financialData && roleEarningData && yearlyDeptData) {
+      setIsDataReady(true);
+    }
+  }, [financialData, roleEarningData, yearlyDeptData])
+
+  useEffect(() => {
+    if (isDataReady) {
       console.log("🚀 ~ file: police-financial.tsx:150 ~ useEffect ~ yearlyDeptData:", yearlyDeptData)
       console.log("🚀 ~ file: police-financial.tsx:150 ~ useEffect ~ roleEarningData:", roleEarningData)
       console.log("🚀 ~ file: police-financial.tsx:150 ~ useEffect ~ financialData:", financialData)
@@ -160,7 +168,7 @@ export default function Fio({ users }) {
 
   useEffect(() => {
     let tmpMap = new Map();
-    if (financialData) {
+    if (isDataReady) {
       financialData.map((obj: object) => {
         handleMapAdd(tmpMap, "total_earnings", obj);
         handleMapAdd(tmpMap, selection, obj);
@@ -169,7 +177,7 @@ export default function Fio({ users }) {
 
     setSelectionMap(tmpMap);
     
-  }, [selection, financialData]);
+  }, [selection, isDataReady]);
 
   useEffect(() => {
     //probably more correct: const tmpData: ChartData = {
@@ -210,7 +218,7 @@ export default function Fio({ users }) {
       tmpData["datasets"][0]["data"].push(value);
     });
     setSelectionData(tmpData);
-  }, [selectionMap]);
+  }, [selectionMap, isDataReady]);
 
   useEffect(() => {
     //probably more correct: const tmpData: ChartData = {
@@ -252,7 +260,7 @@ export default function Fio({ users }) {
     });
 
     setOverallData(tmpData);
-  }, [combineMap]);
+  }, [combineMap, isDataReady]);
 
   useEffect(() => {
     let options = {
@@ -308,7 +316,7 @@ export default function Fio({ users }) {
 
     setRoleData(tmpData);
     setRoleOptions(options);
-  }, [roleMap]);
+  }, [roleMap, isDataReady]);
 
   useEffect(() => {
     let options = {
@@ -347,7 +355,7 @@ export default function Fio({ users }) {
 
     setYearData(tmpData);
     setYearOption(options);
-  }, [yearlyMap]);
+  }, [yearlyMap, isDataReady]);
 
   return (
     <div>
@@ -372,7 +380,7 @@ export default function Fio({ users }) {
             display: "flex",
           }}
         >
-          {overallData && <Pie data={overallData} />}
+          {isDataReady && overallData && <Pie data={overallData} />}
           <div>
             <div
               style={{
@@ -393,7 +401,7 @@ export default function Fio({ users }) {
                 <option value="other"> Other Pay </option>
               </select>
             </div>
-            {selectionData && <Doughnut data={selectionData} />}
+            {isDataReady && selectionData && <Doughnut data={selectionData} />}
           </div>
         </div>
 
@@ -403,7 +411,7 @@ export default function Fio({ users }) {
             width: "800px",
           }}
         >
-          {roleData && <Bar options={roleOptions} data={roleData} />}
+          {isDataReady && roleData && <Bar options={roleOptions} data={roleData} />}
         </div>
 
         <div
@@ -412,7 +420,7 @@ export default function Fio({ users }) {
             width: "800px",
           }}
         >
-          {yearData && <Line options={yearOption} data={yearData} />}
+          {isDataReady && yearData && <Line options={yearOption} data={yearData} />}
         </div>
       </div>
 

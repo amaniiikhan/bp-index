@@ -1,16 +1,11 @@
-import { yearlyData } from "utility/yearly_information";
-
-export interface IWageDataLineChartPoint {
-  // TODO: Probably remove this, cleanup input data or something
-  // Maybe rename it to index or key
-  FIELD1: number;
-  year: number;
-  infl_adj_total: string;
-}
+import { police_dept_yearly } from "@prisma/client";
+import prisma from "lib/prisma";
 
 export const get_yearly_wage_data = async (): Promise<
-  IWageDataLineChartPoint[]
+  police_dept_yearly[]
 > => {
   // Placeholder until we put the data into the DB
-  return Promise.resolve(yearlyData);
+  // return Promise.resolve(yearlyData);
+  const data = await prisma.police_dept_yearly.findMany();
+  return data;
 };
