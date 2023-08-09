@@ -12,12 +12,12 @@ import {
   get_forfeitures_yearly_summary,
 } from "data_handlers/forfeitures";
 import {
-  IWageDataLineChartPoint,
   get_yearly_wage_data,
 } from "data_handlers/police_financial";
+import { police_dept_yearly } from "@prisma/client";
 
 interface IHomeProps {
-  role_average_data: IWageDataLineChartPoint[];
+  role_average_data: police_dept_yearly[];
   forfeitures_yearly_summary: ISingleYearSummary[];
 }
 
