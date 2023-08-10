@@ -13,14 +13,14 @@ import { ReactElement } from "react";
 
 interface IDataOverviewCardProps {
   title: string;
-  sub_title?: string;
+  content?: string;
   chart: ReactElement;
   link: LinkProps["href"];
 }
 
 const DataOverviewCard = ({
   title,
-  sub_title,
+  content,
   chart,
   link,
 }: IDataOverviewCardProps) => {
