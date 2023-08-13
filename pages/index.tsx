@@ -1,10 +1,4 @@
-import Head from "next/head";
-import Header from "@components/NavBar";
-import Footer from "@components/Footer";
-import Grid2 from "@mui/material/Unstable_Grid2";
 import DataOverviewCard from "@components/OverviewCard";
-// import { ThemeProvider } from "@emotion/react";
-import { theme } from "theme";
 import RoleAverageWageChart from "@components/PoliceFinancial_RoleAverageWage";
 import ForfeitureTotalAssetsChart from "@components/Forfeiture_TotalAssets";
 import {
@@ -13,8 +7,9 @@ import {
 } from "data_handlers/forfeitures";
 import {get_yearly_wage_data} from "data_handlers/police_financial";
 import { police_dept_yearly } from "@prisma/client";
-import { Stack } from "@mui/material";
-
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { string } from "prop-types";
 interface IHomeProps {
   role_average_data: police_dept_yearly[];
   forfeitures_yearly_summary: ISingleYearSummary[];
@@ -84,16 +79,27 @@ export default function Home({
       chart={<p>Testing Content</p>}
       link="/details/internal-affairs"
     />,
-    <DataOverviewCard
-      title="Sample Office Detail Page"
-      chart={<p>Testing Content</p>}
-      link="/details/officer-profile/123456"
-    />,
+    // <DataOverviewCard
+    //   title="Sample Office Detail Page"
+    //   chart={<p>Testing Content</p>}
+    //   link="/details/officer-profile/123456"
+    // />,
   ];
+
+  const [keyword, setKeyword] = useState<string>("");
+  const router = useRouter();
+  const handleSearch = () => {
+    if (keyword.length > 0) {
+      router.push({
+        pathname: "/search/[keyword]", query: {keyword: keyword}
+      });
+    }
+  };
+
   return (
     <>
       {/* hero section */}
-      <section className="hero pt-10" >
+      <section className="hero pt-14" >
         <div className="hero-content text-center pb-10">
           <div className="max-w-5xl flex flex-col place-items-center">
             <h1 className="text-5xl font-bold">Boston Police Index</h1>
@@ -104,14 +110,17 @@ export default function Home({
             Ut in ac at vitae placerat. </p>
             <div className="w-full max-w-[38rem] mt-2 relative">
               <input type="text" placeholder="Search by Employee ID, Name, Department, Title, or Postal Code" 
-              className="input w-full bg-gray-100 join-item rounded-2xl border-gray-200 pe-20"
-              onKeyDown={(e)=>{
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                }
+                className="input w-full bg-gray-100 join-item rounded-2xl border-gray-200 pe-20"
+                onChange={(e)=>setKeyword(e.target.value)}
+                onKeyDown={(e)=>{
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSearch();
+                  }
               }}/>
               <button type="button" className="absolute inset-y-0 end-0 grid w-16 place-content-center
-                bg-gray-200 rounded-r-2xl hover:bg-gray-300 text-gray-400">
+                bg-gray-200 rounded-r-2xl hover:bg-gray-300 text-gray-400"
+                onClick={()=>handleSearch()}>
                 <span className="sr-only">Search</span>
                 <svg
                   fill="none"
@@ -133,7 +142,7 @@ export default function Home({
       </section>
 
       {/* data overview section */}
-      <section className="mt-5 w-full text-center bg-gray-300 py-8">
+      <section className="mt-5 w-full text-center bg-gray-300 py-8 mb-10">
         <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
           <h3 className="text-xl font-bold">Lorem ipsum dolor sit amet consectetur. Vulputate ut justo nunc sed amet.</h3>
           <div className="carousel w-full">
