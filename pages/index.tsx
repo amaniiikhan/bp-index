@@ -31,62 +31,6 @@ export default function Home({
   role_average_data,
   forfeitures_yearly_summary,
 }: IHomeProps) {
-  const data_cards = [
-    <DataOverviewCard
-      title="Officer Pay"
-      chart={<RoleAverageWageChart data={role_average_data} />}
-      link={"/details/police-financial"}
-    />,
-    <DataOverviewCard
-      title="Department Salaries"
-      chart={<p>Testing Content</p>}
-      link="/details/police-financial"
-    />,
-    <DataOverviewCard
-      title="Overtime Pay"
-      chart={<p>Testing Content</p>}
-      link="/details/police-financial"
-    />,
-    <DataOverviewCard
-      title="Forfeitures per XXX"
-      chart={
-        <ForfeitureTotalAssetsChart
-          yearly_summary_data={forfeitures_yearly_summary}
-        />
-      }
-      link="/details/forfeiture"
-    />,
-    <DataOverviewCard
-      title="Detail Pay"
-      chart={<p>Testing Content</p>}
-      link="/details/police-financial"
-    />,
-    <DataOverviewCard
-      title="FIOs per XXX"
-      chart={<p>Testing Content</p>}
-      link="/details/fio"
-    />,
-    <DataOverviewCard
-      title="Civil Settlements"
-      chart={<p>Testing Content</p>}
-      link="/details/settlement"
-    />,
-    <DataOverviewCard
-      title="Arrest data"
-      chart={<p>Testing Content</p>}
-      link="/details/arrest"
-    />,
-    <DataOverviewCard
-      title="Internal Affairs Open Cases"
-      chart={<p>Testing Content</p>}
-      link="/details/internal-affairs"
-    />,
-    // <DataOverviewCard
-    //   title="Sample Office Detail Page"
-    //   chart={<p>Testing Content</p>}
-    //   link="/details/officer-profile/123456"
-    // />,
-  ];
 
   const [keyword, setKeyword] = useState<string>("");
   const router = useRouter();
@@ -149,12 +93,6 @@ export default function Home({
       <section className="mt-5 w-full text-center bg-gray-300 pt-8 pb-10 mb-10">
         <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
           <h3 className="text-xl font-bold">Lorem ipsum dolor sit amet consectetur. Vulputate ut justo nunc sed amet.</h3>
-          {/* <div className="carousel w-full">
-            <div id="chart1" className="carousel-item w-full h-[21rem] bg-white mt-5 place-content-center items-center text-6xl" >1</div>
-            <div id="chart2" className="carousel-item w-full h-[21rem] bg-white mt-5 place-content-center items-center text-6xl" >2</div>
-            <div id="chart3" className="carousel-item w-full h-[21rem] bg-white mt-5 place-content-center items-center text-6xl" >3</div>
-            <div id="chart4" className="carousel-item w-full h-[21rem] bg-white mt-5 place-content-center items-center text-6xl" >4</div>
-          </div> */}
           <Carousel 
             className="w-full mt-8"
             withIndicators
