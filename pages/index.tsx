@@ -9,8 +9,9 @@ import {get_yearly_wage_data} from "data_handlers/police_financial";
 import { police_dept_yearly } from "@prisma/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { string } from "prop-types";
 import { toast } from 'sonner';
+import { Carousel } from '@mantine/carousel';
+
 interface IHomeProps {
   role_average_data: police_dept_yearly[];
   forfeitures_yearly_summary: ISingleYearSummary[];
@@ -104,13 +105,13 @@ export default function Home({
       {/* hero section */}
       <section className="hero pt-14" >
         <div className="hero-content text-center pb-10">
-          <div className="max-w-5xl flex flex-col place-items-center">
+          <div className="max-w-4xl flex flex-col place-items-center">
             <h1 className="text-5xl font-bold">Boston Police Index</h1>
-            <p className="my-6 text-lg">Lorem ipsum dolor sit amet consectetur. 
-            Ultricies pretium gravida donec blandit amet libero. 
-            Gravida augue sollicitudin mauris at eget eget. 
-            Pretium nisi euismod curabitur porta tincidunt malesuada. 
-            Ut in ac at vitae placerat. </p>
+            <p className="my-6 text-lg">
+              The Boston Police Index is a resource to bring transparency to the activities of law enforcers in our communities. 
+              We wish to be a resource for journalists, policy makers, residents, workers, and students of the City of Boston.
+              All information here is data from public sources and public records requests. 
+            </p>
             <div className="w-full max-w-[38rem] mt-2 relative">
               <input type="text" placeholder="Search by Employee ID, Name, Department, Title, or Postal Code" 
                 className="input w-full bg-gray-100 join-item rounded-2xl border-gray-200 pe-20"
@@ -145,21 +146,69 @@ export default function Home({
       </section>
 
       {/* data overview section */}
-      <section className="mt-5 w-full text-center bg-gray-300 py-8 mb-10">
+      <section className="mt-5 w-full text-center bg-gray-300 pt-8 pb-10 mb-10">
         <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
           <h3 className="text-xl font-bold">Lorem ipsum dolor sit amet consectetur. Vulputate ut justo nunc sed amet.</h3>
-          <div className="carousel w-full">
+          {/* <div className="carousel w-full">
             <div id="chart1" className="carousel-item w-full h-[21rem] bg-white mt-5 place-content-center items-center text-6xl" >1</div>
             <div id="chart2" className="carousel-item w-full h-[21rem] bg-white mt-5 place-content-center items-center text-6xl" >2</div>
             <div id="chart3" className="carousel-item w-full h-[21rem] bg-white mt-5 place-content-center items-center text-6xl" >3</div>
             <div id="chart4" className="carousel-item w-full h-[21rem] bg-white mt-5 place-content-center items-center text-6xl" >4</div>
-          </div>
-          <div className="flex justify-center w-full my-2 gap-2">
-            <a href="#chart1" className="btn btn-xs rounded-full">1</a> 
-            <a href="#chart2" className="btn btn-xs rounded-full">2</a>
-            <a href="#chart3" className="btn btn-xs rounded-full">3</a> 
-            <a href="#chart4" className="btn btn-xs rounded-full">4</a> 
-          </div>
+          </div> */}
+          <Carousel 
+            className="w-full mt-8"
+            withIndicators
+            // withControls={false}
+            slideGap="lg"
+            styles={{
+              indicator:{
+                position: 'relative',
+                top: '35px',
+                backgroundColor: "#fff !important",
+                width: "12px",
+                height: "8px",
+                transition: 'width 250ms ease',
+                '&[data-active]':{
+                  width: '40px',
+                }
+              },
+              control:{
+                '&[data-inactive]': {
+                  opacity: 0,
+                  cursor: 'default',
+                },
+              }
+            }}  
+          >
+            <Carousel.Slide>
+              <DataOverviewCard
+                title="Officer Pay"
+                chart={<RoleAverageWageChart data={role_average_data} />}
+                link={"/details/police-financial"}
+              />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <DataOverviewCard
+                title="Officer Pay"
+                chart={<RoleAverageWageChart data={role_average_data} />}
+                link={"/details/police-financial"}
+              />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <DataOverviewCard
+                title="Officer Pay"
+                chart={<RoleAverageWageChart data={role_average_data} />}
+                link={"/details/police-financial"}
+              />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <DataOverviewCard
+                title="Officer Pay"
+                chart={<RoleAverageWageChart data={role_average_data} />}
+                link={"/details/police-financial"}
+              />
+            </Carousel.Slide>
+          </Carousel>
         </div>
       </section>
     </>

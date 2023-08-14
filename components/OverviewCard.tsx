@@ -27,8 +27,13 @@ const DataOverviewCard = ({
   return (
     <Link href={link}>
       <CardActionArea>
-        <Card>
-          <Box sx={{ p: 2, display: "flex" }}>
+        <Card className="rounded-3xl">
+          <Box 
+            sx={{ 
+              p: 2, 
+              display: "flex", 
+              borderRadius: '24px'
+            }}>
             <Stack sx={{ width: "100%" }}>
               <Typography variant="h5">{title}</Typography>
               <Divider />
