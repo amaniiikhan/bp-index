@@ -26,13 +26,12 @@ const DataOverviewCard = ({
 }: IDataOverviewCardProps) => {
   return (
     <Link href={link}>
-      <CardActionArea>
+      <CardActionArea className="rounded-3xl">
         <Card className="rounded-3xl">
           <Box 
             sx={{ 
               p: 2, 
               display: "flex", 
-              borderRadius: '24px'
             }}>
             <Stack sx={{ width: "100%" }}>
               <Typography variant="h5">{title}</Typography>

@@ -89,7 +89,7 @@ export default function Home({
         </div>
       </section>
 
-      {/* data overview section */}
+      {/* Carousel section */}
       <section className="mt-5 w-full text-center bg-gray-300 pt-8 pb-10 mb-10">
         <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
           <h3 className="text-xl font-bold">Lorem ipsum dolor sit amet consectetur. Vulputate ut justo nunc sed amet.</h3>
