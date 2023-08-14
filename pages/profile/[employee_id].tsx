@@ -1,49 +1,50 @@
 import { FunctionComponentElement } from "react"
+import HeaderWSearch from "@components/HeaderWSearch"
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import prisma from "lib/prisma";
 
-export default function OfficerProfile(): FunctionComponentElement<{}> {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const employee_id = context.params?.employee_id as string
+  const intEmployeeId = parseInt(employee_id)
+  const res = await prisma.police_financial.findFirst({
+    where: {
+      employee_id: intEmployeeId
+    }
+  })
+  const officerData = {
+    id: res.id,
+    employee_id: res.employee_id,
+    name: res.name,
+    title: res.title,
+    postal: res.postal,
+    department: res.department_name
+  }
+
+  return {
+    props: { officerData }
+  }
+}
+
+export default function OfficerProfile({officerData}: InferGetServerSidePropsType<typeof getServerSideProps>): FunctionComponentElement<{}> {
   return (
     <>
-      {/* Header */}
-      <div className="flex justify-between px-16 w-screen items-center shrink">
-        <h2 className="font-bold text-4xl">Search Results</h2>
-        <div className="w-full max-w-md mt-2 relative">
-          <input type="text" placeholder="" 
-          className="input w-full bg-gray-100 join-item rounded-2xl border-gray-200 pe-20"
-          onKeyDown={(e)=>{
-            if (e.key === 'Enter') {
-              e.preventDefault();
-            }
-          }}/>
-          <button type="button" className="absolute inset-y-0 end-0 grid w-16 place-content-center
-            rounded-r-2xl text-gray-400 hover:text-gray-500">
-            <span className="sr-only">Search</span>
-            <svg
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="3"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+      <HeaderWSearch title="Officer Profile"/>
 
-      <div className="card card-side bg-base-100 shadow-xl">
-        <figure><img src="/images/stock/photo-1635805737707-575885ab0820.jpg" /></figure>
-        <div className="card-body">
-          <h2 className="card-title">New movie is released!</h2>
-          <p>Click the button to watch on Jetflix app.</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Watch</button>
+      <section className="w-full">
+        <div className="card card-side bg-gray-100 shadow-xl mt-10 max-w-3xl mx-auto">
+          <figure>
+            <img className="w-[350px]"
+              src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3500612/blank-woman-placeholder-icon-md.png" />
+          </figure>
+          <div className="card-body">
+            <h1 className="card-title text-3xl mb-5">{officerData.name}</h1>
+            <p><strong>Title: </strong>{officerData.title}</p>
+            <p><strong>Employee ID: </strong>{officerData.employee_id}</p>
+            <p><strong>Department: </strong>{officerData.department}</p>
+            <p><strong>Zip Code: </strong>{officerData.postal}</p>
           </div>
         </div>
-      </div>
+      </section>
     </>
   )
 }

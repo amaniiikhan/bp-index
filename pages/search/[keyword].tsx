@@ -3,6 +3,7 @@ import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import HeaderWSearch from "@components/HeaderWSearch";
 import prisma from "lib/prisma";
+import Link from "next/link";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
@@ -64,12 +65,27 @@ export default function SearchResult({searchResData}: InferGetServerSidePropsTyp
       field: 'employee_id',
       headerName: 'Employee ID',
       type: 'number',
+      valueFormatter: (params) => {
+        return params.value
+      }
     },
     {
       field: 'name',
       headerName: 'Name',
       width: 250,
-      type: 'string'
+      type: 'string',
+      renderCell: (params) => {
+        return(
+          <Link href={{
+            pathname: "/profile/[employee_id]",
+            query: {employee_id: params.row.employee_id}
+          }} 
+          className="link hover:text-blue-500"
+          >
+            {params.row.name}
+          </Link>
+        )
+      }
     },
     {
       field: 'title',
@@ -91,11 +107,11 @@ export default function SearchResult({searchResData}: InferGetServerSidePropsTyp
         <DataGrid 
           columns={cols}
           rows={searchResData}
+          className="max-w-5xl mx-auto"
           initialState={{
             pagination: {paginationModel: {pageSize: 20}}
           }}
           slots={{ toolbar: GridToolbar }}
-          className="max-w-5xl mx-auto"
         />
       </section>
     </>
