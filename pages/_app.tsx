@@ -16,6 +16,7 @@ import '../styles/globals.css';
 import Head from 'next/head';
 import Header from '@components/NavBar';
 import Footer from '@components/Footer';
+import { Toaster } from 'sonner';
 interface ApplicationAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -47,7 +48,8 @@ const Application: FunctionComponent<ApplicationAppProps> = (props) => {
             </Head>
             <Header/>
             <main className='min-h-[calc(100vh-310px)]'>
-              <Component {...pageProps} />  
+              <Component {...pageProps} />
+              <Toaster richColors closeButton/>
             </main>
             <Footer/>
           </div>

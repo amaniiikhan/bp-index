@@ -37,55 +37,57 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       employee_id: 'asc'
     }
   })
-  const searchResData = res.map((item) => {
-    return {
-      id: item.id,
-      employee_id: item.employee_id,
-      name: item.name,
-      title: item.title,
-      postal: item.postal
-    }
-  })
+  let searchResData = []
+  if (res.length && res.length > 0) {
+    searchResData = res.map((item) => {
+      return {
+        id: item.id,
+        employee_id: item.employee_id,
+        name: item.name,
+        title: item.title,
+        postal: item.postal
+      }
+    })
+  }
 
   return {
     props: { searchResData }
   }
 }
 
-const cols: GridColDef[] = [
-  { 
-    field: 'employee_id',
-    headerName: 'Employee ID',
-    type: 'number',
-  },
-  {
-    field: 'name',
-    headerName: 'Name',
-    width: 250,
-    type: 'string'
-  },
-  {
-    field: 'title',
-    headerName: 'Title',
-    width: 250,
-    type: 'string'
-  },
-  {
-    field: 'postal',
-    headerName: 'Zip Code',
-    width: 150,
-    type: 'string'
-  }
-]
+
 
 export default function SearchResult({searchResData}: InferGetServerSidePropsType<typeof getServerSideProps>): 
   FunctionComponentElement<{}> {
+  const cols: GridColDef[] = [
+    { 
+      field: 'employee_id',
+      headerName: 'Employee ID',
+      type: 'number',
+    },
+    {
+      field: 'name',
+      headerName: 'Name',
+      width: 250,
+      type: 'string'
+    },
+    {
+      field: 'title',
+      headerName: 'Title',
+      width: 250,
+      type: 'string'
+    },
+    {
+      field: 'postal',
+      headerName: 'Zip Code',
+      type: 'string'
+    }
+  ]
   return (
     <>
       <HeaderWSearch title="Search Results"/>
-
       {/* Table */}
-      <section className="w-full pt-16">
+      <section className="w-full pt-16 pb-16">
         <DataGrid 
           columns={cols}
           rows={searchResData}

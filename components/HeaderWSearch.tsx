@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface IHeaderWSearchProps {
   title: string;
@@ -14,6 +15,8 @@ const HeaderWSearch: FC<IHeaderWSearchProps> = ({title}) => {
       router.push({
         pathname: "/search/[keyword]", query: {keyword: keyword}
       });
+    }else{
+      toast.error("Please enter a valid keyword");
     }
   };
 

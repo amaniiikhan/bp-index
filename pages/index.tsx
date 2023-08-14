@@ -10,6 +10,7 @@ import { police_dept_yearly } from "@prisma/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { string } from "prop-types";
+import { toast } from 'sonner';
 interface IHomeProps {
   role_average_data: police_dept_yearly[];
   forfeitures_yearly_summary: ISingleYearSummary[];
@@ -93,6 +94,8 @@ export default function Home({
       router.push({
         pathname: "/search/[keyword]", query: {keyword: keyword}
       });
+    }else{
+      toast.error("Please enter a valid keyword");
     }
   };
 
