@@ -14,17 +14,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       OR:[
         {
           name: {
-            contains: keyword
+            contains: keyword,
+            mode: 'insensitive'
           },
         },
         {
           title: {
-            contains: keyword
+            contains: keyword,
+            mode: 'insensitive'
           },
         },
         {
           postal: {
-            contains: keyword
+            contains: keyword,
+            mode: 'insensitive'
           },
         },
         {
