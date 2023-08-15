@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider, CssBaseline, createTheme } from '@mui/material';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -14,9 +15,13 @@ import lightThemeOptions from '../styles/theme/lightTheme';
 import '../styles/globals.css';
 
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Header from '@components/NavBar';
 import Footer from '@components/Footer';
 import { Toaster } from 'sonner';
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 interface ApplicationAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -35,6 +40,26 @@ const queryClient = new QueryClient({
 });
 const Application: FunctionComponent<ApplicationAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const router = useRouter();
+  useEffect(() => {
+    const handleStart = (url: string) => {
+      NProgress.start()
+    }
+
+    const handleStop = () => {
+      NProgress.done()
+    }
+
+    router.events.on('routeChangeStart', handleStart)
+    router.events.on('routeChangeComplete', handleStop)
+    router.events.on('routeChangeError', handleStop)
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart)
+      router.events.off('routeChangeComplete', handleStop)
+      router.events.off('routeChangeError', handleStop)
+    }
+  }, [router])
 
   return (
     <CacheProvider value={emotionCache}>
