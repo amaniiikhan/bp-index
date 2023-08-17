@@ -15,7 +15,7 @@ interface IDataOverviewCardProps {
   title: string;
   sub_title?: string;
   chart: ReactElement;
-  link: LinkProps["href"];
+  link: Route;
 }
 
 const DataOverviewCard = ({

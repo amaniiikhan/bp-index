@@ -11,12 +11,17 @@ declare module "nextjs-routes" {
   } from "nextjs";
 
   export type Route =
+    | StaticRoute<"/api/arrest">
+    | StaticRoute<"/api/internal-affairs">
+    | StaticRoute<"/api/pd-dept-yearly">
+    | StaticRoute<"/api/pd-role-earning">
+    | StaticRoute<"/api/police-financial">
     | StaticRoute<"/details/arrest">
     | StaticRoute<"/details/fio">
     | StaticRoute<"/details/forfeiture">
     | StaticRoute<"/details/internal-affairs">
-    | DynamicRoute<"/details/officer-profile/[badge_id]", { "badge_id": number }>
-    | StaticRoute<"/details/police-financial">
+    | DynamicRoute<"/details/officer-profile/[badge_id]", { "badge_id": string }>
+    | DynamicRoute<"/details/police-financial/[selection]", { "selection": string }>
     | StaticRoute<"/details/settlement">
     | StaticRoute<"/">;
 
@@ -95,7 +100,7 @@ declare module "next/link" {
   export interface LinkProps
     extends Omit<NextLinkProps, "href" | "locale">,
       AnchorHTMLAttributes<HTMLAnchorElement> {
-    href: Route | StaticRoute | DynamicRoute<"/details/officer-profile/[badge_id]", { "badge_id": number }>
+    href: Route | StaticRoute | Omit<Route, "pathname">
     locale?: false;
   }
 

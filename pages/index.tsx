@@ -39,17 +39,26 @@ export default function Home({
     <DataOverviewCard
       title="Officer Pay"
       chart={<RoleAverageWageChart data={role_average_data} />}
-      link={"/details/police-financial"}
+      link={{
+        pathname: "/details/police-financial/[selection]",
+        query: { selection: "regular" },
+      }}
     />,
     <DataOverviewCard
       title="Department Salaries"
       chart={<p>Testing Content</p>}
-      link="/details/police-financial"
+      link={{
+        pathname: "/details/police-financial/[selection]",
+        query: { selection: "retro" },
+      }}
     />,
     <DataOverviewCard
       title="Overtime Pay"
       chart={<p>Testing Content</p>}
-      link="/details/police-financial"
+      link={{
+        pathname: "/details/police-financial/[selection]",
+        query: { selection: "overtime" },
+      }}
     />,
     <DataOverviewCard
       title="Forfeitures per XXX"
@@ -58,37 +67,53 @@ export default function Home({
           yearly_summary_data={forfeitures_yearly_summary}
         />
       }
-      link="/details/forfeiture"
+      link={{
+        pathname: "/details/forfeiture"
+      }}
     />,
     <DataOverviewCard
       title="Detail Pay"
       chart={<p>Testing Content</p>}
-      link="/details/police-financial"
+      link={{
+        pathname: "/details/police-financial/[selection]",
+        query: { selection: "detail" },
+      }}
     />,
     <DataOverviewCard
       title="FIOs per XXX"
       chart={<p>Testing Content</p>}
-      link="/details/fio"
+      link={{
+        pathname: "/details/fio"
+      }}
     />,
     <DataOverviewCard
       title="Civil Settlements"
       chart={<p>Testing Content</p>}
-      link="/details/settlement"
+      link={{
+        pathname: "/details/settlement"
+      }}
     />,
     <DataOverviewCard
       title="Arrest data"
       chart={<p>Testing Content</p>}
-      link="/details/arrest"
+      link={{
+        pathname: "/details/arrest"
+      }}
     />,
     <DataOverviewCard
       title="Internal Affairs Open Cases"
       chart={<p>Testing Content</p>}
-      link="/details/internal-affairs"
+      link={{
+        pathname: "/details/internal-affairs"
+      }}
     />,
     <DataOverviewCard
       title="Sample Office Detail Page"
       chart={<p>Testing Content</p>}
-      link="/details/officer-profile/123456"
+      link={{
+        pathname: "/details/officer-profile/[badge_id]",
+        query: { badge_id: "123456" },
+      }}
     />,
   ];
   return (
