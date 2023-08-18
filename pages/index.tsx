@@ -122,28 +122,40 @@ export default function Home({
               <DataOverviewCard
                 title="Officer Pay"
                 chart={<RoleAverageWageChart data={role_average_data} />}
-                link={"/details/police-financial"}
+                link={{
+                  pathname: '/details/police-financial/[selection]',
+                  query: {selection: 'regular'}
+                }}
               />
             </Carousel.Slide>
             <Carousel.Slide>
               <DataOverviewCard
                 title="Officer Pay"
                 chart={<RoleAverageWageChart data={role_average_data} />}
-                link={"/details/police-financial"}
+                link={{
+                  pathname: '/details/police-financial/[selection]',
+                  query: {selection: 'regular'}
+                }}
               />
             </Carousel.Slide>
             <Carousel.Slide>
               <DataOverviewCard
                 title="Officer Pay"
                 chart={<RoleAverageWageChart data={role_average_data} />}
-                link={"/details/police-financial"}
+                link={{
+                  pathname: '/details/police-financial/[selection]',
+                  query: {selection: 'regular'}
+                }}
               />
             </Carousel.Slide>
             <Carousel.Slide>
               <DataOverviewCard
                 title="Officer Pay"
                 chart={<RoleAverageWageChart data={role_average_data} />}
-                link={"/details/police-financial"}
+                link={{
+                  pathname: '/details/police-financial/[selection]',
+                  query: {selection: 'regular'}
+                }}
               />
             </Carousel.Slide>
           </Carousel>
