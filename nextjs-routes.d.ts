@@ -21,7 +21,7 @@ declare module "nextjs-routes" {
     | StaticRoute<"/details/forfeiture">
     | StaticRoute<"/details/internal-affairs">
     | DynamicRoute<"/details/officer-profile/[badge_id]", { "badge_id": string }>
-    | StaticRoute<"/details/police-financial">
+    | DynamicRoute<"/details/police-financial/[selection]", { "selection": string }>
     | StaticRoute<"/details/settlement">
     | StaticRoute<"/">
     | DynamicRoute<"/profile/[employee_id]", { "employee_id": string }>
